@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`apartment` (
    `rooms_number` VARCHAR(45) NOT NULL,
     `apartment_class` VARCHAR(255) NOT NULL,
     `price` BIGINT(10) NOT NULL,
+    `state` TINYINT(1) NOT NULL,
     PRIMARY KEY (`id`));
 
 
