@@ -31,7 +31,7 @@ public interface GenericDAO<T> {
 
     /** Find entity from respective table by field and value.
      *
-     * @param field user field
+     * @param field user field. Doesn`t support foreign keys!!!
      * @param value user value
      * @param con connection to database
      * @return T
