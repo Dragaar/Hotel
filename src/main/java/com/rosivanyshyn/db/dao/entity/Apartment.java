@@ -1,4 +1,4 @@
-package com.rosivanyshyn.dao.entity;
+package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
@@ -9,14 +9,14 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
-@ToString(exclude = {"id"})
-@EqualsAndHashCode(exclude = {"id"})
+@ToString()
+@EqualsAndHashCode()
 public class Apartment implements Serializable {
-    private int id = 0;
+    private Long id;
     private String maxGuestsNumber;
     private String roomsNumber;
     private String apartmentClass;
     private Long price;
-    //відображає статус апартаментів (false - недоступні/ true - доступні)
-    private boolean state = true;
+    //indicate state of apartment (false - not available/ true - available)
+    private Boolean state = true;
 }

@@ -1,4 +1,4 @@
-package com.rosivanyshyn.dao.entity;
+package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
@@ -11,17 +11,17 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Builder
-@ToString(exclude = {"id"})
-@EqualsAndHashCode(exclude = {"id"})
+@ToString()
+@EqualsAndHashCode(exclude = "reservationData")
 public class Booking implements Serializable {
-    private int id = 0;
+    private Long id;
     private String guestsNumber;
 
     private Date checkInDate;
     private Date checkOutDate;
     private Timestamp reservationData;
-    private boolean isPaidForReservation = false;
-    //зовнішні ключі
+    private Boolean isPaidForReservation = false;
+    //Foreign keys
     Account account;
     Apartment apartment;
 

@@ -1,8 +1,9 @@
-package com.rosivanyshyn.dao.entity;
+package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,8 +11,8 @@ import java.io.Serializable;
 @Setter
 @Builder
 @ToString
-@EqualsAndHashCode(exclude = {"id"})
+@EqualsAndHashCode()
 public class ResponseToOrder implements Serializable {
-    private int id = 0;
+    private Long id;
     private String description;
 }

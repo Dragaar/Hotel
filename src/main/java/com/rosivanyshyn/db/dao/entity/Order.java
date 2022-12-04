@@ -1,4 +1,4 @@
-package com.rosivanyshyn.dao.entity;
+package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
@@ -10,17 +10,17 @@ import java.sql.Date;
 @Getter
 @Setter
 @Builder
-@ToString(exclude = {"id"})
-@EqualsAndHashCode(exclude = {"id"})
+@ToString()
+@EqualsAndHashCode()
 public class Order implements Serializable {
-    private int id = 0;
+    private Long id;
     private String guestsNumber;
     private String roomsNumber;
     private String apartmentClass;
 
     private Date checkInDate;
     private Date checkOutDate;
-    //зовнішні ключі
+    //Foreign keys
     Account account;
     ResponseToOrder responseToOrder = null;
 }
