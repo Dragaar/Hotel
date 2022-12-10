@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,29 +13,38 @@ import java.util.Properties;
 
 public class DBManager {
     private static final Logger LOG = Logger.getLogger(DBManager.class);
-    //private InputStream appConfigPath = getClass().getResourceAsStream("app.properties");
-    private static Properties appProps = new Properties();
+    private static Properties appProps;
 
     private static HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;
 
     static {
-        try {
-            appProps.load(new FileInputStream("src/main/resources/app.properties"));
-        } catch (IOException e){ e.printStackTrace();}
 
+        appProps = getProperties();
         config.setJdbcUrl( appProps.getProperty("connection.url") );
         config.setUsername( appProps.getProperty("connection.username") );
         config.setPassword( appProps.getProperty("connection.password") );
-        config.addDataSourceProperty( "cachePrepStmts" , "true" );
-        config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
-        config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
-        config.setMinimumIdle(20);
-        config.setMaximumPoolSize(50);
+        config.setDriverClassName(appProps.getProperty("connection.driver"));
+
+        config.addDataSourceProperty( "cachePrepStmts" ,
+                appProps.getProperty("connection.datasource.cachePrepStmts"));
+        config.addDataSourceProperty( "prepStmtCacheSize" ,
+                appProps.getProperty("connection.datasource.prepStmtCacheSize") );
+        config.addDataSourceProperty( "prepStmtCacheSqlLimit" ,
+                appProps.getProperty("connection.datasource.prepStmtCacheSqlLimit") );
+
+        config.setMinimumIdle(Integer.parseInt(
+                appProps.getProperty("connection.minimumIdle")
+        ));
+        config.setMaximumPoolSize(Integer.parseInt(
+                appProps.getProperty("connection.maximumPoolSize")
+        ));
         ds = new HikariDataSource( config );
+
     }
 
-    private DBManager() {}
+    private DBManager() {
+    }
 
     public static Connection getConnection() {
         try {
@@ -45,5 +53,17 @@ public class DBManager {
             LOG.error("Cannot establish DB connection", ex);
             throw new DBException("Cannot establish DB connection ", ex);
         }
+    }
+
+    private static Properties getProperties() {
+        Properties properties = new Properties();
+        String connectionFile = "app.properties";
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try (InputStream resource = classLoader.getResourceAsStream(connectionFile)){
+            properties.load(resource);
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+        }
+        return properties;
     }
 }
