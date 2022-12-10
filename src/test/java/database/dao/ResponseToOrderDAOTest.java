@@ -46,7 +46,7 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
     }
     @AfterEach
     void destroyForeignKeys(){
-        apartmentInitializer.deleteTestLogic();
+        apartmentInitializer.deleteTestLogic(apartmentInitializer.entity.getId());
     }
     //----------------------------------------------------------------------\\
 
@@ -62,17 +62,19 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
 
     @Test
     void GeneralTest(){
+        try{
         insertTestLogic(insertEntity);
         insertRTOApartments();
 
         getTestLogic();
         getRTOApartments();
-
         updateTestLogic(updateEntity);
-
-        deleteRTOApartments();
-        deleteTestLogic();
+        } finally {
+            deleteRTOApartments();
+            deleteTestLogic(responseToOrder.getId());
+        }
     }
+
     // -------------- Many to Many extra queries ---------- \\
     protected void insertRTOApartments(){
         connection = DBManager.getConnection();

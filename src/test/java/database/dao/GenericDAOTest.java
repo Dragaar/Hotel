@@ -9,6 +9,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +43,6 @@ public abstract class GenericDAOTest<T> {
     @BeforeAll
     protected void globalSetUp() throws IOException {
         DefaultLF5Configurator.configure();
-        connection = DBManager.getConnection();
     }
 
     /** Logic for insert test
@@ -68,6 +68,22 @@ public abstract class GenericDAOTest<T> {
                 ()-> genericDAO.get(connection, getEntityId(entity)));
 
         assertEquals(entity, getEntity);
+    }
+
+    /** 3 rd record should be represented
+     *  as main class entity to pass the test
+     */
+
+    protected void getFewTestLogic() {
+        connection = DBManager.getConnection();
+
+        //Get 1 record, from 2 to 3
+        @SuppressWarnings("unchecked")
+        T getEntity = (T) TransactionManager.execute(connection,
+                ()-> genericDAO.getFew(connection, 2, 1));
+        ArrayList<T> expected = new ArrayList<>();
+        expected.add(entity);
+        assertEquals(expected, getEntity);
     }
 
     protected void getByFieldTestLogic(String fieldName, Object value) {
@@ -116,10 +132,10 @@ public abstract class GenericDAOTest<T> {
     }
 
     /** Logic for delete test */
-    protected void deleteTestLogic(){
+    protected void deleteTestLogic(Long entityId){
         connection = DBManager.getConnection();
         boolean result = (Boolean) TransactionManager.execute(connection,
-                ()-> genericDAO.delete(connection, getEntityId(entity))
+                ()-> genericDAO.delete(connection, entityId)
         );
         assertTrue(result);
     }

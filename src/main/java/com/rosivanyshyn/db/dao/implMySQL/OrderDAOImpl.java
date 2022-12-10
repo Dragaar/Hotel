@@ -19,6 +19,9 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
     String selectQuery() { return SELECT_ORDER; }
     @Override
     String selectAllQuery() { return SELECT_ALL_ORDERS; }
+
+    @Override
+    String selectFewQuery() { return SELECT_FEW_ORDERS; }
     @Override
     String selectByFieldQuery() { return SELECT_ORDER_BY_FIELD; }
     @Override
@@ -53,7 +56,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
            //Author Account unchanged
           if(entity.getResponseToOrder() != null){
             stmt.setLong(6, entity.getResponseToOrder().getId());}
-          else stmt.setNull(6, Types.INTEGER);
+          else {stmt.setNull(6, Types.INTEGER);}
             //WHERE
             stmt.setLong(7, entity.getId());
         };

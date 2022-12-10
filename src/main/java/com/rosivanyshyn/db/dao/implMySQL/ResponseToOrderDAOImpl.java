@@ -22,6 +22,9 @@ public class ResponseToOrderDAOImpl extends GenericDAOImpl<ResponseToOrder> impl
     String selectQuery() { return SELECT_RESPONSE_TO_ORDER; }
     @Override
     String selectAllQuery() { return SELECT_ALL_RESPONSES_TO_ORDER; }
+
+    @Override
+    String selectFewQuery() { return SELECT_FEW_RESPONSES_TO_ORDER; }
     @Override
     String selectByFieldQuery() { return SELECT_RESPONSE_TO_ORDER_BY_FIELD; }
     @Override

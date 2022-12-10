@@ -7,6 +7,8 @@ public class Query {
     public static final String SELECT_ACCOUNT= "SELECT * FROM account WHERE id = ?";
     public static final String SELECT_ALL_ACCOUNTS = "SELECT * FROM account" ;
 
+    public static final String SELECT_FEW_ACCOUNTS = "SELECT * FROM account LIMIT ?, ?" ;
+
     //use formatter to insert field name
     public static final String SELECT_ACCOUNT_BY_FIELD= "SELECT * FROM account WHERE %s LIKE ?";
 
@@ -22,6 +24,9 @@ public class Query {
 
     public static final String SELECT_APARTMENT= "SELECT * FROM apartment WHERE id = ?";
     public static final String SELECT_ALL_APARTMENTS = "SELECT * FROM apartment" ;
+
+    public static final String SELECT_FEW_APARTMENTS = "SELECT * FROM apartment LIMIT ?, ?" ;
+
     //use formatter to insert field name
     public static final String SELECT_APARTMENT_BY_FIELD= "SELECT * FROM apartment WHERE %s LIKE ?";
 
@@ -37,6 +42,10 @@ public class Query {
 
     public static final String SELECT_BOOKING= "SELECT * FROM booking WHERE id = ?";
     public static final String SELECT_ALL_BOOKINGS = "SELECT * FROM booking" ;
+
+    public static final String SELECT_FEW_BOOKINGS = "SELECT * FROM booking LIMIT ?, ?" ;
+
+
     //use formatter to insert field name
     public static final String SELECT_BOOKING_BY_FIELD= "SELECT * FROM booking WHERE %s LIKE ?";
 
@@ -53,6 +62,9 @@ public class Query {
 
     public static final String SELECT_ORDER = "SELECT * FROM `order` WHERE id = ?";
     public static final String SELECT_ALL_ORDERS= "SELECT * FROM `order`" ;
+
+    public static final String SELECT_FEW_ORDERS = "SELECT * FROM `order` LIMIT ?, ?" ;
+
     //use formatter to insert field name
     public static final String SELECT_ORDER_BY_FIELD= "SELECT * FROM `order` WHERE %s LIKE ?";
 
@@ -68,6 +80,9 @@ public class Query {
 
     public static final String SELECT_RESPONSE_TO_ORDER= "SELECT * FROM `response_to_order` WHERE id = ?";
     public static final String SELECT_ALL_RESPONSES_TO_ORDER= "SELECT * FROM `response_to_order`" ;
+
+    public static final String SELECT_FEW_RESPONSES_TO_ORDER = "SELECT * FROM `response_to_order` LIMIT ?, ?" ;
+
     //use formatter to insert field name
     public static final String SELECT_RESPONSE_TO_ORDER_BY_FIELD= "SELECT * FROM `response_to_order` WHERE %s LIKE ?";
 
@@ -75,7 +90,7 @@ public class Query {
     public static final String UPDATE_RESPONSE_TO_ORDER = "UPDATE `response_to_order`" +
             "SET `description` = ? " +
             "WHERE `id` = ? ";
-    public static final String DELETE_RESPONSE_TO_ORDER = "DELETE FROM `order` WHERE id = ?" ;
+    public static final String DELETE_RESPONSE_TO_ORDER = "DELETE FROM `response_to_order` WHERE id = ?" ;
 
         //------------- Many to Many
         public static final String INSERT_RESPONSE_TO_ORDER_APARTMENTS= "INSERT INTO `response_to_order_has_apartment` VALUES (?, ?)";

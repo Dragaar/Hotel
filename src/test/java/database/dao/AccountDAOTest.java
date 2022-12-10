@@ -29,6 +29,15 @@ public class AccountDAOTest extends GenericDAOTest<Account> {
             .state(true)
             .build();
 
+    protected BuildEntity<Account> insertEntity2 = ()-> {
+        account.setEmail("oleg_shevchuk2@gmail.com");
+        return account;
+    };
+    protected BuildEntity<Account> insertEntity3 = ()-> {
+        account.setEmail("oleg_shevchuk3@gmail.com");
+        return account;
+    };
+
     protected BuildEntity<Account> updateEntity = ()-> Account.builder()
             .id(account.getId())
             .role(account.getRole())
@@ -61,6 +70,25 @@ public class AccountDAOTest extends GenericDAOTest<Account> {
         getAllTestLogic();
     }
     @Test
+    void getFewTest(){
+        Long firstEntityID = 0L, secondEntityID = 0L, ThirdEntityID = 0L;
+
+        try {
+            insertTestLogic(insertEntity);
+            firstEntityID = entity.getId();
+            insertTestLogic(insertEntity2);
+            secondEntityID = entity.getId();
+            insertTestLogic(insertEntity3);
+            ThirdEntityID = entity.getId();
+
+            getFewTestLogic();
+        } finally {
+            deleteTestLogic(firstEntityID);
+            deleteTestLogic(secondEntityID);
+            deleteTestLogic(ThirdEntityID);
+        }
+    }
+    @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
         getByFieldTestLogic(Field.ACCOUNT_FIRST_NAME, "Oleg");
@@ -68,6 +96,6 @@ public class AccountDAOTest extends GenericDAOTest<Account> {
     @Test
     void deleteTest(){
         insertTestLogic(insertEntity);
-        deleteTestLogic();
+        deleteTestLogic(account.getId());
     }
 }

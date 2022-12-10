@@ -18,6 +18,8 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
     @Override
     String selectAllQuery() { return SELECT_ALL_APARTMENTS; }
     @Override
+    String selectFewQuery() { return SELECT_FEW_APARTMENTS; }
+    @Override
     String selectByFieldQuery() { return SELECT_APARTMENT_BY_FIELD; }
     @Override
     String updateQuery() { return UPDATE_APARTMENT; }

@@ -55,6 +55,25 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
         getAllTestLogic();
     }
     @Test
+    void getFewTest(){
+        Long firstEntityID = 0L, secondEntityID = 0L, ThirdEntityID = 0L;
+
+        try {
+            insertTestLogic(insertEntity);
+            firstEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            secondEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            ThirdEntityID = entity.getId();
+
+            getFewTestLogic();
+        } finally {
+            deleteTestLogic(firstEntityID);
+            deleteTestLogic(secondEntityID);
+            deleteTestLogic(ThirdEntityID);
+        }
+    }
+    @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
         getByFieldTestLogic(Field.APARTMENT_PRICE, 2000L);
@@ -62,6 +81,6 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
     @Test
     void deleteTest(){
         insertTestLogic(insertEntity);
-        deleteTestLogic();
+        deleteTestLogic(apartment.getId());
     }
 }

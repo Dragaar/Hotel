@@ -29,6 +29,15 @@ public interface GenericDAO<T> {
      */
     ArrayList<T>    getAll(Connection con);
 
+    /** Get few objects from table.
+     * <br>Example - start 15, total 50, return records from 15 to 65 (Not from 15 to 50!!!)
+     * @param con connection to database
+     * @param start which record to start sampling from
+     * @param total records count to get
+     * @return ArrayList
+     */
+    ArrayList<T>    getFew(Connection con, int start, int total);
+
     /** Find entity from respective table by field and value.
      *
      * @param field user field. Doesn`t support foreign keys!!!

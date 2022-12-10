@@ -37,7 +37,7 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
     }
     @AfterEach
     void destroyForeignKeys(){
-        accountInitializer.deleteTestLogic();
+        accountInitializer.deleteTestLogic(accountInitializer.entity.getId());
     }
     //--------------------------------------------------------------\\
 
@@ -88,6 +88,24 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
         getAllTestLogic();
     }
     @Test
+    void getFewTest(){
+        Long firstEntityID = 0L, secondEntityID = 0L, ThirdEntityID = 0L;
+        try {
+            insertTestLogic(insertEntity);
+            firstEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            secondEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            ThirdEntityID = entity.getId();
+
+            getFewTestLogic();
+        } finally {
+            deleteTestLogic(firstEntityID);
+            deleteTestLogic(secondEntityID);
+            deleteTestLogic(ThirdEntityID);
+        }
+    }
+    @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
         getByFieldTestLogic(Field.ORDER_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
@@ -95,6 +113,6 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
     @Test
     void deleteTest(){
         insertTestLogic(insertEntity);
-        deleteTestLogic();
+        deleteTestLogic(order.getId());
     }
 }

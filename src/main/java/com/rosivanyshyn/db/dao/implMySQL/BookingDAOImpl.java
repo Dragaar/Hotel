@@ -23,6 +23,8 @@ public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDA
     @Override
     String selectAllQuery() { return SELECT_ALL_BOOKINGS; }
     @Override
+    String selectFewQuery() { return SELECT_FEW_BOOKINGS; }
+    @Override
     String selectByFieldQuery() { return SELECT_BOOKING_BY_FIELD; }
     @Override
     String updateQuery() { return UPDATE_BOOKING; }

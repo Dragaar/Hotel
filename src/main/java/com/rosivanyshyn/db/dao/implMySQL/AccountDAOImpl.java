@@ -15,6 +15,8 @@ public class AccountDAOImpl extends GenericDAOImpl<Account> implements AccountDA
     @Override
     String selectAllQuery() { return SELECT_ALL_ACCOUNTS; }
     @Override
+    String selectFewQuery() { return SELECT_FEW_ACCOUNTS; }
+    @Override
     String selectByFieldQuery() { return SELECT_ACCOUNT_BY_FIELD; }
     @Override
     String updateQuery() { return UPDATE_ACCOUNT; }

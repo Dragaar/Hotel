@@ -41,8 +41,8 @@ public class BookingDAOTest extends GenericDAOTest<Booking>{
     }
     @AfterEach
     void destroyForeignKeys(){
-        accountInitializer.deleteTestLogic();
-        apartmentInitializer.deleteTestLogic();
+        accountInitializer.deleteTestLogic(accountInitializer.entity.getId());
+        apartmentInitializer.deleteTestLogic(apartmentInitializer.entity.getId());
     }
     //--------------------------------------------------------------\\
 
@@ -94,6 +94,25 @@ public class BookingDAOTest extends GenericDAOTest<Booking>{
         getAllTestLogic();
     }
     @Test
+    void getFewTest(){
+        Long firstEntityID = 0L, secondEntityID = 0L, ThirdEntityID = 0L;
+
+        try {
+            insertTestLogic(insertEntity);
+            firstEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            secondEntityID = entity.getId();
+            insertTestLogic(insertEntity);
+            ThirdEntityID = entity.getId();
+
+            getFewTestLogic();
+        } finally {
+            deleteTestLogic(firstEntityID);
+            deleteTestLogic(secondEntityID);
+            deleteTestLogic(ThirdEntityID);
+        }
+    }
+    @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
         getByFieldTestLogic(BOOKING_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
@@ -101,6 +120,6 @@ public class BookingDAOTest extends GenericDAOTest<Booking>{
     @Test
     void deleteTest(){
         insertTestLogic(insertEntity);
-        deleteTestLogic();
+        deleteTestLogic(booking.getId());
     }
 }
