@@ -30,24 +30,32 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
     @Override
     DBStatementOperations<Apartment> insertOperations() {
         return (stmt, entity) -> {
-            stmt.setString(1, entity.getMaxGuestsNumber());
-            stmt.setString(2, entity.getRoomsNumber());
-            stmt.setString(3, entity.getApartmentClass());
-            stmt.setLong(4, entity.getPrice());
-            stmt.setBoolean(5, entity.getState());
+            stmt.setString(1, entity.getTitle());
+            stmt.setString(2, entity.getDescription());
+            stmt.setString(3, entity.getImageURL());
+            stmt.setString(4, entity.getAddress());
+            stmt.setString(5, entity.getMaxGuestsNumber());
+            stmt.setString(6, entity.getRoomsNumber());
+            stmt.setString(7, entity.getApartmentClass());
+            stmt.setLong(8, entity.getPrice());
+            stmt.setBoolean(9, entity.getState());
         };
     }
 
     @Override
     DBStatementOperations<Apartment> updateOperations() {
         return (stmt, entity) -> {
-            stmt.setString(1, entity.getMaxGuestsNumber());
-            stmt.setString(2, entity.getRoomsNumber());
-            stmt.setString(3, entity.getApartmentClass());
-            stmt.setLong(4, entity.getPrice());
-            stmt.setBoolean(5, entity.getState());
+            stmt.setString(1, entity.getTitle());
+            stmt.setString(2, entity.getDescription());
+            stmt.setString(3, entity.getImageURL());
+            stmt.setString(4, entity.getAddress());
+            stmt.setString(5, entity.getMaxGuestsNumber());
+            stmt.setString(6, entity.getRoomsNumber());
+            stmt.setString(7, entity.getApartmentClass());
+            stmt.setLong(8, entity.getPrice());
+            stmt.setBoolean(9, entity.getState());
 
-            stmt.setLong(6, entity.getId());
+            stmt.setLong(10, entity.getId());
         };
     }
     //------------------ ExtractEntity initialising ------------------------\\
@@ -61,6 +69,10 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
         return (rs) ->
                 Apartment.builder()
                         .id(rs.getLong(ENTITY_ID))
+                        .title(rs.getString(APARTMENT_TITLE))
+                        .description(rs.getString(APARTMENT_DESCRIPTION))
+                        .imageURL(rs.getString(APARTMENT_IMAGE_URL))
+                        .address(rs.getString(APARTMENT_ADRESS))
                         .maxGuestsNumber(rs.getString(APARTMENT_MAX_GUEST_NUMBER))
                         .roomsNumber(rs.getString(APARTMENT_ROOMS_NUMBER))
                         .apartmentClass(rs.getString(APARTMENT_CLASS))

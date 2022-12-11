@@ -13,6 +13,10 @@ import java.io.Serializable;
 @EqualsAndHashCode()
 public class Apartment implements Serializable {
     private Long id;
+    private String title;
+    private String description;
+    private String imageURL;
+    private String address;
     private String maxGuestsNumber;
     private String roomsNumber;
     private String apartmentClass;

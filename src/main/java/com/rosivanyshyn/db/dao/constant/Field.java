@@ -11,6 +11,10 @@ public class Field {
     public static final String ACCOUNT_PASSWORD = "password";
 
 
+    public static final String APARTMENT_TITLE = "title";
+    public static final String APARTMENT_DESCRIPTION = "description";
+    public static final String APARTMENT_IMAGE_URL = "imageURL";
+    public static final String APARTMENT_ADRESS = "address";
     public static final String APARTMENT_MAX_GUEST_NUMBER = "max_guests_number";
     public static final String APARTMENT_ROOMS_NUMBER = "rooms_number";
     public static final String APARTMENT_CLASS = "apartment_class";

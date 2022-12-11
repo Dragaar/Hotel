@@ -17,6 +17,10 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
 
     protected BuildEntity<Apartment> insertEntity = ()-> apartment = Apartment.builder()
             .id(0L)
+            .title("Затишний хостл")
+            .description("some description")
+            .imageURL("new image")
+            .address("вулиця Прорізна, 14, Київ, 01034")
             .maxGuestsNumber("4")
             .roomsNumber("2")
             .apartmentClass("B")
@@ -26,6 +30,10 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
 
     protected BuildEntity<Apartment> updateEntity = ()-> Apartment.builder()
             .id(apartment.getId())
+            .title(apartment.getTitle())
+            .description("new description")
+            .imageURL("new image")
+            .address(apartment.getAddress())
             .maxGuestsNumber(apartment.getMaxGuestsNumber())
             .roomsNumber(apartment.getRoomsNumber())
             .apartmentClass(apartment.getApartmentClass())

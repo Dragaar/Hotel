@@ -20,7 +20,7 @@ public class Query {
     public static final String DELETE_ACCOUNT = "DELETE FROM account WHERE id = ?" ;
 
     //-----------------------Apartment Queries -------------------------------------------------\\
-    public static final String INSERT_APARTMENT = "INSERT INTO apartment VALUES (DEFAULT, ?, ?, ?, ?, ?)" ;
+    public static final String INSERT_APARTMENT = "INSERT INTO apartment VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_APARTMENT= "SELECT * FROM apartment WHERE id = ?";
     public static final String SELECT_ALL_APARTMENTS = "SELECT * FROM apartment" ;
@@ -32,7 +32,9 @@ public class Query {
 
     //id isn`t change
     public static final String UPDATE_APARTMENT = "UPDATE apartment " +
-            "SET `max_guests_number` = ?, `rooms_number` = ?, `apartment_class` = ?, `price` = ?, `state` = ? " +
+            "SET `title` = ?, `description` = ?, `imageURL` = ?, " +
+            "`address` = ?, `max_guests_number` = ?, `rooms_number` = ?, " +
+            "`apartment_class` = ?, `price` = ?, `state` = ? " +
             "WHERE `id` = ?";
 
     public static final String DELETE_APARTMENT = "DELETE FROM apartment WHERE id = ?" ;
