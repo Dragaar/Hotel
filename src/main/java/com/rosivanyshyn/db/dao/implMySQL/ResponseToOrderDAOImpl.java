@@ -108,6 +108,10 @@ public class ResponseToOrderDAOImpl extends GenericDAOImpl<ResponseToOrder> impl
             if(rs.next()){
                 apartments.add(Apartment.builder()
                                 .id(rs.getLong(ENTITY_ID))
+                                .title(rs.getString(APARTMENT_TITLE))
+                                .description(rs.getString(APARTMENT_DESCRIPTION))
+                                .imageURL(rs.getString(APARTMENT_IMAGE_URL))
+                                .address(rs.getString(APARTMENT_ADRESS))
                                 .maxGuestsNumber(rs.getString(APARTMENT_MAX_GUEST_NUMBER))
                                 .roomsNumber(rs.getString(APARTMENT_ROOMS_NUMBER))
                                 .apartmentClass(rs.getString(APARTMENT_CLASS))

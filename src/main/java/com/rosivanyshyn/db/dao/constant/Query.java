@@ -98,7 +98,7 @@ public class Query {
         public static final String INSERT_RESPONSE_TO_ORDER_APARTMENTS= "INSERT INTO `response_to_order_has_apartment` VALUES (?, ?)";
 
         public static final String SELECT_RESPONSE_TO_ORDER_APARTMENTS =
-                "SELECT ap.id, ap.max_guests_number, ap.rooms_number, ap.apartment_class, ap.price, ap.state " +
+                "SELECT ap.id, ap.title, ap.description, ap.imageURL, ap.address, ap.max_guests_number, ap.rooms_number, ap.apartment_class, ap.price, ap.state " +
                         "FROM hotel.`response_to_order_has_apartment` as rto_ap " +
                         "JOIN hotel.`apartment` AS ap ON ap.id = rto_ap.apartment_id " +
                         "WHERE rto_ap.response_to_order_id = ?" ;
