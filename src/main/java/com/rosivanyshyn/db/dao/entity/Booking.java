@@ -19,6 +19,7 @@ public class Booking implements Serializable {
 
     private Date checkInDate;
     private Date checkOutDate;
+    //Auto-Generated
     private Timestamp reservationData;
     private Boolean isPaidForReservation = false;
     //Foreign keys

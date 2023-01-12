@@ -38,6 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 
     private void processRequest(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+        //TODO Delete this
         String controllerName = request.getParameter(CONTROLLER_NAME);
         System.out.println(" Controller is: " + controllerName);
 

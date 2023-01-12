@@ -30,16 +30,16 @@ public class AppExceptionHandler extends HttpServlet {
                               HttpServletResponse response) throws IOException {
         // Analyze the servlet exception
         Throwable throwable = (Throwable) request
-                .getAttribute("javax.servlet.error.exception");
+                .getAttribute("jakarta.servlet.error.exception");
         Integer statusCode = (Integer) request
-                .getAttribute("javax.servlet.error.status_code");
+                .getAttribute("jakarta.servlet.error.status_code");
         String servletName = (String) request
-                .getAttribute("javax.servlet.error.servlet_name");
+                .getAttribute("jakarta.servlet.error.servlet_name");
         if (servletName == null) {
             servletName = "Unknown";
         }
         String requestUri = (String) request
-                .getAttribute("javax.servlet.error.request_uri");
+                .getAttribute("jakarta.servlet.error.request_uri");
         if (requestUri == null) {
             requestUri = "Unknown";
         }
@@ -63,7 +63,7 @@ public class AppExceptionHandler extends HttpServlet {
         }
 
         out.write("<br><br>");
-        out.write("<a href=\"index.jsp\">Home Page</a>");
+        out.write("<a href=\"../index.jsp\">Home Page</a>");
         out.write("</body></html>");
     }
 }
