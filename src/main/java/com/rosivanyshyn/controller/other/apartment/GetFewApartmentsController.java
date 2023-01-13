@@ -3,6 +3,7 @@ package com.rosivanyshyn.controller.other.apartment;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Apartment;
+import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
@@ -43,7 +44,7 @@ public class GetFewApartmentsController implements Controller {
             resolver.forward(APARTMENTS_JSP);
 
         } catch (RuntimeException ex){
-            throw new ValidationException("Cannot get Apartments", ex);
+            throw new AppException("Cannot get Apartments", ex);
         }
         return resolver;
     }

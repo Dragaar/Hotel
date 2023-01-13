@@ -7,7 +7,7 @@ import com.rosivanyshyn.controller.other.apartment.DeleteApartmentController;
 import com.rosivanyshyn.controller.other.apartment.GetApartmentDetailsController;
 import com.rosivanyshyn.controller.other.apartment.GetFewApartmentsController;
 import com.rosivanyshyn.controller.other.booking.CreateBookingController;
-import com.rosivanyshyn.controller.other.booking.GetBookingFormController;
+import com.rosivanyshyn.controller.other.booking.GetCreateBookingFormController;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 public class ControllerFactory {
@@ -33,7 +33,7 @@ public class ControllerFactory {
                 return new DeleteApartmentController();
 
             case NEW_BOOKING_CONTROLLER:
-                return new GetBookingFormController();
+                return new GetCreateBookingFormController();
             case CREATE_BOOKING_CONTROLLER:
                 return new CreateBookingController();
 
