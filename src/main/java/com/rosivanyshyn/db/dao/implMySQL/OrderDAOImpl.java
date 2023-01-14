@@ -1,9 +1,9 @@
 package com.rosivanyshyn.db.dao.implMySQL;
 
-import com.mysql.cj.xdevapi.Type;
 import com.rosivanyshyn.db.dao.OrderDAO;
 import com.rosivanyshyn.db.dao.entity.*;
 import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.transaction.TransactionManager;
 
 import java.sql.Connection;
 import java.sql.Types;
@@ -111,14 +111,18 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
         Connection connection= DBManager.getConnection();
         AccountDAOImpl accountDAO = new AccountDAOImpl();
 
-        return accountDAO.get(connection, id);
+        return (Account) TransactionManager.execute(connection,
+                ()-> accountDAO.get(connection, id)
+        );
     }
     //foreign key
     private ResponseToOrder getResponseToOrderForeignKey(Long id){
         Connection connection= DBManager.getConnection();
         ResponseToOrderDAOImpl responseToOrderDAO = new ResponseToOrderDAOImpl();
 
-        return responseToOrderDAO.get(connection, id);
+        return (ResponseToOrder) TransactionManager.execute(connection,
+                ()-> responseToOrderDAO.get(connection, id)
+        );
     }
 
 }

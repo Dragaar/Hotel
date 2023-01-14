@@ -1,12 +1,11 @@
 package com.rosivanyshyn.db.dao.implMySQL;
 
-import com.rosivanyshyn.db.dao.ApartmentDAO;
 import com.rosivanyshyn.db.dao.BookingDAO;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
-import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.transaction.TransactionManager;
 
 import java.sql.Connection;
 import java.sql.Timestamp;
@@ -94,14 +93,18 @@ public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDA
         Connection connection= DBManager.getConnection();
         AccountDAOImpl accountDAO = new AccountDAOImpl();
 
-        return accountDAO.get(connection, id);
+        return (Account) TransactionManager.execute(connection,
+                ()-> accountDAO.get(connection, id)
+        );
     }
     //foreign key
     private Apartment getApartmentForeignKey(Long id){
         Connection connection= DBManager.getConnection();
         ApartmentDAOImpl apartmentDAO = new ApartmentDAOImpl();
 
-        return apartmentDAO.get(connection, id);
+        return (Apartment) TransactionManager.execute(connection,
+                ()-> apartmentDAO.get(connection, id)
+        );
     }
 
 
