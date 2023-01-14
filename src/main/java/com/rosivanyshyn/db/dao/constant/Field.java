@@ -34,6 +34,8 @@ public class Field {
     public static final String ORDER_GUESTS_NUMBER = "guests_number";
     public static final String ORDER_ROOMS_NUMBER = "rooms_number";
     public static final String ORDER_APARTMENT_CLASS = "apartment_class";
+    public static final String ORDER_APARTMENT_PRICE = "price";
+    public static final String ORDER_DESCRIPTION = "description";
     public static final String ORDER_CHECK_OUT_DATE = "check_out_date";
     public static final String ORDER_CHECK_IN_DATE = "check_in_date";
 

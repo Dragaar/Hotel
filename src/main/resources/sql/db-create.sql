@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `hotel`.`order` (
    `guests_number` INT NOT NULL,
    `rooms_number` VARCHAR(45) NOT NULL,
     `apartment_class` VARCHAR(255) NOT NULL,
+    `price` BIGINT NOT NULL,
+    `description` VARCHAR(500) NULL,
     `check_out_date` DATE NOT NULL,
     `check_in_date` DATE NOT NULL,
     `account_id` INT NOT NULL,

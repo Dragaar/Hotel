@@ -43,9 +43,11 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
 
     protected BuildEntity<Order> insertEntity = ()-> order = Order.builder()
             .id(0L)
-            .guestsNumber("4")
+            .guestsNumber(4)
             .roomsNumber("2")
             .apartmentClass("B")
+            .price(250L)
+            .description("best apartment")
             .checkInDate(
                     Date.valueOf(LocalDate.of(2023, 01, 10))
             )
@@ -57,9 +59,11 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
 
     protected BuildEntity<Order> updateEntity = ()-> Order.builder()
             .id(order.getId())
-            .guestsNumber("6")
+            .guestsNumber(6)
             .roomsNumber("3")
             .apartmentClass("C")
+            .price(500L)
+            .description("best apartment 2")
             .checkInDate(order.getCheckInDate())
             .checkOutDate(
                     Date.valueOf(LocalDate.of(2023, 01, 27))

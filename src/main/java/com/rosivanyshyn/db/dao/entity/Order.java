@@ -14,9 +14,11 @@ import java.sql.Date;
 @EqualsAndHashCode()
 public class Order implements Serializable {
     private Long id;
-    private String guestsNumber;
+    private Integer guestsNumber;
     private String roomsNumber;
     private String apartmentClass;
+    private Long price;
+    private String description;
 
     private Date checkInDate;
     private Date checkOutDate;

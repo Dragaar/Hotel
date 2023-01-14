@@ -60,7 +60,7 @@ public class Query {
     public static final String DELETE_BOOKING = "DELETE FROM booking WHERE id = ?" ;
 
     //-----------------------Order Queries -------------------------------------------------\\
-    public static final String INSERT_ORDER = "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, DEFAULT)" ;
+    public static final String INSERT_ORDER = "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)" ;
 
     public static final String SELECT_ORDER = "SELECT * FROM `order` WHERE id = ?";
     public static final String SELECT_ALL_ORDERS= "SELECT * FROM `order`" ;
@@ -72,7 +72,8 @@ public class Query {
 
     //id, account_id aren`t change
     public static final String UPDATE_ORDER = "UPDATE `order` " +
-            "SET `guests_number` = ?, `rooms_number` = ?, `apartment_class` = ?, `check_out_date` = ?, `check_in_date` = ?, `response_to_order_id` = ? " +
+            "SET `guests_number` = ?, `rooms_number` = ?, `apartment_class` = ?, `price` = ?, " +
+            "`description` = ?, `check_out_date` = ?, `check_in_date` = ?, `response_to_order_id` = ? " +
             "WHERE `id` = ?";
 
     public static final String DELETE_ORDER = "DELETE FROM `order` WHERE id = ?" ;

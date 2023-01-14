@@ -33,13 +33,15 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
     @Override
     DBStatementOperations<Order> insertOperations() {
         return (stmt, entity) -> {
-            stmt.setString(1, entity.getGuestsNumber());
+            stmt.setInt(1, entity.getGuestsNumber());
             stmt.setString(2, entity.getRoomsNumber());
             stmt.setString(3, entity.getApartmentClass());
-            stmt.setDate(4, entity.getCheckOutDate());
-            stmt.setDate(5, entity.getCheckInDate());
+            stmt.setLong(4, entity.getPrice());
+            stmt.setString(5, entity.getDescription());
+            stmt.setDate(6, entity.getCheckOutDate());
+            stmt.setDate(7, entity.getCheckInDate());
 
-            stmt.setLong(6, entity.getAccount().getId());
+            stmt.setLong(8, entity.getAccount().getId());
            //ResponseToOrder = NULL
         };
     }
@@ -47,18 +49,22 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
     @Override
     DBStatementOperations<Order> updateOperations() {
         return (stmt, entity) -> {
-            stmt.setString(1, entity.getGuestsNumber());
+            stmt.setInt(1, entity.getGuestsNumber());
             stmt.setString(2, entity.getRoomsNumber());
             stmt.setString(3, entity.getApartmentClass());
-            stmt.setDate(4, entity.getCheckOutDate());
-            stmt.setDate(5, entity.getCheckInDate());
-
+            stmt.setLong(4, entity.getPrice());
+            stmt.setString(5, entity.getDescription());
+            stmt.setDate(6, entity.getCheckOutDate());
+            stmt.setDate(7, entity.getCheckInDate());
+            
            //Author Account unchanged
           if(entity.getResponseToOrder() != null){
-            stmt.setLong(6, entity.getResponseToOrder().getId());}
-          else {stmt.setNull(6, Types.INTEGER);}
+            stmt.setLong(8, entity.getResponseToOrder().getId());
+            stmt.setLong(9, entity.getId());
+          }
+          else {stmt.setNull(8, Types.INTEGER);}
             //WHERE
-            stmt.setLong(7, entity.getId());
+            stmt.setLong(9, entity.getId());
         };
     }
 
@@ -76,9 +82,11 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
 
             return Order.builder()
                     .id(rs.getLong(ENTITY_ID))
-                    .guestsNumber(rs.getString(ORDER_GUESTS_NUMBER))
+                    .guestsNumber(rs.getInt(ORDER_GUESTS_NUMBER))
                     .roomsNumber(rs.getString(ORDER_ROOMS_NUMBER))
                     .apartmentClass(rs.getString(ORDER_APARTMENT_CLASS))
+                    .price(rs.getLong(ORDER_APARTMENT_PRICE))
+                    .description(rs.getString(ORDER_DESCRIPTION))
                     .checkOutDate(rs.getDate(ORDER_CHECK_OUT_DATE))
                     .checkInDate(rs.getDate(ORDER_CHECK_IN_DATE))
                     //foreign keys
