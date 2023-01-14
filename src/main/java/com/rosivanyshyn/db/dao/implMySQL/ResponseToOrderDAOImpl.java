@@ -105,7 +105,7 @@ public class ResponseToOrderDAOImpl extends GenericDAOImpl<ResponseToOrder> impl
             stmt.setLong(1, id);
 
             rs = stmt.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 apartments.add(Apartment.builder()
                                 .id(rs.getLong(ENTITY_ID))
                                 .title(rs.getString(APARTMENT_TITLE))
