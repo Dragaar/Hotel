@@ -1,6 +1,7 @@
 package com.rosivanyshyn.db.dao.implMySQL;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
+import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.DAOException;
 import org.apache.log4j.Logger;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Formatter;
 
+import static com.rosivanyshyn.db.dao.constant.Query.SELECT_ALL_APARTMENTS;
 import static com.rosivanyshyn.exeption.Message.*;
 
 /** Implementation of GenericDAO interface
@@ -146,7 +148,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             setDynamicData(stmt,1, value);
 
             rs = stmt.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 return entityFromGet().extractEntity(rs);
             }
 
@@ -155,6 +157,32 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             throw new DAOException(className + " " + SELECT_BY_FIELD_ERROR, ex);
         }
         return null;
+    }
+    @Override
+    public ArrayList<T> getWithDynamicQuery(Connection con, String secondQueryPart, Object... fields){
+        LOG.info("Query: " + selectAllQuery()+secondQueryPart);
+        ArrayList<T> array = new ArrayList<>();
+        int index = 1;
+
+        ResultSet rs;
+        try (PreparedStatement stmt = con.prepareStatement(selectAllQuery()+secondQueryPart) ) {
+            if(fields.length>0){
+                for(Object field : fields){
+                    setDynamicData(stmt, index++, field);
+                }
+            }
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                array.add(entityFromGet().extractEntity(rs));
+            }
+            return array;
+        } catch (SQLException ex){
+            LOG.error(className + " " + SELECT_DYNAMIC_ERROR, ex);
+            throw new DAOException(className + " " + SELECT_DYNAMIC_ERROR, ex);
+        }
+
     }
 
     @Override

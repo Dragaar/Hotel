@@ -1,5 +1,7 @@
 package com.rosivanyshyn.db.dao;
 
+import com.rosivanyshyn.db.dao.entity.Apartment;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -46,6 +48,8 @@ public interface GenericDAO<T> {
      * @return T
      */
     T               getByField(Connection con, String field, Object value);
+
+    ArrayList<T>    getWithDynamicQuery(Connection con, String secondQueryPart, Object... fields);
 
     /** Update object in respective table.
      *
