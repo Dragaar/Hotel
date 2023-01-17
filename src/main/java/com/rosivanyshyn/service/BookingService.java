@@ -8,10 +8,7 @@ import java.util.ArrayList;
 
 public interface BookingService {
     Boolean                  createBooking(Booking booking);
-
-    Booking                  findBookingByField(String field, Object value);
-    ArrayList<Booking>       findAllBooking();
-    ArrayList<Booking>       findFewBooking(int start, int total);
+    ArrayList<Booking>       findFewOrdersAndSort(String secondQueryPart, Object... fields);
 
     Boolean                  updateBooking(Booking booking);
     Boolean                  deleteBooking(Booking booking);

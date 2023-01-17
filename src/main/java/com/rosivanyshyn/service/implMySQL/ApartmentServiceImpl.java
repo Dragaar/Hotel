@@ -1,7 +1,6 @@
 package com.rosivanyshyn.service.implMySQL;
 
 import com.rosivanyshyn.db.dao.ApartmentDAO;
-import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.implMySQL.ApartmentDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
@@ -40,13 +39,24 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public ArrayList<Apartment> findFewApartment(int start, int end) {
+    public ArrayList<Apartment> findFewApartment(int start, int total) {
         Connection connection = DBManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
          ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
-                ()-> apartmentDAO.getFew(connection, start-1, end)
+                ()-> apartmentDAO.getFew(connection, start-1, total)
+        );
+        return result;
+    }
+    @Override
+    public ArrayList<Apartment> findFewApartmentsAndSort(String secondQueryPart, String... fields) {
+        Connection connection = DBManager.getConnection();
+
+        //sql start indexing from 0
+        @SuppressWarnings("unchecked")
+        ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
+                ()-> apartmentDAO.getWithDynamicQuery(connection, secondQueryPart, fields)
         );
         return result;
     }

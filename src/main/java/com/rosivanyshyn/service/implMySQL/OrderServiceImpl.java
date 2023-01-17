@@ -70,14 +70,21 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
+    /**
+     * Delete order, response-to-order and all apartments submitted to response-to-order
+     * @param order order to delete
+     * @return Boolean result of operation
+     */
     @Override
     public Boolean deleteOrder(Order order) {
     Connection connection = DBManager.getConnection();
 
         return (Boolean) TransactionManager.execute(connection,
             ()-> {
-            responseToOrderDAO.deleteResponseApartments(connection, order.getResponseToOrder().getId());
-            responseToOrderDAO.delete(connection, order.getResponseToOrder().getId());
+            if(order.getResponseToOrder() != null) {
+                responseToOrderDAO.deleteResponseApartments(connection, order.getResponseToOrder().getId());
+                responseToOrderDAO.delete(connection, order.getResponseToOrder().getId());
+            }
             orderDAO.delete(connection, order.getId());
             return true;
             }

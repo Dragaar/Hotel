@@ -23,20 +23,16 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking findBookingByField(String field, Object value) {
-        return null;
-    }
+    public ArrayList<Booking> findFewOrdersAndSort(String secondQueryPart, Object... fields) {
+        Connection connection = DBManager.getConnection();
 
-    @Override
-    public ArrayList<Booking> findAllBooking() {
-        return null;
+        //sql start indexing from 0
+        @SuppressWarnings("unchecked")
+        ArrayList<Booking> result = (ArrayList<Booking>) TransactionManager.execute(connection,
+                ()-> bookingDAO.getWithDynamicQuery(connection, secondQueryPart, fields)
+        );
+        return result;
     }
-
-    @Override
-    public ArrayList<Booking> findFewBooking(int start, int total) {
-        return null;
-    }
-
     @Override
     public Boolean updateBooking(Booking booking) {
         return null;
