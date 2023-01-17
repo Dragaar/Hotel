@@ -6,8 +6,11 @@ import com.rosivanyshyn.controller.authorization.RegistrationController;
 import com.rosivanyshyn.controller.other.apartment.DeleteApartmentController;
 import com.rosivanyshyn.controller.other.apartment.GetApartmentDetailsController;
 import com.rosivanyshyn.controller.other.apartment.GetFewApartmentsController;
-import com.rosivanyshyn.controller.other.booking.CreateBookingController;
-import com.rosivanyshyn.controller.other.booking.GetCreateBookingFormController;
+import com.rosivanyshyn.controller.other.booking.*;
+import com.rosivanyshyn.controller.other.order.*;
+import com.rosivanyshyn.controller.other.responseToOrder.CreateResponseToOrderController;
+import com.rosivanyshyn.controller.other.responseToOrder.GetCreateResponseToOrderController;
+import com.rosivanyshyn.controller.other.responseToOrder.GetResponseToOrderController;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 public class ControllerFactory {
@@ -32,10 +35,37 @@ public class ControllerFactory {
             case DELETE_APARTMENT_CONTROLLER:
                 return new DeleteApartmentController();
 
+            case GET_BOOKINGS_CONTROLLER:
+                return new GetFewBookingController();
+            case GET_ALL_BOOKINGS_CONTROLLER:
+                return new GetAllBookingController();
             case NEW_BOOKING_CONTROLLER:
                 return new GetCreateBookingFormController();
             case CREATE_BOOKING_CONTROLLER:
                 return new CreateBookingController();
+            case DELETE_BOOKING_CONTROLLER:
+                return new DeleteBookingController();
+
+
+
+            case GET_ORDERS_CONTROLLER:
+                return new GetFewOrdersController();
+            case GET_ALL_ORDERS_CONTROLLER:
+                return new GetAllOrdersController();
+            case NEW_ORDER_CONTROLLER:
+                return new GetCreateOrderFormController();
+            case CREATE_ORDER_CONTROLLER:
+                return new CreateOrderController();
+            case DELETE_ORDER_CONTROLLER:
+                return new DeleteOrderController();
+
+
+            case GET_RESPONSE_TO_ORDER_CONTROLLER:
+                return new GetResponseToOrderController();
+            case NEW_RESPONSE_TO_ORDER_CONTROLLER:
+                return new GetCreateResponseToOrderController();
+            case CREATE_RESPONSE_TO_ORDER_CONTROLLER:
+                return new CreateResponseToOrderController();
 
             default:
         }
