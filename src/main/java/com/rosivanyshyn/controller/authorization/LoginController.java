@@ -3,8 +3,10 @@ package com.rosivanyshyn.controller.authorization;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 
+import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
+import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.AccountService;
 import com.rosivanyshyn.service.implMySQL.AccountServiceImpl;
@@ -44,14 +46,19 @@ public class LoginController implements Controller {
 
                 session.setAttribute("id", DBAccount.getId());
                 session.setAttribute("email", DBAccount.getEmail());
-                session.setAttribute("role", DBAccount.getRole());
+
+                AccountRole role = AccountRole.get(DBAccount.getRole());
+                session.setAttribute("role", role);
+
+                session.setAttribute("managerRoleName", AccountRole.MANAGER);
+                session.setAttribute("userRoleName", AccountRole.USER);
 
                 resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER +
                         "&message=" + "Successful login!");
             } else throw new RuntimeException("Account isn`t exist!");
 
         } catch (RuntimeException ex){
-            throw new ValidationException("Wrong login input data", ex);
+            throw new AppException("Wrong login input data", ex);
         }
         return resolver;
     }

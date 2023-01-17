@@ -52,9 +52,7 @@ public class AuthFilter implements Filter {
                 nonNull(session.getAttribute("email")) &&
                 nonNull(session.getAttribute("role"))) {
 
-            final AccountRole role = AccountRole.valueOf(
-                    ((String) session.getAttribute("role")).toUpperCase()
-                    );
+            final AccountRole role = (AccountRole) session.getAttribute("role");
 
             filterChain.doFilter(request, response);
             //moveToMenu(req, res, role);
