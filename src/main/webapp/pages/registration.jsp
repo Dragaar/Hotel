@@ -8,18 +8,17 @@
     <div class="row">
         <div class="col-sm-6 text-black">
 
-            <div class="px-5 ms-xl-4">
-                <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-                <span class="h1 fw-bold mb-0">Hotel</span>
+            <div class="row" >
+                <img class="col-ml-6 offset-md-3" style="max-height: 180px; max-width: 180px;" src="${pageContext.request.contextPath}/images/site-logo.png" >
             </div>
 
-            <div class="px-5 ms-xl-4 d-flex d-flex justify-content-center">
+            <div class="px-5 ms-xl-4">
                 <h3><c:out value = "${param.message}" /></h3>
             </div>
 
-            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-4 pt-5 pt-xl-0 mt-xl-n5">
+            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-xl-0 mt-xl-n5">
 
-                <form action="../front?controller=registration" method="post" style="width: 23rem;">
+                <form action="${pageContext.request.contextPath}/front?controller=registration" method="post" style="width: 23rem;">
 
                     <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign up now!</h3>
 
@@ -46,12 +45,12 @@
                     </div>
 
                     <!-- Password input -->
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-2">
                         <input name="password" type="password" id="form3Example4" class="form-control" />
                         <label class="form-label" for="form3Example4">Password</label>
                     </div>
 
-                    <div class="pt-1 mb-4">
+                    <div class="pt-1 mb-2">
                         <button class="col-12 btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
                     </div>
 
@@ -63,7 +62,7 @@
 
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-            <img src="/hotel/images/fon-1.jpg"
+            <img src="${pageContext.request.contextPath}/images/fon-1.jpg"
                  alt="Sign up image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
         </div>
     </div>
