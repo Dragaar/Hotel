@@ -44,7 +44,9 @@ public class HelloServlet extends HttpServlet {
 
         LOG.error("tesing info message");
 
-
+        final String LOGIN_JSP = "/hotel/pages/login.jsp";
+        response.sendRedirect(LOGIN_JSP + "?message="+
+                "Your account has been successfully registered!");
 
     }
 
