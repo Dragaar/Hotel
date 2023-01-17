@@ -1,7 +1,6 @@
 package database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
-import com.rosivanyshyn.db.dao.constant.Field;
 
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
