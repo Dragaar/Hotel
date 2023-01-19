@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import com.rosivanyshyn.exeption.DAOException;
 
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * TransactionManager provide safe database queries
@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public final class TransactionManager {
 
-    private static final Logger LOG = Logger.getLogger(TransactionManager.class);
+    private static final Logger LOG = LogManager.getLogger(TransactionManager.class);
 
     public static Object execute(Connection con, ExecuteOperation operation) {
         Object value = null;

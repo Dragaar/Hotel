@@ -10,9 +10,6 @@ import com.rosivanyshyn.service.implMySQL.AccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
-import org.apache.log4j.lf5.DefaultLF5Configurator;
-
-import java.io.IOException;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 

@@ -9,7 +9,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.lf5.DefaultLF5Configurator;
 
 import java.io.IOException;
 
@@ -22,9 +21,8 @@ public class AuthFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        try { DefaultLF5Configurator.configure();
-        } catch (IOException e) {throw new RuntimeException(e);}
+    public void init(FilterConfig filterConfig){
+
     }
     @Override
     public void doFilter(final ServletRequest request,

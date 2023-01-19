@@ -15,9 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
-import org.apache.log4j.lf5.DefaultLF5Configurator;
-
-import java.io.IOException;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
@@ -28,10 +25,6 @@ public class LoginController implements Controller {
 
     protected static final Logger LOG = Logger.getLogger(AccountDAOImpl.class);
 
-    public LoginController() {
-        try { DefaultLF5Configurator.configure();
-        } catch (IOException e) {throw new RuntimeException(e);}
-    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
