@@ -16,6 +16,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.exeption.Message.SELECT_BY_FIELD_ERROR;
@@ -45,6 +48,9 @@ public class LoginController implements Controller {
 
                 session.setAttribute("managerRoleName", AccountRole.MANAGER);
                 session.setAttribute("userRoleName", AccountRole.USER);
+
+                session.setAttribute("lang", "en");
+                session.setAttribute("languages", new ArrayList<>(Arrays.asList("en", "uk")));
 
                 resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER +
                         "&message=" + "Successful login!");

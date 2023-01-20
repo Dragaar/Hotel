@@ -1,6 +1,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="language"/>
 
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -50,6 +54,21 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
 
+
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <div class="nav-item dropdown">
+                <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <fmt:message key="menu.languages.${sessionScope.lang}" />
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <c:forEach items="${sessionScope.languages}" var="language" >
+                    <li><a class="dropdown-item" href="front?controller=changeLanguage&language=${language}">
+                        <fmt:message key="menu.languages.${language}" />
+                    </a></li>
+                </c:forEach>
+                </div>
+            </div>
         </ul>
         <ul class="navbar-nav navbar-right">
             <li class="nav-item float-right">

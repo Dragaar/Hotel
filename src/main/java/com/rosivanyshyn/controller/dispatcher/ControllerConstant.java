@@ -54,5 +54,6 @@ public class ControllerConstant {
     public static final String CREATE_RESPONSE_TO_ORDER_CONTROLLER = "createResponseToOrder";
 
 
+    public static final String CHANGE_LANGUAGE_CONTROLLER = "changeLanguage";
 
 }

@@ -3,6 +3,7 @@ package com.rosivanyshyn.controller.dispatcher;
 import com.rosivanyshyn.controller.authorization.LoginController;
 import com.rosivanyshyn.controller.authorization.LogoutController;
 import com.rosivanyshyn.controller.authorization.RegistrationController;
+import com.rosivanyshyn.controller.other.langueage.ChangeLanguageController;
 import com.rosivanyshyn.controller.other.apartment.DeleteApartmentController;
 import com.rosivanyshyn.controller.other.apartment.GetApartmentDetailsController;
 import com.rosivanyshyn.controller.other.apartment.GetFewApartmentsController;
@@ -67,6 +68,9 @@ public class ControllerFactory {
             case CREATE_RESPONSE_TO_ORDER_CONTROLLER:
                 return new CreateResponseToOrderController();
 
+
+            case CHANGE_LANGUAGE_CONTROLLER:
+                return new ChangeLanguageController();
             default:
         }
         return null;
