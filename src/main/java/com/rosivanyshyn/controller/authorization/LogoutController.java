@@ -20,7 +20,7 @@ public class LogoutController implements Controller {
             destroySession(request, response);
 
             resolver.redirect(request.getContextPath() + LOGIN_JSP +
-                    "?message=" + "You have successfully logged out!");
+                    "?message=" + "app.message.logout");
 
         } catch (RuntimeException ex){
             throw new ValidationException("Cannot logout", ex);

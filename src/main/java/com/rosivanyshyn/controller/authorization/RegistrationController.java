@@ -42,7 +42,7 @@ public class RegistrationController implements Controller {
             accountService.createAccount(account);
 
             resolver.redirect(request.getContextPath() + LOGIN_JSP +
-                    "?message=" + "Your account has been successfully registered!");
+                    "?message=" + "app.message.registration");
 
         } catch (RuntimeException ex){
             throw new ValidationException("Wrong registration input data", ex);

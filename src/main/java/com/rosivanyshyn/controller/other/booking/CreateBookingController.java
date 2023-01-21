@@ -6,7 +6,6 @@ import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.exeption.AppException;
-import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.BookingService;
 import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
@@ -62,7 +61,7 @@ public class CreateBookingController implements Controller {
                 bookingService.createBooking(booking);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "Successful Booking!");
+                    "&message=" + "app.message.booking.create");
 
         } catch (RuntimeException ex){
             throw new AppException("Cannot booking apartment", ex);

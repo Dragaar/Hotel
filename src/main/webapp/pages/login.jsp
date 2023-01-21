@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="tagsl" uri ="commonTags" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 
-
-
-
+<tags:localeItialization />
 <section class="vh-100">
     <div class="container-fluid">
         <div class="row">
@@ -16,7 +17,7 @@
                 </div>
 
                 <div class="px-5 ms-xl-4">
-                    <h3><c:out value = "${param.message}" /></h3>
+                    <tags:showMessage messageKey="${param.message}"/>
                 </div>
 
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-xl-0 mt-xl-n5">

@@ -3,12 +3,9 @@ package com.rosivanyshyn.controller.other.order;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.Field;
-import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.exeption.AppException;
-import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.OrderService;
-import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
 import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +34,7 @@ public class DeleteOrderController implements Controller {
             }
 
             resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "Successful order delete!");
+                    "&message=" + "app.message.order.delete");
 
         } catch (RuntimeException ex){
             throw new AppException("Cannot delete order", ex);

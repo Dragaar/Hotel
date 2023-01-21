@@ -7,7 +7,6 @@ import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
 import com.rosivanyshyn.exeption.AppException;
-import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.AccountService;
 import com.rosivanyshyn.service.implMySQL.AccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import java.util.Arrays;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
-import static com.rosivanyshyn.exeption.Message.SELECT_BY_FIELD_ERROR;
 
 public class LoginController implements Controller {
     AccountService accountService = new AccountServiceImpl();
@@ -52,8 +50,8 @@ public class LoginController implements Controller {
                 session.setAttribute("lang", "en");
                 session.setAttribute("languages", new ArrayList<>(Arrays.asList("en", "uk")));
 
-                resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                        "&message=" + "Successful login!");
+                resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER);
+                       // "&message=" + "Successful login!");
             } else throw new RuntimeException("Account isn`t exist!");
 
         } catch (RuntimeException ex){

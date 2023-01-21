@@ -40,7 +40,7 @@ public class DeleteBookingController implements Controller {
             }
 
             resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "Successful booking delete!");
+                    "&message=" + "app.message.booking.delete");
 
         } catch (RuntimeException ex){
             throw new AppException("Cannot delete booking", ex);

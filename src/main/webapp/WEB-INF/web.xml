@@ -13,4 +13,11 @@
         <exception-type>jakarta.servlet.ServletException</exception-type>
         <location>/AppExceptionHandler</location>
     </error-page>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>commonTags</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/commonTags.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>

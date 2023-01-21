@@ -61,7 +61,7 @@ public class CreateOrderController implements Controller {
                  orderService.createOrder(order);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "Successful create order!");
+                    "&message=" + "app.message.order.create");
 
         } catch (RuntimeException ex){
             throw new AppException("Cannot create order", ex);

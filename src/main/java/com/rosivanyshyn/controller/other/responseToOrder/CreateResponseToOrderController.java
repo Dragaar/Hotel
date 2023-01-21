@@ -4,7 +4,6 @@ import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.constant.Field;
-import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
@@ -18,10 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
@@ -61,7 +57,7 @@ public class CreateResponseToOrderController implements Controller {
                 responseToOrderService.createResponseToOrder(order, responseToOrder, apartments);
 
                 resolver.redirect(request.getContextPath() + "/front?controller=" + GET_ALL_ORDERS_CONTROLLER +
-                        "&message=" + "Successful create response to order!");
+                        "&message=" + "app.message.responseToOrder.create");
             }
         } catch (RuntimeException ex){
             throw new AppException("Cannot create response to order", ex);
