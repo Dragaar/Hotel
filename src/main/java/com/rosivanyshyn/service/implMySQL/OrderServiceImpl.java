@@ -1,8 +1,6 @@
 package com.rosivanyshyn.service.implMySQL;
 
 import com.rosivanyshyn.db.dao.ResponseToOrderDAO;
-import com.rosivanyshyn.db.dao.entity.Apartment;
-import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.db.dao.implMySQL.OrderDAOImpl;
 import com.rosivanyshyn.db.dao.implMySQL.ResponseToOrderDAOImpl;

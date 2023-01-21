@@ -1,12 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 <jsp:include page="/pages/common/navbar.jsp" />
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="language"/>
+
 <div class="container mt-5">
 
     <div class="px-5 ms-xl-4 d-flex d-flex justify-content-center">
-        <h3><c:out value = "${param.message}" /></h3>
+        <tags:showMessage messageKey="${param.message}"/>
     </div>
 
     <c:if test="${empty requestScope.apartments}">

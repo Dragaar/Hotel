@@ -4,7 +4,6 @@ import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.AppException;
-import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;

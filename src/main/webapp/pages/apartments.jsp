@@ -6,7 +6,9 @@
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 <jsp:include page="/pages/common/navbar.jsp" />
 
-<tags:localeItialization />
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="language"/>
+
 <div class="container mt-5">
 
 <div class="px-5 ms-xl-4 d-flex d-flex justify-content-center">

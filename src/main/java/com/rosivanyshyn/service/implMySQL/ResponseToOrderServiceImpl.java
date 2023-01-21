@@ -9,7 +9,6 @@ import com.rosivanyshyn.db.dao.implMySQL.OrderDAOImpl;
 import com.rosivanyshyn.db.dao.implMySQL.ResponseToOrderDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
-import com.rosivanyshyn.exeption.DAOException;
 import com.rosivanyshyn.service.ResponseToOrderService;
 
 import java.sql.Connection;

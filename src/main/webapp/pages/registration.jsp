@@ -7,7 +7,18 @@
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 
 
-<tags:localeItialization />
+<c:choose>
+    <c:when test="${!empty sessionScope.lang}">
+        <fmt:setLocale value="${sessionScope.lang}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="lang" scope="session" value="en"/>
+        <fmt:setLocale value="en"/>
+    </c:otherwise>
+</c:choose>
+
+<fmt:setBundle basename="language"/>
+
 <section class="vh-100">
 <div class="container-fluid">
     <div class="row">

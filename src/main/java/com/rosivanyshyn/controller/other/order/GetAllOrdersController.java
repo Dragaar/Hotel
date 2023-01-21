@@ -17,7 +17,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_ORDERS_JSP;
-import static com.rosivanyshyn.db.dao.constant.Field.*;
+
 public class GetAllOrdersController implements Controller {
 
     OrderService orderService = new OrderServiceImpl();
