@@ -1,12 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 <jsp:include page="/pages/common/navbar.jsp" />
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="language"/>
+
 <div class="container mt-5">
 
     <c:if test="${empty requestScope.apartment}">
-        <br>Ops! Cannot find available apartments!</br>
+        <br><fmt:message key="apartment.error.cannotFind" /></br>
     </c:if>
 
     <div class="container">
@@ -26,20 +31,20 @@
                 <p>${apartment.getDescription()}</p>
 
                 <div class="row">
-                        <h6 class="col-md-5 text-left">Вартість проживання за одну ніч:</h6>
+                        <h6 class="col-md-5 text-left"><fmt:message key="apartment.price" /></h6>
                         <h6 class="col-md-2 text-muted">
                             <c:out value="${apartment.getPrice()}" /> &#8372
                         </h6>
                 </div>
             </div>
             <div class="row">
-                <h6 class="col-md-3 text-left">Кількість кімнат:</h6>
+                <h6 class="col-md-3 text-left"><fmt:message key="apartment.roomsCount" /></h6>
                 <h6 class="col-md-2 text-muted">
                     <c:out value="${apartment.getRoomsNumber()}" />
                 </h6>
             </div>
             <div class="row">
-                <h6 class="col-md-3 text-left">Максимальна кількість гостей:</h6>
+                <h6 class="col-md-3 text-left"><fmt:message key="apartment.maxGuestsNumber" /></h6>
                 <h6 class="col-md-2 text-muted">
                     <c:out value="${apartment.getMaxGuestsNumber()}" />
                 </h6>
@@ -52,7 +57,7 @@
                     <input type="hidden" name="apartmentPrice" value="${apartment.getPrice()}">
                     <input type="hidden" name="apartmentId" value="${apartment.getId()}">
                 <div class="row d-flex flex-row-reverse">
-                <button class="col-2 btn btn-primary my-1" type="submit" >Make a booking</button>
+                <button class="col-2 btn btn-primary my-1" type="submit" ><fmt:message key="apartment.makeBooking" /></button>
             </div>
             </form>
 

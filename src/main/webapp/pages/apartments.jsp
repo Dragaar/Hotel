@@ -16,7 +16,7 @@
 </div>
 
 <c:if test="${empty requestScope.apartments}">
-    <h2 class="d-flex justify-content-center"> Ops! Cannot find available apartments!</h2>
+    <h2 class="d-flex justify-content-center"> <fmt:message key="apartment.error.cannotFind" /></h2>
     <div class="d-flex justify-content-center">
         <img src="${pageContext.request.contextPath}/images/icons/sad-cat.jpg" class="img">
     </div>
@@ -27,14 +27,14 @@
 
     <c:if test="${page == 2}">
     <div class="row img-thumbnail">
-        <h3 class="col-md-8"> Не можете знайти потрібне житло? Залиште заявку!</h3>
-        <a href="${pageContext.request.contextPath}/front?controller=newOrder" class="col-md-2 btn btn-primary">Оформити</a>
+        <h3 class="col-md-8"> <fmt:message key="apartment.createApplicationMessage" /></h3>
+        <a href="${pageContext.request.contextPath}/front?controller=newOrder" class="col-md-2 btn btn-primary"><fmt:message key="apartment.createApplication" /></a>
     </div>
     </c:if>
 
     <div class="row mb-4 mt-4">
 
-        <h2 class="col-md-6">Apartment List</h2>
+        <h2 class="col-md-6"><fmt:message key="apartment.list" /></h2>
 
         <div class="col-md-6 input-group">
             <select class="col form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
@@ -49,7 +49,7 @@
                 <option value="2">Two</option>
                 <option value="3">Three</option>
             </select>
-            <button class="col-md-2 btn btn-outline-secondary" type="button">Sort</button>
+            <button class="col-md-2 btn btn-outline-secondary" type="button"><fmt:message key="apartment.sort" /></button>
         </div>
     </div>
 
@@ -67,11 +67,11 @@
                         <h6 class="card-subtitle mb-2 text-muted text-end"><c:out value="${apartment.getPrice()}" /> &#8372</h6>
 
                         <c:if test="${sessionScope.role == sessionScope.managerRoleName}">
-                        <a href="/notes/edit">Редагувати</a>
+                        <a href="/notes/edit"><fmt:message key="apartment.edit" /></a>
                         </c:if>
                         <form action="${pageContext.request.contextPath}/front?controller=getApartmentDetails" method="POST" class="float-end">
                             <input type="hidden" name="apartmentId" value="${apartment.getId()}">
-                            <button class="btn btn-primary my-1" type="submit" >Details</button>
+                            <button class="btn btn-primary my-1" type="submit" ><fmt:message key="apartment.details" /></button>
                         </form>
                     </div>
                 </div>
