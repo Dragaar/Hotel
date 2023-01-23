@@ -6,6 +6,10 @@
 <jsp:include page="/pages/common/pagePatternPart1.jsp" />
 <jsp:include page="/pages/common/navbar.jsp" />
 
+<!-- Bootstrap-Select plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="language"/>
 
@@ -27,7 +31,7 @@
 
     <c:if test="${page == 2}">
     <div class="row img-thumbnail">
-        <h3 class="col-md-8"> <fmt:message key="apartment.createApplicationMessage" /></h3>
+        <h4 class="col-md-8"> <fmt:message key="apartment.createApplicationMessage" /></h4>
         <a href="${pageContext.request.contextPath}/front?controller=newOrder" class="col-md-2 btn btn-primary"><fmt:message key="apartment.createApplication" /></a>
     </div>
     </c:if>
@@ -36,21 +40,39 @@
 
         <h2 class="col-md-6"><fmt:message key="apartment.list" /></h2>
 
-        <div class="col-md-6 input-group">
-            <select class="col form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+
+        <form class="col-md-6 input-group" action="${pageContext.request.contextPath}/front?controller=getApartments" method="POST">
+            <select class="selectpicker" multiple  name="price">
+                <optgroup label="<fmt:message key="apartment.sort.price" />" data-max-options="1">
+                    <option name="price" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
+                    <option name="price" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
+                </optgroup>
             </select>
-            <select class="col form-select" id="inputGroupSelect05" aria-label="Example select with button addon">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="selectpicker" multiple name="maxGuestsNumber">
+                <optgroup label="<fmt:message key="apartment.sort.maxGuestsNumber" />" data-max-options="1">
+                    <option name="maxGuestsNumber" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
+                    <option name="maxGuestsNumber" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
+                </optgroup>
             </select>
-            <button class="col-md-2 btn btn-outline-secondary" type="button"><fmt:message key="apartment.sort" /></button>
-        </div>
+            <select class="selectpicker" multiple name="class">
+                <optgroup label="<fmt:message key="apartment.sort.class" />" data-max-options="1">
+                    <option name="class" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
+                    <option name="class" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
+                </optgroup>
+            </select>
+            <select class="selectpicker" multiple name="status">
+                <optgroup label="<fmt:message key="apartment.sort.status" />" data-max-options="1">
+                    <option name="status" value="Free" ><fmt:message key="apartment.sort.status.free" /></option>
+                    <option name="status" value="Booked" ><fmt:message key="apartment.sort.status.booked" /></option>
+                    <option name="status" value="Busy" ><fmt:message key="apartment.sort.status.busy" /></option>
+                    <option name="status" value="Unavailable" ><fmt:message key="apartment.sort.status.unavailable" /></option>
+                </optgroup>
+            </select>
+
+            <input type="hidden" name="newSortingOrder" value="exist">
+            <button class="col-md-2 btn btn-outline-secondary" type="submit"><fmt:message key="apartment.sort" /></button>
+            </form>
+
     </div>
 
 
