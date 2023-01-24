@@ -3,6 +3,8 @@ package com.rosivanyshyn.utils;
 public class MySQLQueryBuilder {
 
     protected String label;
+
+    private StringBuilder join;
     protected StringBuilder where;
     private StringBuilder order;
     private String limit;
@@ -14,6 +16,17 @@ public class MySQLQueryBuilder {
         this.label="`"+label+"`";
     }
 
+    //------------------ Inner Join------------------------\\
+    public void join(String table, String label, String tableField, String field) {
+        if (join == null) {
+            join = new StringBuilder();
+        }
+        join.append(" INNER JOIN `" + table + "` " + label);
+        join.append(" ON " + label + ".`" + tableField + "` = " + this.label + ".`" + field + "`");
+
+    }
+
+    //-------------------------------------------------------------\\
     //Пошук за полем
     //------------------ Searching by field------------------------\\
     protected void addWhere(String clause, boolean and) {
@@ -60,6 +73,9 @@ public class MySQLQueryBuilder {
     public String getQuery() {
         StringBuilder query = new StringBuilder();
 
+        if (join != null) {
+            query.append(join);
+        }
         if (where != null) {
             query.append(where);
         }

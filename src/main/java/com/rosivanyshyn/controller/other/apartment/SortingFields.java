@@ -10,7 +10,8 @@ public enum SortingFields {
     PRICE (Field.APARTMENT_PRICE),
     MAX_GUESTS_NUMBER(Field.APARTMENT_MAX_GUEST_NUMBER),
     CLASS(Field.APARTMENT_CLASS),
-    STATUS("status");
+    STATUS("status"),
+    STATUS_AVAILABILITY(Field.ENTITY_STATE);
     private String field;
 
     private static final Map<String, SortingFields> ENUM_MAP;

@@ -11,6 +11,7 @@ public class Field {
     public static final String ACCOUNT_PASSWORD = "password";
 
 
+    public static final String APARTMENT = "apartment";
     public static final String APARTMENT_TITLE = "title";
     public static final String APARTMENT_DESCRIPTION = "description";
     public static final String APARTMENT_IMAGE_URL = "imageURL";
@@ -21,6 +22,7 @@ public class Field {
     public static final String APARTMENT_PRICE = "price";
 
 
+    public static final String BOOKING = "booking";
     public static final String BOOKING_GUESTS_NUMBER = "guests_number";
     public static final String BOOKING_CHECK_IN_DATE = "check_in_date" ;
     public static final String BOOKING_CHECK_OUT_DATE = "check_out_date";

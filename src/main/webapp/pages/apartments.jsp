@@ -42,25 +42,25 @@
 
 
         <form class="col-md-6 input-group" action="${pageContext.request.contextPath}/front?controller=getApartments" method="POST">
-            <select class="selectpicker" multiple  name="price">
+            <select class="selectpicker" multiple  name="price" data-selected-text-format="static" title="<fmt:message key="apartment.sort.price" />">
                 <optgroup label="<fmt:message key="apartment.sort.price" />" data-max-options="1">
                     <option name="price" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
                     <option name="price" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
                 </optgroup>
             </select>
-            <select class="selectpicker" multiple name="maxGuestsNumber">
+            <select class="selectpicker" multiple name="maxGuestsNumber" data-selected-text-format="static" title="<fmt:message key="apartment.sort.maxGuestsNumber" />">
                 <optgroup label="<fmt:message key="apartment.sort.maxGuestsNumber" />" data-max-options="1">
                     <option name="maxGuestsNumber" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
                     <option name="maxGuestsNumber" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
                 </optgroup>
             </select>
-            <select class="selectpicker" multiple name="class">
+            <select class="selectpicker" multiple name="class" data-selected-text-format="static" title="<fmt:message key="apartment.sort.class" />">
                 <optgroup label="<fmt:message key="apartment.sort.class" />" data-max-options="1">
                     <option name="class" value="Asc" ><fmt:message key="apartment.sort.ascOrder" /></option>
                     <option name="class" value="Desc" ><fmt:message key="apartment.sort.descOrder" /></option>
                 </optgroup>
             </select>
-            <select class="selectpicker" multiple name="status">
+            <select class="selectpicker" multiple name="status" data-selected-text-format="static" title="<fmt:message key="apartment.sort.status" />">
                 <optgroup label="<fmt:message key="apartment.sort.status" />" data-max-options="1">
                     <option name="status" value="Free" ><fmt:message key="apartment.sort.status.free" /></option>
                     <option name="status" value="Booked" ><fmt:message key="apartment.sort.status.booked" /></option>

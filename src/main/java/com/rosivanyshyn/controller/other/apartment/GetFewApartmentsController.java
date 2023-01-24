@@ -29,7 +29,7 @@ public class GetFewApartmentsController implements Controller {
 
         try {
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
-            queryBuilder.setLabel("apartment");
+            queryBuilder.setLabel(Field.APARTMENT);
 
             //Search
             /*if(request.getParameter("newSearch") !=null)
@@ -40,18 +40,11 @@ public class GetFewApartmentsController implements Controller {
             //Sorting
             if(request.getParameter("newSortingOrder") !=null)
             {
-                Map<SortingFields, Boolean> sortingParamMap = getSortingParameters(request);
+
+                performSorting(request, queryBuilder);
                 System.out.println("sorting");
-                System.out.println( request.getParameter("sorting"));
+                System.out.println( request.getParameter("status"));
 
-                if(!sortingParamMap.isEmpty()) {
-                for (Map.Entry<SortingFields, Boolean> entry : sortingParamMap.entrySet()) {
-                    //TODO зробити окрему обробку state
-                    System.out.println("sorting for-each");
-                    queryBuilder.order(entry.getKey().getField(), entry.getValue());
-                }
-
-                }
             }
 
             //Pagination
@@ -112,34 +105,53 @@ public class GetFewApartmentsController implements Controller {
         }
     }
 
-    private Map<SortingFields, Boolean> getSortingParameters(HttpServletRequest request)
+    private void performSorting(HttpServletRequest request, MySQLQueryBuilder queryBuilder)
     {
-        Map<SortingFields, Boolean> sortingParametersMap = new HashMap<>();
+
         if(request.getParameter("price")!= null)
         {
-            sortingParametersMap.put(SortingFields.PRICE,
+            queryBuilder.order(
+                    SortingFields.PRICE.getField(),
                     getSortingOrder(request.getParameter("price"))
-            );
+                    );
         }
         if(request.getParameter("maxGuestsNumber")!= null)
         {
-            sortingParametersMap.put(SortingFields.MAX_GUESTS_NUMBER,
+            queryBuilder.order(
+                    SortingFields.MAX_GUESTS_NUMBER.getField(),
                     getSortingOrder(request.getParameter("maxGuestsNumber"))
             );
         }
         if(request.getParameter("class")!= null)
         {
-            sortingParametersMap.put(SortingFields.CLASS,
+            queryBuilder.order(
+                    SortingFields.CLASS.getField(),
                     getSortingOrder(request.getParameter("class"))
             );
         }
         if(request.getParameter("status")!= null)
         {
-            sortingParametersMap.put(SortingFields.STATUS,
-                    getSortingOrder(request.getParameter("status"))
+            switch (request.getParameter("status"))
+            {
+            case "Free" -> queryBuilder.order(
+                    SortingFields.STATUS_AVAILABILITY.getField(),
+                    true);
+            case "Booked" -> queryBuilder.join(Field.BOOKING,
+                Field.BOOKING,
+                Field.BOOKING_APARTMENT_ID,
+                Field.ENTITY_ID
             );
+            case "Busy" -> queryBuilder.join(Field.BOOKING,
+                    Field.BOOKING,
+                    Field.BOOKING_APARTMENT_ID,
+                    Field.ENTITY_ID
+            );
+            case "Unavailable" -> queryBuilder.order(
+                    SortingFields.STATUS_AVAILABILITY.getField(),
+                    false);
+            default ->  throw new ValidationException("Input sorting order doesn`t exist", new RuntimeException());
+            }
         }
-        return sortingParametersMap;
     }
 
     Boolean getSortingOrder(String order){
