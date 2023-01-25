@@ -17,6 +17,14 @@ public class MySQLQueryBuilder {
     }
 
     //------------------ Inner Join------------------------\\
+
+    /**
+     * Returns rows of current table, that are existed in table B
+     * @param table table to comparisons
+     * @param label abbreviation of the compared table name
+     * @param tableField field name of the compared table
+     * @param field field name of current table
+     */
     public void join(String table, String label, String tableField, String field) {
         if (join == null) {
             join = new StringBuilder();
@@ -25,9 +33,28 @@ public class MySQLQueryBuilder {
         join.append(" ON " + label + ".`" + tableField + "` = " + this.label + ".`" + field + "`");
 
     }
+    //------------------ Exclude Join------------------------\\
+
+    /**
+     * Returns rows of current table, that are not exist in table B
+     * @param table table to comparisons
+     * @param label abbreviation of the compared table name
+     * @param tableField field name of the compared table
+     * @param field field name of current table
+     */
+    public void excludeJoin(String table, String label, String tableField, String field) {
+        if (join == null) {
+            join = new StringBuilder();
+        }
+        join.append(" LEFT JOIN `" + table + "` " + label);
+        join.append(" ON " + label + ".`" + tableField + "` = " + this.label + ".`" + field + "`");
+        join.append(" WHERE " + label + ".`" + tableField + "` IS NULL");
+
+    }
+
 
     //-------------------------------------------------------------\\
-    //Пошук за полем
+
     //------------------ Searching by field------------------------\\
     protected void addWhere(String clause, boolean and) {
         if (where == null) {

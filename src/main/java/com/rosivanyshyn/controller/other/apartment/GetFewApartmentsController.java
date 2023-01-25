@@ -28,6 +28,8 @@ public class GetFewApartmentsController implements Controller {
         ViewResolver resolver = new ViewResolver();
 
         try {
+            HttpSession session = request.getSession(true);
+
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel(Field.APARTMENT);
 
@@ -40,11 +42,27 @@ public class GetFewApartmentsController implements Controller {
             //Sorting
             if(request.getParameter("newSortingOrder") !=null)
             {
+                performSorting(request, queryBuilder,
+                    request.getParameter("price"),
+                    request.getParameter("maxGuestsNumber"),
+                    request.getParameter("class"),
+                    request.getParameter("status")
+                );
+                setAttributeInSession(session, "existingSortingOrder", "exist");
 
-                performSorting(request, queryBuilder);
-                System.out.println("sorting");
-                System.out.println( request.getParameter("status"));
+                setAttributeInSession(session, "price", request.getParameter("price"));
+                setAttributeInSession(session, "maxGuestsNumber", request.getParameter("maxGuestsNumber"));
+                setAttributeInSession(session, "class", request.getParameter("class"));
+                setAttributeInSession(session, "status", request.getParameter("status"));
 
+            } else if (session.getAttribute("existingSortingOrder")!=null) {
+
+                performSorting(request, queryBuilder,
+                    (String) session.getAttribute("price"),
+                    (String) session.getAttribute("maxGuestsNumber"),
+                    (String) session.getAttribute("class"),
+                    (String)session.getAttribute("status")
+                );
             }
 
             //Pagination
@@ -58,11 +76,6 @@ public class GetFewApartmentsController implements Controller {
             request.setAttribute("apartments", apartments);
 
 
-           /* ArrayList<Apartment> apartments;
-            getPageConfig(request);
-            apartments = apartmentService.findFewApartment(currentRecord, recordsPerPage);
-            request.setAttribute("apartments", apartments);
-            */
 
             //for pagination links
 
@@ -105,37 +118,45 @@ public class GetFewApartmentsController implements Controller {
         }
     }
 
-    private void performSorting(HttpServletRequest request, MySQLQueryBuilder queryBuilder)
+    private void performSorting(HttpServletRequest request, MySQLQueryBuilder queryBuilder,
+                                String price, String maxGuestsNumber, String apartmentClass, String status)
     {
 
-        if(request.getParameter("price")!= null)
+        if(price != null)
         {
             queryBuilder.order(
                     SortingFields.PRICE.getField(),
-                    getSortingOrder(request.getParameter("price"))
+                    getSortingOrder(price)
                     );
         }
-        if(request.getParameter("maxGuestsNumber")!= null)
+        if(maxGuestsNumber!= null)
         {
             queryBuilder.order(
                     SortingFields.MAX_GUESTS_NUMBER.getField(),
-                    getSortingOrder(request.getParameter("maxGuestsNumber"))
+                    getSortingOrder(maxGuestsNumber)
             );
         }
-        if(request.getParameter("class")!= null)
+        if(apartmentClass!= null)
         {
             queryBuilder.order(
                     SortingFields.CLASS.getField(),
-                    getSortingOrder(request.getParameter("class"))
+                    getSortingOrder(apartmentClass)
             );
         }
-        if(request.getParameter("status")!= null)
+        if(status!= null)
         {
-            switch (request.getParameter("status"))
+            switch (status)
             {
-            case "Free" -> queryBuilder.order(
-                    SortingFields.STATUS_AVAILABILITY.getField(),
-                    true);
+            case "Free" -> {
+                    queryBuilder.order(
+                        SortingFields.STATUS_AVAILABILITY.getField(),
+                        true);
+                    queryBuilder.excludeJoin(Field.BOOKING,
+                        Field.BOOKING,
+                        Field.BOOKING_APARTMENT_ID,
+                        Field.ENTITY_ID
+                    );
+            }
             case "Booked" -> queryBuilder.join(Field.BOOKING,
                 Field.BOOKING,
                 Field.BOOKING_APARTMENT_ID,
@@ -165,4 +186,14 @@ public class GetFewApartmentsController implements Controller {
             throw new ValidationException("Input sorting order doesn`t exist", new RuntimeException());
         }
     }
+
+    private void setAttributeInSession(HttpSession session, String attributeName, Object attribute){
+        if(attribute!=null){
+            session.setAttribute(attributeName, attribute);
+        }else {
+            session.removeAttribute(attributeName);
+        }
+    }
+
+
 }
