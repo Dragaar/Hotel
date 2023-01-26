@@ -22,7 +22,7 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
 public class GetFewApartmentsController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
-    int pageId, recordsPerPage, currentRecord, totalRecordCount, totalPagesCount;
+    int pageId, recordsPerPage, currentRecord;
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
@@ -71,19 +71,17 @@ public class GetFewApartmentsController implements Controller {
             request.setAttribute("currentController", "getApartments");
             queryBuilder.limit(currentRecord, recordsPerPage);
 
+
+
             //Result list
             ArrayList<Apartment> apartments = apartmentService.findFewApartmentsAndSort(queryBuilder.getQuery());
             request.setAttribute("apartments", apartments);
 
-
-
-            //for pagination links
-
-            //totalRecordCount should work with search, pagination of the table and user filters
-            //int totalRecordCount = apartmentService.getRecordCount();
-            //int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-            //request.setAttribute("totalPagesCount", apartments);
-
+            //Pagination totalPagesCount
+            int totalRecordCount = apartmentService.getRowsNumber();
+            int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
+            System.out.println("totalPagesCount = "+totalPagesCount);
+            request.setAttribute("totalPagesCount", totalPagesCount);
 
             resolver.forward(APARTMENTS_JSP);
 

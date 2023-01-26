@@ -36,10 +36,11 @@ public class GetCreateResponseToOrderController implements Controller {
         //for pagination links
         request.setAttribute("currentController", "newResponseToOrder");
 
-        //totalRecordCount should work with search, pagination of the table and user filters
-        //int totalRecordCount = apartmentService.getRecordCount();
-        //int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-        //request.setAttribute("totalPagesCount", apartments);
+        //Pagination totalPagesCount
+        int totalRecordCount = apartmentService.getRowsNumber();
+        int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
+        System.out.println("totalPagesCount = "+totalPagesCount);
+        request.setAttribute("totalPagesCount", totalPagesCount);
 
         try {
             resolver.forward(NEW_RESPONSE_TO_ORDER_JSP);

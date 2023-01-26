@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="language"/>
 <div class="mt-4">
     <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -22,7 +24,7 @@
             <%--For displaying Page numbers.
             The when condition does not display a link for the current page--%>
 
-            <c:forEach begin="${page > 5 ? page-3 : '1'}" end="${page+3}" var="i">
+            <c:forEach begin="${page > 5 ? page-3 : '1'}" end="${requestScope.totalPagesCount}" var="i">
                 <c:choose>
                     <c:when test="${page == i}">
                         <li class="page-item active">
@@ -38,10 +40,6 @@
             </c:forEach>
 
             <%--For displaying Next link --%>
-            <li class="page-item">
-                <a class="page-link" href="?controller=${requestScope.currentController}&page=${page + 1}">Next</a>
-            </li>
-            <%-- if totalPagesCount exist
             <c:choose>
             <c:when test="${page < totalPagesCount}">
                 <li class="page-item">
@@ -54,7 +52,7 @@
                 </li>
             </c:otherwise>
             </c:choose>
-            --%>
+
     </ul>
     </nav>
 </div>
