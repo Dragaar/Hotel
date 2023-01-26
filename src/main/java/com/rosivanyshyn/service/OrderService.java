@@ -16,4 +16,9 @@ public interface OrderService {
     ArrayList<Order>         findFewOrdersAndSort(String secondQueryPart, Object... fields);
     Boolean                  updateOrder(Order order);
     Boolean                  deleteOrder(Order order);
+
+    /** Get last statement rows count
+     * @return last statement rows count
+     */
+    int                      getRowsNumber();
 }

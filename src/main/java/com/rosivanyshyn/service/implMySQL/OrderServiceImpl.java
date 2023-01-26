@@ -16,6 +16,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDAOImpl orderDAO = new OrderDAOImpl();
     ResponseToOrderDAO responseToOrderDAO = new ResponseToOrderDAOImpl();
 
+    private int rowsNumber;
+
     @Override
     public Boolean createOrder(Order order) {
         Connection connection = DBManager.getConnection();
@@ -46,7 +48,11 @@ public class OrderServiceImpl implements OrderService {
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
         ArrayList<Order> result = (ArrayList<Order>) TransactionManager.execute(connection,
-                ()-> orderDAO.getFew(connection, start-1, total)
+                ()-> {
+                ArrayList<Order> r = orderDAO.getFew(connection, start-1, total);
+                rowsNumber = orderDAO.countRowsInLastQuery(connection);
+                return r;
+                }
         );
         return result;
     }
@@ -58,7 +64,11 @@ public class OrderServiceImpl implements OrderService {
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
         ArrayList<Order> result = (ArrayList<Order>) TransactionManager.execute(connection,
-                ()-> orderDAO.getWithDynamicQuery(connection, secondQueryPart, fields)
+                ()-> {
+                ArrayList<Order> r = orderDAO.getWithDynamicQuery(connection, secondQueryPart, fields);
+                rowsNumber = orderDAO.countRowsInLastQuery(connection);
+                return r;
+                }
         );
         return result;
     }
@@ -87,5 +97,9 @@ public class OrderServiceImpl implements OrderService {
             return true;
             }
         );
+    }
+
+    public int getRowsNumber(){
+        return rowsNumber;
     }
 }

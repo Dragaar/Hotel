@@ -11,6 +11,8 @@ public class Message {
 
     public static final String UPDATE_ERROR = "Cannot update row by given object";
     public static final String DELETE_ERROR = "Cannot delete row by given id";
+
+    public static final String COUNT_ROWS_ERROR = "Cannot count rows of the last query";
     public static final String MANY_TO_MANY_ERROR = "Cannot operate with ManyToMany";
 
 }

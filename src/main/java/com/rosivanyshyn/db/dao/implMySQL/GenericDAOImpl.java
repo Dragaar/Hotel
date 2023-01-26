@@ -1,7 +1,6 @@
 package com.rosivanyshyn.db.dao.implMySQL;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
-import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.DAOException;
 import org.apache.log4j.Logger;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Formatter;
 
-import static com.rosivanyshyn.db.dao.constant.Query.SELECT_ALL_APARTMENTS;
+import static com.rosivanyshyn.db.dao.constant.Query.COUNT_ROWS_IN_LAST_QUERY;
 import static com.rosivanyshyn.exeption.Message.*;
 
 /** Implementation of GenericDAO interface
@@ -218,6 +217,26 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             throw new DAOException(className + " " + DELETE_ERROR, ex);
         }
     }
+
+    @Override
+    public int countRowsInLastQuery(Connection con){
+        LOG.info("Query: " + COUNT_ROWS_IN_LAST_QUERY);
+        ResultSet rs;
+
+        try (PreparedStatement stmt = con.prepareStatement(COUNT_ROWS_IN_LAST_QUERY) ) {
+
+            rs = stmt.executeQuery();
+
+            if(rs.next()) {
+               return rs.getInt("count");
+            } else throw new RuntimeException();
+
+        } catch (SQLException ex){
+            LOG.error(className + " " + COUNT_ROWS_ERROR, ex);
+            throw new DAOException(className + " " + COUNT_ROWS_ERROR, ex);
+        }
+    }
+
 
     // Defines the type of data which should be using for substitute fields in query
     private void setDynamicData(PreparedStatement stmt, int index, Object value) throws SQLException{

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class BookingServiceImpl implements BookingService {
 
     BookingDAO bookingDAO = new BookingDAOImpl();
+    private int rowsNumber;
     @Override
     public Boolean createBooking(Booking booking) {
         Connection connection = DBManager.getConnection();
@@ -29,7 +30,11 @@ public class BookingServiceImpl implements BookingService {
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
         ArrayList<Booking> result = (ArrayList<Booking>) TransactionManager.execute(connection,
-                ()-> bookingDAO.getWithDynamicQuery(connection, secondQueryPart, fields)
+                ()-> {
+                ArrayList<Booking> r = bookingDAO.getWithDynamicQuery(connection, secondQueryPart, fields);
+                rowsNumber = bookingDAO.countRowsInLastQuery(connection);
+                return r;
+                }
         );
         return result;
     }
@@ -44,5 +49,9 @@ public class BookingServiceImpl implements BookingService {
         return (Boolean) TransactionManager.execute(connection,
                 ()-> bookingDAO.delete(connection, booking.getId())
         );
+    }
+
+    public int getRowsNumber(){
+        return rowsNumber;
     }
 }

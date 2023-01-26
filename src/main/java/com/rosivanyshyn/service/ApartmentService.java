@@ -17,4 +17,9 @@ public interface ApartmentService {
     ArrayList<Apartment>     findFewApartmentsAndSort(String secondQueryPart, String... fields);
     Boolean                  updateApartment(Apartment apartment);
     Boolean                  deleteApartment(Apartment apartment);
+
+    /** Get last statement rows count
+     * @return last statement rows count
+     */
+    int                      getRowsNumber();
 }

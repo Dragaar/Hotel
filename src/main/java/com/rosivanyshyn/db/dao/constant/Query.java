@@ -23,12 +23,12 @@ public class Query {
     public static final String INSERT_APARTMENT = "INSERT INTO apartment VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_APARTMENT= "SELECT * FROM apartment WHERE id = ?";
-    public static final String SELECT_ALL_APARTMENTS = "SELECT * FROM apartment" ;
+    public static final String SELECT_ALL_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment" ;
 
-    public static final String SELECT_FEW_APARTMENTS = "SELECT * FROM apartment LIMIT ?, ?" ;
+    public static final String SELECT_FEW_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment LIMIT ?, ?" ;
 
     //use formatter to insert field name
-    public static final String SELECT_APARTMENT_BY_FIELD= "SELECT * FROM apartment WHERE %s LIKE ?";
+    public static final String SELECT_APARTMENT_BY_FIELD= "SELECT SQL_CALC_FOUND_ROWS * FROM apartment WHERE %s LIKE ?";
 
     //id isn`t change
     public static final String UPDATE_APARTMENT = "UPDATE apartment " +
@@ -43,13 +43,13 @@ public class Query {
     public static final String INSERT_BOOKING = "INSERT INTO booking VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_BOOKING= "SELECT * FROM booking WHERE id = ?";
-    public static final String SELECT_ALL_BOOKINGS = "SELECT * FROM booking" ;
+    public static final String SELECT_ALL_BOOKINGS = "SELECT SQL_CALC_FOUND_ROWS * FROM booking" ;
 
-    public static final String SELECT_FEW_BOOKINGS = "SELECT * FROM booking LIMIT ?, ?" ;
+    public static final String SELECT_FEW_BOOKINGS = "SELECT SQL_CALC_FOUND_ROWS * FROM booking LIMIT ?, ?" ;
 
 
     //use formatter to insert field name
-    public static final String SELECT_BOOKING_BY_FIELD= "SELECT * FROM booking WHERE %s LIKE ?";
+    public static final String SELECT_BOOKING_BY_FIELD= "SELECT SQL_CALC_FOUND_ROWS * FROM booking WHERE %s LIKE ?";
 
     //id, reservation_data aren`t change
     public static final String UPDATE_BOOKING = "UPDATE `booking` " +
@@ -63,12 +63,12 @@ public class Query {
     public static final String INSERT_ORDER = "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)" ;
 
     public static final String SELECT_ORDER = "SELECT * FROM `order` WHERE id = ?";
-    public static final String SELECT_ALL_ORDERS= "SELECT * FROM `order`" ;
+    public static final String SELECT_ALL_ORDERS= "SELECT SQL_CALC_FOUND_ROWS * FROM `order`" ;
 
-    public static final String SELECT_FEW_ORDERS = "SELECT * FROM `order` LIMIT ?, ?" ;
+    public static final String SELECT_FEW_ORDERS = "SELECT SQL_CALC_FOUND_ROWS * FROM `order` LIMIT ?, ?" ;
 
     //use formatter to insert field name
-    public static final String SELECT_ORDER_BY_FIELD= "SELECT * FROM `order` WHERE %s LIKE ?";
+    public static final String SELECT_ORDER_BY_FIELD= "SELECT SQL_CALC_FOUND_ROWS * FROM `order` WHERE %s LIKE ?";
 
     //id, account_id aren`t change
     public static final String UPDATE_ORDER = "UPDATE `order` " +
@@ -107,6 +107,8 @@ public class Query {
         public static final String DELETE_RESPONSE_TO_ORDER_APARTMENTS = "DELETE FROM `response_to_order_has_apartment` WHERE response_to_order_id = ?" ;
 
         //--------------------------------
+
+        public static final String COUNT_ROWS_IN_LAST_QUERY = "SELECT FOUND_ROWS() AS count" ;
 
 
 }

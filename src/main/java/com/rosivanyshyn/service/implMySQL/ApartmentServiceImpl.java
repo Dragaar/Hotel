@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ApartmentServiceImpl implements ApartmentService {
 
     ApartmentDAO apartmentDAO = new ApartmentDAOImpl();
+    private int rowsNumber;
 
     @Override
     public Boolean createApartment(Apartment apartment) {
@@ -45,7 +46,11 @@ public class ApartmentServiceImpl implements ApartmentService {
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
          ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
-                ()-> apartmentDAO.getFew(connection, start-1, total)
+                ()-> {
+                ArrayList<Apartment> r = apartmentDAO.getFew(connection, start-1, total);
+                rowsNumber = apartmentDAO.countRowsInLastQuery(connection);
+                return r;
+                }
         );
         return result;
     }
@@ -56,7 +61,11 @@ public class ApartmentServiceImpl implements ApartmentService {
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
         ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
-                ()-> apartmentDAO.getWithDynamicQuery(connection, secondQueryPart, fields)
+                ()-> {
+                ArrayList<Apartment> r = apartmentDAO.getWithDynamicQuery(connection, secondQueryPart, fields);
+                rowsNumber = apartmentDAO.countRowsInLastQuery(connection);
+                return r;
+                }
         );
         return result;
     }
@@ -72,5 +81,9 @@ public class ApartmentServiceImpl implements ApartmentService {
         return (Boolean) TransactionManager.execute(connection,
                 ()-> apartmentDAO.delete(connection, apartment.getId())
         );
+    }
+
+    public int getRowsNumber(){
+        return rowsNumber;
     }
 }

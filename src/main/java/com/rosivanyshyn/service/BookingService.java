@@ -12,4 +12,9 @@ public interface BookingService {
 
     Boolean                  updateBooking(Booking booking);
     Boolean                  deleteBooking(Booking booking);
+
+    /** Get last statement rows count
+     * @return last statement rows count
+     */
+    int                      getRowsNumber();
 }
