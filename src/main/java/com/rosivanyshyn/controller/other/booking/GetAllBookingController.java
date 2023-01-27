@@ -52,7 +52,7 @@ public class GetAllBookingController implements Controller {
                 //Pagination totalPagesCount
                 int totalRecordCount = bookingService.getRowsNumber();
                 int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-                System.out.println("totalPagesCount = "+totalPagesCount);
+
                 request.setAttribute("totalPagesCount", totalPagesCount);
 
                 resolver.forward(ALL_BOOKINGS_JSP);

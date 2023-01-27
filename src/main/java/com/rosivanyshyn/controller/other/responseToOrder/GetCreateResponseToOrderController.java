@@ -39,7 +39,7 @@ public class GetCreateResponseToOrderController implements Controller {
         //Pagination totalPagesCount
         int totalRecordCount = apartmentService.getRowsNumber();
         int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-        System.out.println("totalPagesCount = "+totalPagesCount);
+
         request.setAttribute("totalPagesCount", totalPagesCount);
 
         try {

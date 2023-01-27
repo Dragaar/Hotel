@@ -50,7 +50,7 @@ public class GetAllOrdersController implements Controller {
                 //Pagination totalPagesCount
                 int totalRecordCount = orderService.getRowsNumber();
                 int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-                System.out.println("totalPagesCount = "+totalPagesCount);
+
                 request.setAttribute("totalPagesCount", totalPagesCount);
 
                 resolver.forward(ALL_ORDERS_JSP);
