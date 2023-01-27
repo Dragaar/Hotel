@@ -26,6 +26,13 @@ public class ControllerConstant {
     //------------- Dispatcher Servlet -----------\\
     public static final String CONTROLLER_NAME = "controller";
 
+    //------------- Security -----------\\
+    public static final String SECURITY = "security";
+
+    public static final String SECURITY_PATH = "/WEB-INF/security/security.xml";
+    public static final String FEATURE_TURN_VALIDATION_ON = "http://xml.org/sax/features/validation";
+    public static final String FEATURE_TURN_SCHEMA_VALIDATION_ON = "http://apache.org/xml/features/validation/schema";
+
     //------------- Controller Identification ------------\\
     public static final String LOGIN_CONTROLLER = "login";
     public static final String LOGOUT_CONTROLLER ="logout";
