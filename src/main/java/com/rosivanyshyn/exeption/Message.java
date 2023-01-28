@@ -15,4 +15,6 @@ public class Message {
     public static final String COUNT_ROWS_ERROR = "Cannot count rows of the last query";
     public static final String MANY_TO_MANY_ERROR = "Cannot operate with ManyToMany";
 
+    public static final String EVENT_IS_BILL_PAID_ERROR = "Cannot create event is-bill-paid by given id";
+
 }

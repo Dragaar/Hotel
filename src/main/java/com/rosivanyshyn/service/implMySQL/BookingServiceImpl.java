@@ -19,7 +19,11 @@ public class BookingServiceImpl implements BookingService {
         Connection connection = DBManager.getConnection();
 
         return  (Boolean) TransactionManager.execute(connection,
-                ()-> bookingDAO.insert(connection, booking)
+                ()-> {
+                if     (bookingDAO.insert(connection, booking))
+                return bookingDAO.createEventIsBillPaid(connection, booking.getId());
+                else return false;
+                }
         );
     }
 
@@ -40,7 +44,11 @@ public class BookingServiceImpl implements BookingService {
     }
     @Override
     public Boolean updateBooking(Booking booking) {
-        return null;
+        Connection connection = DBManager.getConnection();
+
+        return  (Boolean) TransactionManager.execute(connection,
+                ()-> bookingDAO.update(connection, booking)
+        );
     }
 
     @Override

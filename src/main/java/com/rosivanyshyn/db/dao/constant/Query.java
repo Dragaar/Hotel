@@ -110,5 +110,8 @@ public class Query {
 
         public static final String COUNT_ROWS_IN_LAST_QUERY = "SELECT FOUND_ROWS() AS count" ;
 
-
+        public static final String CREATE_EVENT_IS_BILL_PAID = "CREATE EVENT %s " +
+                "ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE " +
+                "DO " +
+                "DELETE FROM `hotel`.`booking` WHERE id = ? AND is_paid_for_reservation = 0";
 }

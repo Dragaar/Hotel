@@ -42,7 +42,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     abstract ExtractEntity<T> entityFromGet();
 
     //--------------------------------------------------------------\\
-    protected static final Logger LOG = Logger.getLogger(AccountDAOImpl.class);
+    protected static final Logger LOG = Logger.getLogger(GenericDAOImpl.class);
     protected final String className = this.getClass().getSimpleName();
 
     @Override

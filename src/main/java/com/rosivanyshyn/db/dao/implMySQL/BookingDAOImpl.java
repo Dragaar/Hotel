@@ -6,12 +6,18 @@ import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
+import com.rosivanyshyn.exeption.DAOException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Formatter;
 
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
+import static com.rosivanyshyn.exeption.Message.DELETE_ERROR;
+import static com.rosivanyshyn.exeption.Message.EVENT_IS_BILL_PAID_ERROR;
 
 public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDAO {
     //------------------ Queries initialising ------------------------\\
@@ -107,6 +113,25 @@ public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDA
         );
     }
 
+    //------------------ MySQL Event System ------------------------\\
+
+    @Override
+    public Boolean createEventIsBillPaid(Connection con, Long id) {
+        LOG.info("Query: " + CREATE_EVENT_IS_BILL_PAID);
+
+        Formatter formatter = new Formatter();
+        formatter.format(CREATE_EVENT_IS_BILL_PAID, "isBillPaid"+id);
+
+        try (PreparedStatement stmt = con.prepareStatement(formatter.toString()) ) {
+            stmt.setLong(1, id);
+
+            return stmt.execute();
+
+        } catch (SQLException ex){
+            LOG.error(className + " " + EVENT_IS_BILL_PAID_ERROR, ex);
+            throw new DAOException(className + " " + EVENT_IS_BILL_PAID_ERROR, ex);
+        }
+    }
 
 
 }
