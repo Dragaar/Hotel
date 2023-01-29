@@ -31,10 +31,16 @@ public class DeleteOrderController implements Controller {
             if(order.getAccount().getId().equals(accountId))
             {
                 orderService.deleteOrder(order);
+
+                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                        "&message=" + "app.message.order.delete");
+            }
+            else {
+                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                        "&message=" + "app.message.order.dontHaveAccessToDelete");
             }
 
-            resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.order.delete");
+
 
         } catch (RuntimeException ex){
             throw new AppException("Cannot delete order", ex);
