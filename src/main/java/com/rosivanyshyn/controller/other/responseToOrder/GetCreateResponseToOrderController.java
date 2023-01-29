@@ -2,10 +2,12 @@ package com.rosivanyshyn.controller.other.responseToOrder;
 
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
+import com.rosivanyshyn.db.dao.constant.Field;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
+import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -13,10 +15,11 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_RESPONSE_TO_ORDER_JSP;
+import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 
 public class GetCreateResponseToOrderController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
-    int pageId, recordsPerPage, currentRecord, totalRecordCount, totalPagesCount;
+    int pageId, recordsPerPage, currentRecord;
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
@@ -24,23 +27,28 @@ public class GetCreateResponseToOrderController implements Controller {
 
         ArrayList<Apartment> apartments;
 
-        getPageConfig(request);
+        //getPageConfig(request);
+
 
         @NonNull final Long orderId = Long.valueOf(request.getParameter("orderId"));
         request.setAttribute("orderId", orderId);
 
-        apartments = apartmentService.findFewApartment(currentRecord, recordsPerPage);
+        MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
+        queryBuilder.setLabel(Field.APARTMENT);
+        //queryBuilder.limit(currentRecord, recordsPerPage);
+
+        apartments = apartmentService.findFewApartmentsAndSort(queryBuilder.getQuery());
         request.setAttribute("apartments", apartments);
 
-        request.setAttribute("page", pageId);
+        //request.setAttribute("page", pageId);
         //for pagination links
-        request.setAttribute("currentController", "newResponseToOrder");
+        //request.setAttribute("currentController", "newResponseToOrder");
 
         //Pagination totalPagesCount
-        int totalRecordCount = apartmentService.getRowsNumber();
-        int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
+        //int totalRecordCount = apartmentService.getRowsNumber();
+        //int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
 
-        request.setAttribute("totalPagesCount", totalPagesCount);
+        //request.setAttribute("totalPagesCount", totalPagesCount);
 
         try {
             resolver.forward(NEW_RESPONSE_TO_ORDER_JSP);
@@ -50,7 +58,7 @@ public class GetCreateResponseToOrderController implements Controller {
         return resolver;
     }
 
-    private void getPageConfig(HttpServletRequest request) {
+    /*private void getPageConfig(HttpServletRequest request) {
         String reqPageId = request.getParameter("page");
         String reqRecordsPerPage = request.getParameter("recordsPerPage");
 
@@ -73,5 +81,5 @@ public class GetCreateResponseToOrderController implements Controller {
             int temp = pageId-1;
             currentRecord = temp*recordsPerPage+1;
         }
-    }
+    }*/
 }
