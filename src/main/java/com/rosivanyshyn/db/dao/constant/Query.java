@@ -5,7 +5,7 @@ public class Query {
     public static final String INSERT_ACCOUNT = "INSERT INTO account VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_ACCOUNT= "SELECT * FROM account WHERE id = ?";
-    public static final String SELECT_ALL_ACCOUNTS = "SELECT * FROM account" ;
+    public static final String SELECT_ALL_ACCOUNTS = "SELECT * FROM account " ;
 
     public static final String SELECT_FEW_ACCOUNTS = "SELECT * FROM account LIMIT ?, ?" ;
 
@@ -23,7 +23,12 @@ public class Query {
     public static final String INSERT_APARTMENT = "INSERT INTO apartment VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_APARTMENT= "SELECT * FROM apartment WHERE id = ?";
-    public static final String SELECT_ALL_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment" ;
+    public static final String SELECT_ALL_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment " ;
+    // Select only unique rows
+    public static final String UNIQUE_APARTMENTS_WHICH_ARE_BOOKED =
+            "INNER JOIN (SELECT DISTINCT `apartment`.`id` FROM apartment INNER JOIN `booking` booking ON booking.`apartment_id` = `apartment`.`id`) AS a2 " +
+            "ON `apartment`.`id` = a2.`id` " +
+            "%s" ;
 
     public static final String SELECT_FEW_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment LIMIT ?, ?" ;
 
@@ -43,7 +48,7 @@ public class Query {
     public static final String INSERT_BOOKING = "INSERT INTO booking VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)" ;
 
     public static final String SELECT_BOOKING= "SELECT * FROM booking WHERE id = ?";
-    public static final String SELECT_ALL_BOOKINGS = "SELECT SQL_CALC_FOUND_ROWS * FROM booking" ;
+    public static final String SELECT_ALL_BOOKINGS = "SELECT SQL_CALC_FOUND_ROWS * FROM booking " ;
 
     public static final String SELECT_FEW_BOOKINGS = "SELECT SQL_CALC_FOUND_ROWS * FROM booking LIMIT ?, ?" ;
 
@@ -63,7 +68,7 @@ public class Query {
     public static final String INSERT_ORDER = "INSERT INTO `order` VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)" ;
 
     public static final String SELECT_ORDER = "SELECT * FROM `order` WHERE id = ?";
-    public static final String SELECT_ALL_ORDERS= "SELECT SQL_CALC_FOUND_ROWS * FROM `order`" ;
+    public static final String SELECT_ALL_ORDERS= "SELECT SQL_CALC_FOUND_ROWS * FROM `order` " ;
 
     public static final String SELECT_FEW_ORDERS = "SELECT SQL_CALC_FOUND_ROWS * FROM `order` LIMIT ?, ?" ;
 
@@ -82,7 +87,7 @@ public class Query {
     public static final String INSERT_RESPONSE_TO_ORDER = "INSERT INTO `response_to_order` VALUES (DEFAULT, ?)" ;
 
     public static final String SELECT_RESPONSE_TO_ORDER= "SELECT * FROM `response_to_order` WHERE id = ?";
-    public static final String SELECT_ALL_RESPONSES_TO_ORDER= "SELECT * FROM `response_to_order`" ;
+    public static final String SELECT_ALL_RESPONSES_TO_ORDER= "SELECT * FROM `response_to_order` " ;
 
     public static final String SELECT_FEW_RESPONSES_TO_ORDER = "SELECT * FROM `response_to_order` LIMIT ?, ?" ;
 

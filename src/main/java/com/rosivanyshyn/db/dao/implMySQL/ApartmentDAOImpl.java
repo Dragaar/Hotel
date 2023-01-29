@@ -5,6 +5,10 @@ import com.rosivanyshyn.db.dao.ApartmentDAO;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Order;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Formatter;
+
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
 
@@ -81,5 +85,16 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
                         .build();
     }
 
+    //-----------------------Unique Queries---------------------------\\
+    @Override
+    public ArrayList<Apartment> getUniqueApartmentsWhichAreBookedWithDynamicQuery(Connection con, String secondQueryPart, Object... fields){
 
-}
+        Formatter formatter = new Formatter();
+        formatter.format(UNIQUE_APARTMENTS_WHICH_ARE_BOOKED, secondQueryPart);
+
+        return getWithDynamicQuery(con, formatter.toString(), fields);
+    }
+
+
+
+    }

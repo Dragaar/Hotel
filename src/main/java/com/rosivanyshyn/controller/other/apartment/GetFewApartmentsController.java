@@ -23,6 +23,7 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 public class GetFewApartmentsController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
     int pageId, recordsPerPage, currentRecord;
+    boolean findBookedApartment = false;
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
@@ -74,7 +75,13 @@ public class GetFewApartmentsController implements Controller {
 
 
             //Result list
-            ArrayList<Apartment> apartments = apartmentService.findFewApartmentsAndSort(queryBuilder.getQuery());
+            ArrayList<Apartment> apartments = null;
+            if(findBookedApartment)
+            { apartments = apartmentService.findFewApartmentsWhichAreBooked(queryBuilder.getQuery()); }
+            else
+            { apartments = apartmentService.findFewApartmentsAndSort(queryBuilder.getQuery());  }
+
+
             request.setAttribute("apartments", apartments);
 
             //Pagination totalPagesCount
@@ -155,16 +162,10 @@ public class GetFewApartmentsController implements Controller {
                         Field.ENTITY_ID
                     );
             }
-            case "Booked" -> queryBuilder.join(Field.BOOKING,
-                Field.BOOKING,
-                Field.BOOKING_APARTMENT_ID,
-                Field.ENTITY_ID
-            );
-            case "Busy" -> queryBuilder.join(Field.BOOKING,
-                    Field.BOOKING,
-                    Field.BOOKING_APARTMENT_ID,
-                    Field.ENTITY_ID
-            );
+            case "Booked" -> findBookedApartment = true;
+
+            case "Busy" -> findBookedApartment = true;
+
             case "Unavailable" -> queryBuilder.order(
                     SortingFields.STATUS_AVAILABILITY.getField(),
                     false);

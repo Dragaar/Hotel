@@ -69,6 +69,21 @@ public class ApartmentServiceImpl implements ApartmentService {
         );
         return result;
     }
+    @Override
+    public ArrayList<Apartment> findFewApartmentsWhichAreBooked(String secondQueryPart, String... fields) {
+        Connection connection = DBManager.getConnection();
+
+        //sql start indexing from 0
+        @SuppressWarnings("unchecked")
+        ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
+                ()-> {
+                    ArrayList<Apartment> r = apartmentDAO.getUniqueApartmentsWhichAreBookedWithDynamicQuery(connection, secondQueryPart, fields);
+                    rowsNumber = apartmentDAO.countRowsInLastQuery(connection);
+                    return r;
+                }
+        );
+        return result;
+    }
 
     @Override
     public Boolean updateApartment(Apartment apartment) {

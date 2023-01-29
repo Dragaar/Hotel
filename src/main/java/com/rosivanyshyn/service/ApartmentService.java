@@ -15,6 +15,8 @@ public interface ApartmentService {
     ArrayList<Apartment>     findFewApartment(int start, int total);
 
     ArrayList<Apartment>     findFewApartmentsAndSort(String secondQueryPart, String... fields);
+    ArrayList<Apartment>     findFewApartmentsWhichAreBooked(String secondQueryPart, String... fields);
+
     Boolean                  updateApartment(Apartment apartment);
     Boolean                  deleteApartment(Apartment apartment);
 
