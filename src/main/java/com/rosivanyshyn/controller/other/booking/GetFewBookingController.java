@@ -37,7 +37,7 @@ public class GetFewBookingController implements Controller {
             queryBuilder.setLabel("booking");
             queryBuilder.where(BOOKING_ACCOUNT_ID, true);
             queryBuilder.limit(currentRecord, recordsPerPage);
-            bookings = bookingService.findFewOrdersAndSort(queryBuilder.getQuery(), accountId);
+            bookings = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), accountId);
 
             //orders = orderService.findFewOrders(currentRecord, recordsPerPage);
             request.setAttribute("bookings", bookings);

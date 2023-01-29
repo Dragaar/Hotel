@@ -28,7 +28,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public ArrayList<Booking> findFewOrdersAndSort(String secondQueryPart, Object... fields) {
+    public ArrayList<Booking> findFewBookingAndSort(String secondQueryPart, Object... fields) {
         Connection connection = DBManager.getConnection();
 
         //sql start indexing from 0

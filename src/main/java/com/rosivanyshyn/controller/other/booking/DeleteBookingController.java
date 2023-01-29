@@ -32,7 +32,7 @@ public class DeleteBookingController implements Controller {
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("booking");
             queryBuilder.where(ENTITY_ID, true);
-            @NonNull ArrayList<Booking> booking = bookingService.findFewOrdersAndSort(queryBuilder.getQuery(), bookingId);
+            @NonNull ArrayList<Booking> booking = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), bookingId);
 
             if(booking.get(0).getAccount().getId().equals(accountId))
             {

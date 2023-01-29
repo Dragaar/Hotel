@@ -40,7 +40,7 @@ public class GetAllBookingController implements Controller {
                 MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
                 queryBuilder.setLabel("booking");
                 queryBuilder.limit(currentRecord, recordsPerPage);
-                bookings = bookingService.findFewOrdersAndSort(queryBuilder.getQuery());
+                bookings = bookingService.findFewBookingAndSort(queryBuilder.getQuery());
 
                 //orders = orderService.findFewOrders(currentRecord, recordsPerPage);
                 request.setAttribute("bookings", bookings);
