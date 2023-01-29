@@ -46,6 +46,7 @@ public class ControllerConstant {
     public static final String GET_ALL_BOOKINGS_CONTROLLER = "getAllBookings";
     public static final String NEW_BOOKING_CONTROLLER = "newBooking";
     public static final String CREATE_BOOKING_CONTROLLER = "createBooking";
+    public static final String MAKE_PAYMENT_FOR_BOOKING = "makePaymentForBooking";
     public static final String DELETE_BOOKING_CONTROLLER = "deleteBooking";
 
 

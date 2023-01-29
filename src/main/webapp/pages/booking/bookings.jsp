@@ -34,6 +34,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Статус бронювання</th>
+                        <th scope="col">Оплатити бронювання</th>
                         <th scope="col">Апартаменти</th>
                         <th scope="col">Кількість гостей</th>
                         <th scope="col">День заїзду</th>
@@ -58,7 +59,11 @@
                                     <td class="table-warning">Не оплачено</td>
                                 </c:otherwise>
                             </c:choose>
-
+                            <td>
+                                <form id="paymentForm" action="${pageContext.request.contextPath}/front?controller=makePaymentForBooking&bookingId=${booking.getId()}" method="POST">
+                                    <button type="submit" class="btn btn-info"><i class="bi bi-currency-dollar"></i></button>
+                                </form>
+                            </td>
                             <td>
                                 <form id="apartmentForm" action="${pageContext.request.contextPath}/front?controller=getApartmentDetails&apartmentId=${booking.getApartment().getId()}" method="POST">
                                     <button type="submit" class="btn btn-primary"><i class="bi bi-info-circle"></i></button>

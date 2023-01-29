@@ -44,6 +44,8 @@ public class ControllerFactory {
                 return new GetCreateBookingFormController();
             case CREATE_BOOKING_CONTROLLER:
                 return new CreateBookingController();
+            case MAKE_PAYMENT_FOR_BOOKING:
+                return new PaymentForBooking();
             case DELETE_BOOKING_CONTROLLER:
                 return new DeleteBookingController();
 
