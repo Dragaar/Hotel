@@ -4,6 +4,8 @@ public class ControllerConstant {
 
     //---------------- JSP Path -------------------\\
     public static final String INDEX_JSP = "/index.jsp";
+    public static final String ERROR_JSP = "/pages/error.jsp";
+
     public static final String LOGIN_JSP = "/pages/login.jsp";
 
     public static final String APARTMENTS_JSP = "/pages/apartments.jsp";

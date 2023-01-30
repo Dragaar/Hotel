@@ -9,6 +9,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ERROR_JSP;
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.LOGIN_JSP;
 
 @WebServlet("/AppExceptionHandler")
 public class AppExceptionHandler extends HttpServlet {
@@ -27,7 +31,7 @@ public class AppExceptionHandler extends HttpServlet {
     }
 
     private void processError(HttpServletRequest request,
-                              HttpServletResponse response) throws IOException {
+                              HttpServletResponse response) throws ServletException, IOException {
         // Analyze the servlet exception
         Throwable throwable = (Throwable) request
                 .getAttribute("jakarta.servlet.error.exception");
@@ -44,8 +48,20 @@ public class AppExceptionHandler extends HttpServlet {
             requestUri = "Unknown";
         }
 
+        if(statusCode != 500) {
+            request.setAttribute("statusCode", statusCode);
+            request.setAttribute("requestUri", requestUri);
+        }
+        else{
+            request.setAttribute("statusCode", statusCode);
+            request.setAttribute("requestUri", requestUri);
+            request.setAttribute("message", throwable.getMessage());
+        }
+
+        request.getRequestDispatcher(ERROR_JSP).forward(request, response);
+
         // Set response content type
-        response.setContentType("text/html");
+       /* response.setContentType("text/html");
 
         PrintWriter out = response.getWriter();
         out.write("<html><head><title>Exception/Error Details</title></head><body>");
@@ -64,6 +80,6 @@ public class AppExceptionHandler extends HttpServlet {
 
         out.write("<br><br>");
         out.write("<a href=\"../index.jsp\">Home Page</a>");
-        out.write("</body></html>");
+        out.write("</body></html>");*/
     }
 }

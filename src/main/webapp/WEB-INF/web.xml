@@ -5,12 +5,12 @@
          version="4.0">
 
     <error-page>
-        <error-code>404</error-code>
+        <exception-type>java.lang.Throwable</exception-type>
         <location>/AppExceptionHandler</location>
     </error-page>
 
     <error-page>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
+        <error-code>404</error-code>
         <location>/AppExceptionHandler</location>
     </error-page>
 
