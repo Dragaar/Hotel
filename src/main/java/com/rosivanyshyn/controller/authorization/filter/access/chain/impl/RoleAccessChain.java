@@ -31,7 +31,7 @@ public class RoleAccessChain extends AccessChain {
 		){
 			chain.doFilter(req, res);
 		} else {
-			req.getRequestDispatcher(req.getContextPath() + LOGIN_JSP).forward(req, res);
+			res.sendRedirect(req.getContextPath() + LOGIN_JSP);
 		}
 
 	}
