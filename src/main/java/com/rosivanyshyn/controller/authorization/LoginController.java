@@ -48,6 +48,7 @@ public class LoginController implements Controller {
                 session.setAttribute("userRoleName", AccountRole.USER);
 
                 session.setAttribute("lang", "en");
+                //TODO move list to resources
                 session.setAttribute("languages", new ArrayList<>(Arrays.asList("en", "uk")));
 
                 resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER);

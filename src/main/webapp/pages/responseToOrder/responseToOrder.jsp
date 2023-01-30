@@ -16,7 +16,7 @@
     </div>
 
     <c:if test="${empty requestScope.apartments}">
-        <h2 class="d-flex justify-content-center"> Ops! Cannot find available apartments!</h2>
+        <h2 class="d-flex justify-content-center"> <fmt:message key="apartment.error.cannotFind" /></h2>
         <div class="d-flex justify-content-center">
             <img src="${pageContext.request.contextPath}/images/icons/sad-cat.jpg" class="img">
         </div>
@@ -27,8 +27,8 @@
 
         <div class="row mb-4 mt-4">
 
-            <h4 >Коментар модератора: <c:out value="${description}" /></h4>
-            <h2 >Submitted apartment List</h2>
+            <h4 ><fmt:message key="responseToOrder.description" />: <c:out value="${description}" /></h4>
+            <h2 ><fmt:message key="apartment.submittedApartmentsList" /></h2>
 
         </div>
 
@@ -44,13 +44,11 @@
                                 <h6 class="card-subtitle mb-2 text-muted"><c:out value="${apartment.getAddress()}" /></h6>
                                 <p class="card-text line-clamp" style="-webkit-line-clamp: 3"><c:out value="${apartment.getDescription()}" /></p>
                                 <h6 class="card-subtitle mb-2 text-muted text-end"><c:out value="${apartment.getPrice()}" /> &#8372</h6>
-                                <!-- /hotel/front?controller=deleteApartment
-                                /hotel/pages/test11.jsp
-                                -->
-                                <a href="/notes/edit">Редагувати</a>
+
+                                <a href="/notes/edit"><fmt:message key="apartment.edit" /></a>
                                 <form action="${pageContext.request.contextPath}/front?controller=getApartmentDetails" method="POST" class="float-end">
                                     <input type="hidden" name="apartmentId" value="${apartment.getId()}">
-                                    <button class="btn btn-primary my-1" type="submit" >Details</button>
+                                    <button class="btn btn-primary my-1" type="submit" ><fmt:message key="apartment.details" /></button>
                                 </form>
                             </div>
                         </div>

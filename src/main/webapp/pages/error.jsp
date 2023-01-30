@@ -23,13 +23,13 @@
         <img src="${pageContext.request.contextPath}/images/icons/sad-cat.jpg" class="img">
     </div>
         <c:if test="${!empty requestScope.statusCode}">
-            <div class="d-flex justify-content-center"> <strong>Status Code</strong>:${requestScope.statusCode} </div>
+            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.statusCode" /></strong>:${requestScope.statusCode} </div>
         </c:if>
         <c:if test="${!empty requestScope.requestUri}">
-            <div class="d-flex justify-content-center"> <strong>Requested URI</strong>:${requestScope.requestUri} </div>
+            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.requestURI" /></strong>:${requestScope.requestUri} </div>
         </c:if>
         <c:if test="${!empty requestScope.message}">
-            <div class="d-flex justify-content-center"> <strong>Message</strong>:${requestScope.message} </div>
+            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.message" /></strong>:${requestScope.message} </div>
         </c:if>
       </div>
 

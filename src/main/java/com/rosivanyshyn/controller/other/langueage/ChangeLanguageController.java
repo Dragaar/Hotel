@@ -25,6 +25,7 @@ public class ChangeLanguageController implements Controller {
         @NonNull final String language = request.getParameter("language");
         session.setAttribute("lang", language);
 
+        //TODO add forward support
         String lastPage = request.getHeader("referer");
 
         if(lastPage != null){

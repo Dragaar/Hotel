@@ -32,27 +32,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getApartments">Catalog <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getApartments"><fmt:message key="navbar.catalog" /><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getBookings">Bookings</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getBookings"><fmt:message key="navbar.bookings" /></a>
             </li>
             <c:if test="${sessionScope.role == sessionScope.userRoleName}">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getOrders">My applications</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getOrders"><fmt:message key="navbar.myApplications" /></a>
             </li>
             </c:if>
             <c:if test="${sessionScope.role == sessionScope.managerRoleName}">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAllOrders">Users applications</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAllOrders"><fmt:message key="navbar.userApplications" /></a>
             </li>
             </c:if>
             <li class="nav-item ">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAccount">Account</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAccount"><fmt:message key="navbar.account" /></a>
             </li>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="<fmt:message key="navbar.search" />" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="navbar.search" /></button>
             </form>
 
 
@@ -73,7 +73,7 @@
         </ul>
         <ul class="navbar-nav navbar-right">
             <li class="nav-item float-right">
-                <a class="nav-link" href="front?controller=logout">Logout</a>
+                <a class="nav-link" href="front?controller=logout"><fmt:message key="navbar.logout" /></a>
             </li>
         </ul>
     </div>

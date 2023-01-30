@@ -16,7 +16,7 @@
     </div>
 
     <c:if test="${empty requestScope.orders}">
-        <h2 class="d-flex justify-content-center"> Ops! Cannot find your applications!</h2>
+        <h2 class="d-flex justify-content-center"> <fmt:message key="order.error.cannotFind" /></h2>
         <div class="d-flex justify-content-center">
             <img src="${pageContext.request.contextPath}/images/icons/sad-cat.jpg" class="img">
         </div>
@@ -25,7 +25,7 @@
 
     <c:if test="${!empty requestScope.orders}">
 
-    <h2 class="col-md-4">Applications List</h2>
+    <h2 class="col-md-4"><fmt:message key="order.list" /></h2>
 
     <div class="container">
         <div class="row ">
@@ -33,15 +33,15 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Статус заявки</th>
-                    <th scope="col">Тип Апартаментів</th>
-                    <th scope="col">Кількість кімнат</th>
-                    <th scope="col">Кількість гостей</th>
-                    <th scope="col">Вартість</th>
-                    <th scope="col">День заїзду</th>
-                    <th scope="col">День виїзду</th>
-                    <th scope="col">Деталі заявки</th>
-                    <th scope="col">Дії</th>
+                    <th scope="col"><fmt:message key="order.status" /></th>
+                    <th scope="col"><fmt:message key="order.apartmentType" /></th>
+                    <th scope="col"><fmt:message key="order.roomsCount" /></th>
+                    <th scope="col"><fmt:message key="order.guestsNumber" /></th>
+                    <th scope="col"><fmt:message key="order.price" /></th>
+                    <th scope="col"><fmt:message key="order.checkInDate" /></th>
+                    <th scope="col"><fmt:message key="order.checkOutDate" /></th>
+                    <th scope="col"><fmt:message key="order.details" /></th>
+                    <th scope="col"><fmt:message key="order.actions" /></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,11 +53,13 @@
                         <c:choose>
                             <c:when test="${!empty order.getResponseToOrder()}">
                                 <td class="table-success">
-                                    Заявку оброблено!
+                                    <fmt:message key="order.status.processed" />
                                 </td>
                             </c:when>
                             <c:otherwise>
-                                <td class="table-warning">Оброблюється</td>
+                                <td class="table-warning">
+                                    <fmt:message key="order.status.inProcessing" />
+                                </td>
                             </c:otherwise>
                         </c:choose>
 

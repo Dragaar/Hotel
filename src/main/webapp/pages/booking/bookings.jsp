@@ -16,7 +16,7 @@
     </div>
 
     <c:if test="${empty requestScope.bookings}">
-        <h2 class="d-flex justify-content-center"> Ops! Cannot find your bookings!</h2>
+        <h2 class="d-flex justify-content-center"> <fmt:message key="booking.error.cannotFind" /></h2>
         <div class="d-flex justify-content-center">
             <img src="${pageContext.request.contextPath}/images/icons/sad-cat.jpg" class="img">
         </div>
@@ -25,7 +25,7 @@
 
     <c:if test="${!empty requestScope.bookings}">
 
-        <h2 class="col-md-4">Booking List</h2>
+        <h2 class="col-md-4"><fmt:message key="booking.list" /></h2>
 
         <div class="container">
             <div class="row ">
@@ -33,14 +33,14 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Статус бронювання</th>
-                        <th scope="col">Оплатити бронювання</th>
-                        <th scope="col">Апартаменти</th>
-                        <th scope="col">Кількість гостей</th>
-                        <th scope="col">День заїзду</th>
-                        <th scope="col">День виїзду</th>
-                        <th scope="col">Час створення</th>
-                        <th scope="col">Дії</th>
+                        <th scope="col"><fmt:message key="booking.status" /></th>
+                        <th scope="col"><fmt:message key="booking.makePaymentForBooking" /></th>
+                        <th scope="col"><fmt:message key="booking.apartment" /></th>
+                        <th scope="col"><fmt:message key="booking.guestsNumber" /></th>
+                        <th scope="col"><fmt:message key="booking.checkInDate" /></th>
+                        <th scope="col"><fmt:message key="booking.checkOutDate" /></th>
+                        <th scope="col"><fmt:message key="booking.dateOfCreation" /></th>
+                        <th scope="col"><fmt:message key="booking.actions" /></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,11 +52,11 @@
                             <c:choose>
                                 <c:when test="${booking.getIsPaidForReservation() == true}">
                                     <td class="table-success">
-                                        Оплачено!
+                                        <fmt:message key="booking.paid" />
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td class="table-warning">Не оплачено</td>
+                                    <td class="table-warning"><fmt:message key="booking.notPaid" /></td>
                                 </c:otherwise>
                             </c:choose>
                             <td>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
@@ -11,12 +12,12 @@
             <c:choose>
                 <c:when test="${page != 1}">
                     <li class="page-item">
-                        <a class="page-link" href="?controller=${requestScope.currentController}&page=${page - 1}">Previous</a>
+                        <a class="page-link" href="?controller=${requestScope.currentController}&page=${page - 1}"><fmt:message key="pagination.previous" /></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
+                        <a class="page-link"><fmt:message key="pagination.previous" /></a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -43,12 +44,12 @@
             <c:choose>
             <c:when test="${page < totalPagesCount}">
                 <li class="page-item">
-                    <a class="page-link" href="?controller=${requestScope.currentController}&page=${page + 1}">Next</a>
+                    <a class="page-link" href="?controller=${requestScope.currentController}&page=${page + 1}"><fmt:message key="pagination.next" /></a>
                 </li>
             </c:when>
             <c:otherwise>
                 <li class="page-item disabled">
-                    <a class="page-link">Next</a>
+                    <a class="page-link"><fmt:message key="pagination.next" /></a>
                 </li>
             </c:otherwise>
             </c:choose>
