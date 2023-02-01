@@ -20,8 +20,6 @@ public class RegistrationController implements Controller {
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
 
-        //валидация -
-        //https://github.com/muhireheir/userAuth/blob/main/src/main/java/com/controllers/RegisterFilter.java
         try {
 
             @NonNull final String email = request.getParameter("email");

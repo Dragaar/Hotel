@@ -10,6 +10,7 @@ import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.BookingService;
 import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
 import com.rosivanyshyn.service.implMySQL.BookingServiceImpl;
+import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import lombok.NonNull;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
@@ -30,21 +32,26 @@ public class CreateBookingController implements Controller {
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
 
-        try {
+
             HttpSession session = request.getSession(false);
 
             @NonNull final Long accountId = (Long) session.getAttribute("id");
-            @NonNull final Long apartmentId = Long.valueOf(request.getParameter("apartmentId"));
-            Apartment apartment = apartmentService.findApartmentByField(ENTITY_ID, apartmentId);
             Account account = new Account();
             account.setId(accountId);
+
+            @SuppressWarnings("unchecked")
+            @NonNull final HashMap<Date, Date> bookingsDates
+                    = (HashMap<Date, Date>) session.getAttribute("bookingsDates");
+
+            @NonNull final Long apartmentId = Long.valueOf(request.getParameter("apartmentId"));
+            Apartment apartment = apartmentService.findApartmentByField(ENTITY_ID, apartmentId);
+
 
                 @NonNull final String guestsNumber = request.getParameter("guestsNumber");
                 @NonNull final LocalDate  checkInDate = LocalDate.parse(
                         request.getParameter("checkInDate"));
                 @NonNull final LocalDate checkOutDate = LocalDate.parse(
                         request.getParameter("checkOutDate"));
-                //@NonNull final String isPaidForReservation = request.getParameter("password");
 
                 Booking booking = Booking.builder()
                         .id(0L)
@@ -58,6 +65,9 @@ public class CreateBookingController implements Controller {
                         .apartment(apartment)
                         .build();
 
+                Validation validation = new Validation();
+                validation.validateBooking(booking, bookingsDates);
+        try {
                 bookingService.createBooking(booking);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
