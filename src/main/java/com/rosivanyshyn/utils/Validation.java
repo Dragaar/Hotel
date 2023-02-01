@@ -7,6 +7,7 @@ import com.rosivanyshyn.exeption.ValidationException;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -160,6 +161,16 @@ public class Validation {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Check if entered data isn`t less, than current data
+     * @param CheckInData date to check
+     * @return true, if data is`n belong to pastime
+     */
+    public boolean isDataInFutureTime(final Date CheckInData){
+        Date currentTime = Date.valueOf(LocalDate.now());
+        return !CheckInData.before(currentTime);
     }
 
     /**
@@ -335,6 +346,7 @@ public class Validation {
         }
         if (!isValidDate(checkInDate.toString())
             ||!isValidDate(checkOutDate.toString())
+            ||!isDataInFutureTime(checkInDate)
         ) {
             validationException(INCORRECT_BOOKING_DATA);
         }
