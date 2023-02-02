@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hotel:security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hotel="http://com.rosivanyshyn.Hotel" xsi:schemaLocation="http://com.rosivanyshyn.Hotel security.xsd">
+	<constraint>
+		<url-pattern>login</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>logout</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>registration</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+
+
+	<constraint>
+		<url-pattern>getApartments</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>getApartmentDetails</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>deleteApartment</url-pattern>
+		<role>manager</role>
+	</constraint>
+
+
+	<constraint>
+		<url-pattern>getBookings</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>getAllBookings</url-pattern>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>newBooking</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>createBooking</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>makePaymentForBooking</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>deleteBooking</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+
+
+	<constraint>
+		<url-pattern>getOrders</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>getAllOrders</url-pattern>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>newOrder</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>createOrder</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>deleteOrder</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+
+
+	<constraint>
+		<url-pattern>getResponseToOrder</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>newResponseToOrder</url-pattern>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>createResponseToOrder</url-pattern>
+		<role>manager</role>
+	</constraint>
+
+
+	<constraint>
+		<url-pattern>changeLanguage</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+
+</hotel:security>
