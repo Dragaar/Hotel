@@ -25,7 +25,6 @@ public class DeleteOrderController implements Controller {
             @NonNull final Long accountId = (Long) session.getAttribute("id");
 
             @NonNull final Long orderId = Long.valueOf(request.getParameter("orderId"));
-            System.out.println("Order Id === " + orderId);
             Order order = orderService.findOrderByField(Field.ENTITY_ID, orderId);
 
             if(order.getAccount().getId().equals(accountId))

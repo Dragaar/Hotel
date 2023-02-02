@@ -1,13 +1,11 @@
 package com.rosivanyshyn.utils;
 
-import com.rosivanyshyn.controller.authorization.filter.AccessFilter;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.*;
 import com.rosivanyshyn.exeption.ValidationException;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -388,10 +386,10 @@ public class Validation {
         if (!isValidNumber(guestsNumber)) {
             validationException(INCORRECT_GUESTS_NUMBER);
         }
-        if (!isValidString(roomsNumber)) {
+        if (!isValidNumber(roomsNumber)) {
             validationException(INCORRECT_APARTMENT_ROOMS_NUMBER);
         }
-        if (!isValidString(apartmentClass)) {
+        if (!isValidDescription(apartmentClass)) {
             validationException(INCORRECT_APARTMENT_CLASS);
         }
         if (!isValidNumber(price)) {

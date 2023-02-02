@@ -7,6 +7,7 @@ import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.OrderService;
 import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
+import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +26,7 @@ public class CreateOrderController implements Controller {
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
 
-        try {
+
             HttpSession session = request.getSession(false);
 
             @NonNull final Long accountId = (Long) session.getAttribute("id");
@@ -58,6 +59,10 @@ public class CreateOrderController implements Controller {
                         //responseToOrder is null
                         .build();
 
+                Validation validation = new Validation();
+                validation.validateOrder(order);
+
+        try {
                  orderService.createOrder(order);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +

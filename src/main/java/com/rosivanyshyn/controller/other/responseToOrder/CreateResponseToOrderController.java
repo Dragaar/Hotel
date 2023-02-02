@@ -12,6 +12,7 @@ import com.rosivanyshyn.service.OrderService;
 import com.rosivanyshyn.service.ResponseToOrderService;
 import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
 import com.rosivanyshyn.service.implMySQL.ResponseToOrderServiceImpl;
+import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -53,6 +54,9 @@ public class CreateResponseToOrderController implements Controller {
                 ResponseToOrder responseToOrder = ResponseToOrder.builder()
                         .description(description)
                         .build();
+
+                Validation validation = new Validation();
+                validation.validateResponseToOrder(responseToOrder);
 
                 responseToOrderService.createResponseToOrder(order, responseToOrder, apartments);
 
