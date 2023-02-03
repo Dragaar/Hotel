@@ -1,5 +1,10 @@
 package com.rosivanyshyn.db.dao.constant;
 
+/**
+ * Database fields constants
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class Field {
     public static final String ENTITY_ID = "id";
     public static final String ENTITY_STATE = "state";

@@ -5,7 +5,13 @@ import com.rosivanyshyn.db.dao.entity.Apartment;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-
+/**
+ * Generic DAO interface.
+ * Implement methods which are generic for all others DAO
+ *
+ * @author Rostyslav Ivanyshyn
+ * @param <T> – the type of entities
+ */
 public interface GenericDAO<T> {
 
     /** Add specific object to respective table.
@@ -76,7 +82,7 @@ public interface GenericDAO<T> {
     Boolean         delete(Connection con, Long id);
 
     /** Count the number of rows in the last query
-     * Last query should have SQL_CALC_FOUND_ROWS part!!!
+     * <br>Last query should have SQL_CALC_FOUND_ROWS part!!!
      * @param con connection to database
      * @return number of rows
      */

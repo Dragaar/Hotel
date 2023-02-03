@@ -5,9 +5,15 @@ import org.apache.log4j.Logger;
 
 import java.io.Serial;
 
+/**
+ * Validation layer exception
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ValidationException extends RuntimeException{
+
     @Serial
-    private static final long serialVersionUID = 9050488517174621013L;
+    private static final long serialVersionUID = -8404774518851987089L;
 
     public ValidationException(String msg, Exception ex) {
         super(msg, ex);

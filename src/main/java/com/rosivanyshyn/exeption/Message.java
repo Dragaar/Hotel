@@ -1,5 +1,9 @@
 package com.rosivanyshyn.exeption;
 
+/** Exceptions messages constants.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class Message {
     public static final String INSERT_ERROR = "Cannot create row";
     public static final String SELECT_ERROR = "Cannot find row";

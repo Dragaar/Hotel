@@ -12,6 +12,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/** Database connection manager.
+ * <br> Configure Hikari connection pool and provides access to it
+ *
+ *  @author Rostyslav Ivanyshyn.
+ */
 public class DBManager {
     private static final Logger LOG = LogManager.getLogger(DBManager.class);
     private static Properties appProps;

@@ -2,6 +2,7 @@ package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -12,6 +13,10 @@ import java.io.Serializable;
 @ToString()
 @EqualsAndHashCode()
 public class Apartment implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -2943941589166694458L;
+
     private Long id;
     private String title;
     private String description;

@@ -4,6 +4,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Account role enum.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public enum AccountRole {
         USER ("user"), MANAGER("manager"), UNKNOWN("unknown");
         private String role;

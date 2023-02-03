@@ -2,6 +2,7 @@ package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,6 +15,10 @@ import java.sql.Timestamp;
 @ToString()
 @EqualsAndHashCode(exclude = "reservationData")
 public class Booking implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 385954903468257504L;
+
     private Long id;
     private String guestsNumber;
 

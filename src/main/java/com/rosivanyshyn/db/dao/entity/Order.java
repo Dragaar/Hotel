@@ -2,6 +2,7 @@ package com.rosivanyshyn.db.dao.entity;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -13,6 +14,10 @@ import java.sql.Date;
 @ToString()
 @EqualsAndHashCode()
 public class Order implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1444499296234806694L;
+
     private Long id;
     private Integer guestsNumber;
     private String roomsNumber;

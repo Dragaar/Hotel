@@ -14,6 +14,11 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
 import static com.rosivanyshyn.exeption.Message.*;
 
+/**
+ * Response To Order DAO interface implementation.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ResponseToOrderDAOImpl extends GenericDAOImpl<ResponseToOrder> implements ResponseToOrderDAO {
     //------------------ Queries initialising ------------------------\\
     @Override

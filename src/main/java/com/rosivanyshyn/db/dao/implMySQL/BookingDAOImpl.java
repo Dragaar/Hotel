@@ -19,6 +19,11 @@ import static com.rosivanyshyn.db.dao.constant.Query.*;
 import static com.rosivanyshyn.exeption.Message.DELETE_ERROR;
 import static com.rosivanyshyn.exeption.Message.EVENT_IS_BILL_PAID_ERROR;
 
+/**
+ * Booking DAO interface implementation.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDAO {
     //------------------ Queries initialising ------------------------\\
     @Override

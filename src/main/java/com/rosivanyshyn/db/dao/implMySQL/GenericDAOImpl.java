@@ -12,8 +12,10 @@ import java.util.Formatter;
 import static com.rosivanyshyn.db.dao.constant.Query.COUNT_ROWS_IN_LAST_QUERY;
 import static com.rosivanyshyn.exeption.Message.*;
 
-/** Implementation of GenericDAO interface
+/**
+ * Generic DAO interface implementation.
  *
+ * @author Rostyslav Ivanyshyn.
  * @param <T> Entity
  */
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
@@ -133,7 +135,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     }
 
-    //TODO провірити роботоздатність у випадку повернення масиву значень
     @Override
     public T getByField(Connection con, String field, Object value) {
         LOG.info("Query: " + selectByFieldQuery());

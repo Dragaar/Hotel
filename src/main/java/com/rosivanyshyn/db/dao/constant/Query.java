@@ -1,5 +1,10 @@
 package com.rosivanyshyn.db.dao.constant;
 
+/**
+ * MySQL Database queries constants
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class Query {
     //-----------------------Account Queries -------------------------------------------------\\
     public static final String INSERT_ACCOUNT = "INSERT INTO account VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)" ;

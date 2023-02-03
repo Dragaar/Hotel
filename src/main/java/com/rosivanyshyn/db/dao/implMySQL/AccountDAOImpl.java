@@ -6,6 +6,12 @@ import com.rosivanyshyn.db.dao.entity.Order;
 
 import static com.rosivanyshyn.db.dao.constant.Query.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+
+/**
+ * Account DAO interface implementation.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class AccountDAOImpl extends GenericDAOImpl<Account> implements AccountDAO {
     //------------------ Queries initialising ------------------------\\
     @Override

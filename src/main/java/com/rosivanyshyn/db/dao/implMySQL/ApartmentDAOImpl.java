@@ -12,7 +12,11 @@ import java.util.Formatter;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
 
-
+/**
+ * Apartment DAO interface implementation.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements ApartmentDAO {
     //------------------ Queries initialising ------------------------\\
     @Override
