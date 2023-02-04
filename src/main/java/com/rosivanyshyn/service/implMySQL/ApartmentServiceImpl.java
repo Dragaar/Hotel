@@ -21,22 +21,12 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public Boolean isApartmentExist(Apartment apartment) {
-        return null;
-    }
-
-    @Override
     public Apartment findApartmentByField(String field, Object value) {
         Connection connection = DBManager.getConnection();
 
         return  (Apartment) TransactionManager.execute(connection,
                 ()-> apartmentDAO.getByField(connection, field, value)
         );
-    }
-
-    @Override
-    public ArrayList<Apartment> findAllApartment() {
-        return null;
     }
 
     @Override
@@ -97,7 +87,7 @@ public class ApartmentServiceImpl implements ApartmentService {
                 ()-> apartmentDAO.delete(connection, apartment.getId())
         );
     }
-
+    @Override
     public int getRowsNumber(){
         return rowsNumber;
     }

@@ -1,5 +1,11 @@
 package com.rosivanyshyn.utils;
 
+/**
+ * MySQL Query Builder.
+ * <br>It contains methods to build dynamic query depends on business requirements.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class MySQLQueryBuilder {
 
     protected String label;
@@ -56,6 +62,22 @@ public class MySQLQueryBuilder {
     //-------------------------------------------------------------\\
 
     //------------------ Searching by field------------------------\\
+
+    /** Filter the table by the specified field
+     *
+     * @param field field by which to filter
+     * @param and combining with previous condition. True -> the preconditions, including the new one, must be true to return records. False -> return a records if any of the conditions is true.
+     */
+    public void where(String field, boolean and) {
+        String clause = label + ".`" + field + "` = ? ";
+        addWhere(clause, and);
+    }
+
+    /** Combine several filters
+     *
+     * @param clause new filter
+     * @param and Combining with previous condition. True -> the preconditions, including the new one, must be true to return records. False -> return a records if any of the conditions is true.
+     */
     protected void addWhere(String clause, boolean and) {
         if (where == null) {
             where = new StringBuilder(" WHERE ");
@@ -69,19 +91,28 @@ public class MySQLQueryBuilder {
         }
     }
 
-    public void where(String field, boolean and) {
-        String clause = label + ".`" + field + "` = ? ";
-        addWhere(clause, and);
-    }
+
     //-------------------------------------------------------------\\
 
     //---------------------- Filtrating ----------------------------\\
+
+    /** Specify the number of records to return.
+     *
+     * @param offset which record to start sampling from
+     * @param limit records count to get
+     */
 
     public void limit(Integer offset, Integer limit) {
         //in database count start from 0
         offset-=1;
         this.limit = " LIMIT " + offset + ", " + limit;
     }
+
+    /** Sort records by field in ascending or descending order.
+     *
+     * @param field field by which to sort
+     * @param desc if true -> sort in descending order
+     */
 
     public void order(String field, boolean desc) {
         if (this.order == null) {
@@ -97,6 +128,11 @@ public class MySQLQueryBuilder {
     //-------------------------------------------------------------\\
 
     //------------------ Build final Query -------------------------\\
+
+    /** Build the query from all the previous added parts.
+     *
+     * @return string represent of query.
+     */
     public String getQuery() {
         StringBuilder query = new StringBuilder();
 
@@ -115,9 +151,15 @@ public class MySQLQueryBuilder {
         return query.toString();
     }
 
+    /**
+     * Clear query builder
+     */
     public void clear() {
+
+        join = null;
+        where = null;
         order = null;
         limit = null;
-        where = null;
+
     }
 }

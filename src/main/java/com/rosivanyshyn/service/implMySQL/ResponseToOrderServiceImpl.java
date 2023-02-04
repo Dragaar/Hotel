@@ -56,16 +56,6 @@ public class ResponseToOrderServiceImpl implements ResponseToOrderService {
     }
 
     @Override
-    public ArrayList<ResponseToOrder> findAllResponseToOrders() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ResponseToOrder> findFewResponseToOrders(int start, int total) {
-        return null;
-    }
-
-    @Override
     public Boolean updateResponseToOrder(ResponseToOrder responseToOrder) {
         return null;
     }

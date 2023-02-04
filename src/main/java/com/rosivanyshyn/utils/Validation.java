@@ -13,6 +13,12 @@ import java.util.regex.Pattern;
 
 import static com.rosivanyshyn.exeption.Message.*;
 
+/**
+ * Application validator.
+ * <br>It contains methods to validate data types, fields, and entities
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class Validation {
 
     private static final Logger LOG = Logger.getLogger(Validation.class);

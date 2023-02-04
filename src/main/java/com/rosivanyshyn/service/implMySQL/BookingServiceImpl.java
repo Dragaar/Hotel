@@ -58,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
                 ()-> bookingDAO.delete(connection, booking.getId())
         );
     }
-
+    @Override
     public int getRowsNumber(){
         return rowsNumber;
     }

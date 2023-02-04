@@ -37,11 +37,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ArrayList<Order> findAllOrders() {
-        return null;
-    }
-
-    @Override
     public ArrayList<Order> findFewOrders(int start, int total) {
         Connection connection = DBManager.getConnection();
 
@@ -98,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
             }
         );
     }
-
+    @Override
     public int getRowsNumber(){
         return rowsNumber;
     }
