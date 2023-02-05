@@ -76,7 +76,7 @@ public class Validation {
         if (string == null || string.isEmpty()) {
             return false;
         }
-        Pattern pattern = Pattern.compile("^[a-zA-Z\u0430-\u044F\u0410-\u042F\u0451\u0401\\s]{3,}$");
+        Pattern pattern = Pattern.compile("^[a-zA-ZА-ЩЬЮЯҐІЇЄЫЭЪЁа-щьюяґіїєыэъё'\\s\\-]{3,}$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
@@ -91,7 +91,7 @@ public class Validation {
         if (string == null || string.isEmpty()) {
             return false;
         }
-        Pattern pattern = Pattern.compile("^[a-zA-Z\u0430-\u044F\u0410-\u042F\u0451\u0401\\d\\s\\-'.,;:+~`!?@#$^&*()={}|/]{3,}$");
+        Pattern pattern = Pattern.compile("^[a-zA-ZА-ЩЬЮЯҐІЇЄЫЭЪЁа-щьюяґіїєыэъё\\d\\s\\-'.,;:+~`!?@#$^&*()={}|/]{3,}$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
@@ -221,7 +221,7 @@ public class Validation {
      */
     public boolean isValidEmail(final String email) {
         Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                .compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
@@ -352,7 +352,7 @@ public class Validation {
             ||!isValidDate(checkOutDate.toString())
             ||!isDataInFutureTime(checkInDate)
         ) {
-            validationException(INCORRECT_BOOKING_DATA);
+            validationException(INCORRECT_BOOKING_DATE);
         }
         if(otherBookingDates != null){
 
@@ -360,7 +360,7 @@ public class Validation {
                     (fCheckInDate, fCheckOutDate)-> {
                         if(!comparisonDataValidator(fCheckInDate, fCheckOutDate,
                                                      checkInDate, checkOutDate))
-                        { validationException(INCORRECT_BOOKING_DATA); }
+                        { validationException(BOOKING_ALREADY_EXIST_ON_THIS_DATE); }
                     }
             );
         }
@@ -407,7 +407,7 @@ public class Validation {
         if (!isValidDate(checkInDate.toString())
                 ||!isValidDate(checkOutDate.toString())
         ) {
-            validationException(INCORRECT_BOOKING_DATA);
+            validationException(INCORRECT_BOOKING_DATE);
         }
 
     }

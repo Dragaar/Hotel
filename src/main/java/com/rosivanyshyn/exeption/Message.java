@@ -38,7 +38,8 @@ public class Message {
     public static final String INCORRECT_APARTMENT_ROOMS_NUMBER ="validation.error.roomsNumber.format";
     public static final String INCORRECT_APARTMENT_CLASS ="validation.error.apartmentClass.format";
 
-    public static final String INCORRECT_BOOKING_DATA = "validation.error.bookingData.format";
+    public static final String INCORRECT_BOOKING_DATE = "validation.error.bookingDate.format";
+    public static final String BOOKING_ALREADY_EXIST_ON_THIS_DATE = "validation.error.bookingAlreadyExistOnThisDate";
     //general
     public static final String INCORRECT_GUESTS_NUMBER ="validation.error.guestsNumber.format";
     public static final String INCORRECT_DESCRIPTION ="validation.error.description.format";
