@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_RESPONSE_TO_ORDER_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 
+/** Get Create Response To Order Controller class.
+ * <br> Get JSP form (for moderator) for create new response-to-order.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetCreateResponseToOrderController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
     int pageId, recordsPerPage, currentRecord;

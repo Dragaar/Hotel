@@ -22,6 +22,11 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Create Response To Order Controller class.
+ * <br> Add new response-to-order (by moderator) to database and redirect to all orders JSP.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class CreateResponseToOrderController implements Controller {
 
     ResponseToOrderService responseToOrderService = new ResponseToOrderServiceImpl();

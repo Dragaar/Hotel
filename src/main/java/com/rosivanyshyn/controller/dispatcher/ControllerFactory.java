@@ -1,8 +1,8 @@
 package com.rosivanyshyn.controller.dispatcher;
 
-import com.rosivanyshyn.controller.authorization.LoginController;
-import com.rosivanyshyn.controller.authorization.LogoutController;
-import com.rosivanyshyn.controller.authorization.RegistrationController;
+import com.rosivanyshyn.controller.security.LoginController;
+import com.rosivanyshyn.controller.security.LogoutController;
+import com.rosivanyshyn.controller.security.RegistrationController;
 import com.rosivanyshyn.controller.other.langueage.ChangeLanguageController;
 import com.rosivanyshyn.controller.other.apartment.DeleteApartmentController;
 import com.rosivanyshyn.controller.other.apartment.GetApartmentDetailsController;
@@ -14,6 +14,12 @@ import com.rosivanyshyn.controller.other.responseToOrder.GetCreateResponseToOrde
 import com.rosivanyshyn.controller.other.responseToOrder.GetResponseToOrderController;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+
+/**
+ * Controller Factory class. Contains all available controller and method to get any of them.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ControllerFactory {
     public ControllerFactory() {
 
@@ -45,7 +51,7 @@ public class ControllerFactory {
             case CREATE_BOOKING_CONTROLLER:
                 return new CreateBookingController();
             case MAKE_PAYMENT_FOR_BOOKING:
-                return new PaymentForBooking();
+                return new PaymentForBookingController();
             case DELETE_BOOKING_CONTROLLER:
                 return new DeleteBookingController();
 

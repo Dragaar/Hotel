@@ -14,6 +14,11 @@ import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Delete Order Controller class.
+ * <br> Delete order from database (if order created by current user) and redirect to apartments JSP.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class DeleteOrderController implements Controller {
 
     OrderService orderService = new OrderServiceImpl();

@@ -17,6 +17,12 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ORDERS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+
+/** Get Few Orders Controller class.
+ * <br> Get current user orders (paginated) and forward to orders JSP.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetFewOrdersController implements Controller {
 
     OrderService orderService = new OrderServiceImpl();

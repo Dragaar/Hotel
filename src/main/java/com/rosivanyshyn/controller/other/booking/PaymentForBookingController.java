@@ -9,46 +9,43 @@ import com.rosivanyshyn.service.implMySQL.BookingServiceImpl;
 import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 
-import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
 
-/** Delete Booking Controller class.
- * <br> Delete booking from database and redirect to apartments JSP
+/** Payment For Booking Controller class.
+ * <br> Make payment for specific booking
  *
  * @author Rostyslav Ivanyshyn.
  */
-public class DeleteBookingController implements Controller {
+public class PaymentForBookingController implements Controller {
 
     BookingService bookingService = new BookingServiceImpl();
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
         try {
-            HttpSession session = request.getSession(false);
-            @NonNull final Long accountId = (Long) session.getAttribute("id");
 
             @NonNull final Long bookingId = Long.valueOf(request.getParameter("bookingId"));
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("booking");
             queryBuilder.where(ENTITY_ID, true);
+
             @NonNull ArrayList<Booking> booking = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), bookingId);
 
-            if(booking.get(0).getAccount().getId().equals(accountId))
-            {
-                bookingService.deleteBooking(booking.get(0));
-            }
+            booking.get(0).setIsPaidForReservation(true);
+            bookingService.updateBooking(booking.get(0));
+
 
             resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.booking.delete");
+                    "&message=" + "app.message.booking.makePaymentForBooking");
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot delete booking", ex);
+            throw new AppException("Cannot make payment for booking", ex);
         }
         return resolver;
     }

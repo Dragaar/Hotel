@@ -20,6 +20,11 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_BOOKINGS_JSP;
 
+/** Delete Booking Controller class.
+ * <br> Get all users bookings (paginated)(for moderator request) and forward to all bookings JSP
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetAllBookingController implements Controller {
 
     BookingService bookingService = new BookingServiceImpl();

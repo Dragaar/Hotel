@@ -6,6 +6,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/** Sorting Fields enum.
+ * <br> fields by which to sort apartments
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public enum SortingFields {
     PRICE (Field.APARTMENT_PRICE),
     MAX_GUESTS_NUMBER(Field.APARTMENT_MAX_GUEST_NUMBER),

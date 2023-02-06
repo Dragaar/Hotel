@@ -12,6 +12,10 @@ import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Delete Apartment Controller class.
+ * <br> Delete apartment from database and redirect to index JSP.
+ * @author Rostyslav Ivanyshyn.
+ */
 public class DeleteApartmentController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
     @Override

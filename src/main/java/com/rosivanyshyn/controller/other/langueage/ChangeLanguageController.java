@@ -11,6 +11,11 @@ import org.apache.log4j.Logger;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 
+/** Change Language Controller class.
+ * <br> Change and save localization in session.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ChangeLanguageController implements Controller {
 
     protected static final Logger LOG = Logger.getLogger(ChangeLanguageController.class);

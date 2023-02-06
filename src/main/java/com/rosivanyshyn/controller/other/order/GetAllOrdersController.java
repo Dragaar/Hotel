@@ -18,6 +18,11 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_ORDERS_JSP;
 
+/** Get All Orders Controller class.
+ * <br> Get all users orders (paginated)(for moderator request) and forward to all orders JSP.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetAllOrdersController implements Controller {
 
     OrderService orderService = new OrderServiceImpl();

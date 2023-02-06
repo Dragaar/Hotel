@@ -16,6 +16,11 @@ import java.util.ArrayList;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.RESPONSE_TO_ORDER_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
 
+/** Get Response To Order Controller class.
+ * <br> Get response-to-order by id and forward to response-to-order JSP
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetResponseToOrderController implements Controller {
     ResponseToOrderService responseToOrderService = new ResponseToOrderServiceImpl();
 

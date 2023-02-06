@@ -8,6 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_ORDER_JSP;
 
+/** Get Create Order Form Controller class.
+ * <br> Get JSP form for create new order.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetCreateOrderFormController implements Controller {
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {

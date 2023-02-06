@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ERROR_JSP;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.LOGIN_JSP;
 
+/**
+ * Application Exception Handler class. Web Servlet for handling exceptions and forward to error page.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 @WebServlet("/AppExceptionHandler")
 public class AppExceptionHandler extends HttpServlet {
 

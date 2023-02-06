@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.BOOKINGS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 
+/** Get Few Booking Controller class.
+ * <br> Get current user bookings (paginated) and forward to bookings JSP
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetFewBookingController implements Controller {
 
     BookingService bookingService = new BookingServiceImpl();

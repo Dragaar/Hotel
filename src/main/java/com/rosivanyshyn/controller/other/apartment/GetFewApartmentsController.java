@@ -20,6 +20,11 @@ import java.util.Map;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Get Few Apartments Controller class.
+ * <br> Get apartments (paginated) by sorting parameters and forward to apartments JSP
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetFewApartmentsController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
     int pageId, recordsPerPage, currentRecord;

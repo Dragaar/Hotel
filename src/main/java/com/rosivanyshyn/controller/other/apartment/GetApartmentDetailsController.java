@@ -13,6 +13,10 @@ import lombok.NonNull;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 
+/** Get Apartment Details Controller class.
+ * <br> Get apartment by id and forward to apartment details JSP
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetApartmentDetailsController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
 

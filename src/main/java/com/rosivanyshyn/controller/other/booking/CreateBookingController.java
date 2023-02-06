@@ -23,6 +23,11 @@ import java.util.HashMap;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 
+/** Create Booking Controller class.
+ * <br> Add new booking to database and redirect to apartments JSP
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class CreateBookingController implements Controller {
     ApartmentService apartmentService = new ApartmentServiceImpl();
     BookingService bookingService = new BookingServiceImpl();

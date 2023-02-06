@@ -1,5 +1,8 @@
 package com.rosivanyshyn.controller.dispatcher.viewresolve;
 
+/** View Resolver class.
+ * <br> Contain view path and action to resolve it
+ */
 public class ViewResolver {
     private String view;
     private ResolveAction resolveAction;

@@ -1,5 +1,10 @@
 package com.rosivanyshyn.controller.dispatcher;
 
+/**
+ * Controller Constant class. It contains views paths, security config paths and controllers names
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class ControllerConstant {
 
     //---------------- JSP Path -------------------\\

@@ -18,6 +18,11 @@ import java.time.LocalDate;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 
+/** Create Order Controller class.
+ * <br> Add new order to database and redirect to apartments JSP.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class CreateOrderController implements Controller {
     OrderService orderService = new OrderServiceImpl();
 

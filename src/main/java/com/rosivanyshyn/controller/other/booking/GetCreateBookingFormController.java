@@ -23,8 +23,8 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_APARTMENT_ID;
 
-/** Forward to new booking page and prepare data to working there
- * <br>
+/** Get Create Booking Form Controller class.
+ * <br> Get JSP form for create new booking by apartment id and prepare data to working there.
  * <br>Get from DB bookings dates of related apartment (using requested apartment id)
  * and if this not exist or related to other apartment - set new into the session.
  * This HashMap inform validator about existing bookings
