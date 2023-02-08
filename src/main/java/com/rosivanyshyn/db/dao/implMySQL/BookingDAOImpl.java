@@ -4,7 +4,7 @@ import com.rosivanyshyn.db.dao.BookingDAO;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
-import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.manager.MySQLDBManagerImpl;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import com.rosivanyshyn.exeption.DAOException;
 
@@ -16,7 +16,6 @@ import java.util.Formatter;
 
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
-import static com.rosivanyshyn.exeption.Message.DELETE_ERROR;
 import static com.rosivanyshyn.exeption.Message.EVENT_IS_BILL_PAID_ERROR;
 
 /**
@@ -90,18 +89,29 @@ public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDA
                     .isPaidForReservation(rs.getBoolean(BOOKING_IS_PAID_FOR_RESERVATION))
                     .reservationData(rs.getTimestamp(BOOKING_RESERVATION_DATA))
                     //foreign keys
+                    //Lazy load
+                    .account(
+                            Account.builder().id(rs.getLong(BOOKING_ACCOUNT_ID)).build()
+                    )
+                    .apartment(
+                            Apartment.builder().id(rs.getLong(BOOKING_APARTMENT_ID)).build()
+                    )
+                    /* Eager loading
                     .account(
                             geAccountForeignKey(rs.getLong(BOOKING_ACCOUNT_ID))
                             )
                     .apartment(
                             getApartmentForeignKey(rs.getLong(BOOKING_APARTMENT_ID))
-                            )
+                            )*/
                     .build();
     }
 
     //foreign key
+    //Eager loading
+    // Add mechanism to receive DBManager from outside
+    /*
     private Account geAccountForeignKey(Long id){
-        Connection connection= DBManager.getConnection();
+        Connection connection= MySQLDBManagerImpl.getInstance().getConnection();
         AccountDAOImpl accountDAO = new AccountDAOImpl();
 
         return (Account) TransactionManager.execute(connection,
@@ -109,14 +119,15 @@ public class BookingDAOImpl extends GenericDAOImpl<Booking> implements BookingDA
         );
     }
     //foreign key
+    //Eager loading
     private Apartment getApartmentForeignKey(Long id){
-        Connection connection= DBManager.getConnection();
+        Connection connection= MySQLDBManagerImpl.getInstance().getConnection();
         ApartmentDAOImpl apartmentDAO = new ApartmentDAOImpl();
 
         return (Apartment) TransactionManager.execute(connection,
                 ()-> apartmentDAO.get(connection, id)
         );
-    }
+    }*/
 
     //------------------ MySQL Event System ------------------------\\
 

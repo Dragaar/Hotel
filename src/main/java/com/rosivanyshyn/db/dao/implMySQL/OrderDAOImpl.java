@@ -2,7 +2,7 @@ package com.rosivanyshyn.db.dao.implMySQL;
 
 import com.rosivanyshyn.db.dao.OrderDAO;
 import com.rosivanyshyn.db.dao.entity.*;
-import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.manager.MySQLDBManagerImpl;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 
 import java.sql.Connection;
@@ -95,11 +95,21 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
                     .checkOutDate(rs.getDate(ORDER_CHECK_OUT_DATE))
                     .checkInDate(rs.getDate(ORDER_CHECK_IN_DATE))
                     //foreign keys
+                    //Lazy load
+                    .account(
+                            Account.builder().id(rs.getLong(ORDER_ACCOUNT_ID)).build()
+                    )
+                    //may be null
+                    .responseToOrder(rs.getLong(ORDER_RESPONSE_TO_ORDER_ID) ==0 ? null :
+                                ResponseToOrder.builder().id(rs.getLong(ORDER_RESPONSE_TO_ORDER_ID)).build()
+                    )
+                    /* Eager loading
                     .account(
                             geAccountForeignKey(rs.getLong(ORDER_ACCOUNT_ID))
                     )
                     //may be null
                     .responseToOrder(getResponseToOrderForeignKey(rs.getLong(ORDER_RESPONSE_TO_ORDER_ID)))
+                     */
                     .build();
 
            /* Long  tempFK = rs.getLong(ORDER_RESPONSE_TO_ORDER_ID);
@@ -111,9 +121,11 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
         };
     }
 
-    //foreign key
+    //Foreign key
+    //Eager loading
+    /*
     private Account geAccountForeignKey(Long id){
-        Connection connection= DBManager.getConnection();
+        Connection connection= MySQLDBManagerImpl.getInstance().getConnection();
         AccountDAOImpl accountDAO = new AccountDAOImpl();
 
         return (Account) TransactionManager.execute(connection,
@@ -121,13 +133,14 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements OrderDAO {
         );
     }
     //foreign key
+    //Eager loading
     private ResponseToOrder getResponseToOrderForeignKey(Long id){
-        Connection connection= DBManager.getConnection();
+        Connection connection= MySQLDBManagerImpl.getInstance().getConnection();
         ResponseToOrderDAOImpl responseToOrderDAO = new ResponseToOrderDAOImpl();
 
         return (ResponseToOrder) TransactionManager.execute(connection,
                 ()-> responseToOrderDAO.get(connection, id)
         );
-    }
+    }*/
 
 }
