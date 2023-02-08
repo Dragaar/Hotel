@@ -1,8 +1,7 @@
-package com.rosivanyshyn.service.implMySQL;
+package com.rosivanyshyn.service.impl;
 
 import com.rosivanyshyn.db.dao.AccountDAO;
 import com.rosivanyshyn.db.dao.entity.Account;
-import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import com.rosivanyshyn.service.AccountService;
@@ -12,11 +11,17 @@ import java.sql.Connection;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 
 public class AccountServiceImpl implements AccountService {
-    AccountDAO accountDAO = new AccountDAOImpl();
+    AccountDAO accountDAO;
+    DBManager dbManager;
+
+    public AccountServiceImpl(AccountDAO accountDAO,   DBManager dbManager) {
+        this.accountDAO = accountDAO;
+        this.dbManager = dbManager;
+    }
 
     @Override
     public Boolean createAccount(Account account) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Boolean) TransactionManager.execute(connection,
                 ()-> accountDAO.insert(connection, account)
@@ -25,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Boolean isAccountExist(Account account) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         Account dbAccount = (Account) TransactionManager.execute(connection,
                 ()-> accountDAO.getByField(connection, ENTITY_ID, account.getId())
@@ -35,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findAccountByField(String field, Object value) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Account) TransactionManager.execute(connection,
                 ()-> accountDAO.getByField(connection, field, value)
@@ -44,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Boolean updateAccount(Account account) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Boolean) TransactionManager.execute(connection,
                 ()-> accountDAO.update(connection, account));
@@ -52,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Boolean deleteAccount(Account account) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
         return (Boolean) TransactionManager.execute(connection,
                 ()-> accountDAO.delete(connection, account.getId())
         );

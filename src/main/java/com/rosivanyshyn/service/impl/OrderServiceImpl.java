@@ -1,9 +1,8 @@
-package com.rosivanyshyn.service.implMySQL;
+package com.rosivanyshyn.service.impl;
 
+import com.rosivanyshyn.db.dao.OrderDAO;
 import com.rosivanyshyn.db.dao.ResponseToOrderDAO;
 import com.rosivanyshyn.db.dao.entity.Order;
-import com.rosivanyshyn.db.dao.implMySQL.OrderDAOImpl;
-import com.rosivanyshyn.db.dao.implMySQL.ResponseToOrderDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import com.rosivanyshyn.service.OrderService;
@@ -13,14 +12,19 @@ import java.util.ArrayList;
 
 public class OrderServiceImpl implements OrderService {
 
-    OrderDAOImpl orderDAO = new OrderDAOImpl();
-    ResponseToOrderDAO responseToOrderDAO = new ResponseToOrderDAOImpl();
-
+    OrderDAO orderDAO;
+    ResponseToOrderDAO responseToOrderDAO;
+    DBManager dbManager;
     private int rowsNumber;
 
+    public OrderServiceImpl(OrderDAO orderDAO, ResponseToOrderDAO responseToOrderDAO,   DBManager dbManager) {
+        this.orderDAO = orderDAO;
+        this.responseToOrderDAO = responseToOrderDAO;
+        this.dbManager = dbManager;
+    }
     @Override
     public Boolean createOrder(Order order) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Boolean) TransactionManager.execute(connection,
                 ()-> orderDAO.insert(connection, order)
@@ -29,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOrderByField(String field, Object value) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Order) TransactionManager.execute(connection,
                 ()-> orderDAO.getByField(connection, field, value)
@@ -38,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ArrayList<Order> findFewOrders(int start, int total) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
@@ -54,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ArrayList<Order> findFewOrdersAndSort(String secondQueryPart, Object... fields) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
@@ -80,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Boolean deleteOrder(Order order) {
-    Connection connection = DBManager.getConnection();
+    Connection connection = dbManager.getConnection();
 
         return (Boolean) TransactionManager.execute(connection,
             ()-> {

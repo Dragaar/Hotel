@@ -1,8 +1,7 @@
-package com.rosivanyshyn.service.implMySQL;
+package com.rosivanyshyn.service.impl;
 
 import com.rosivanyshyn.db.dao.ApartmentDAO;
 import com.rosivanyshyn.db.dao.entity.Apartment;
-import com.rosivanyshyn.db.dao.implMySQL.ApartmentDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import com.rosivanyshyn.service.ApartmentService;
@@ -12,9 +11,14 @@ import java.util.ArrayList;
 
 public class ApartmentServiceImpl implements ApartmentService {
 
-    ApartmentDAO apartmentDAO = new ApartmentDAOImpl();
+    ApartmentDAO apartmentDAO;
+    DBManager dbManager;
     private int rowsNumber;
 
+    public ApartmentServiceImpl(ApartmentDAO apartmentDAO,   DBManager dbManager) {
+        this.apartmentDAO = apartmentDAO;
+        this.dbManager = dbManager;
+    }
     @Override
     public Boolean createApartment(Apartment apartment) {
         return null;
@@ -22,7 +26,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     public Apartment findApartmentByField(String field, Object value) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Apartment) TransactionManager.execute(connection,
                 ()-> apartmentDAO.getByField(connection, field, value)
@@ -31,7 +35,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     public ArrayList<Apartment> findFewApartment(int start, int total) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
@@ -46,7 +50,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
     @Override
     public ArrayList<Apartment> findFewApartmentsAndSort(String secondQueryPart, String... fields) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
@@ -61,7 +65,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
     @Override
     public ArrayList<Apartment> findFewApartmentsWhichAreBooked(String secondQueryPart, String... fields) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         //sql start indexing from 0
         @SuppressWarnings("unchecked")
@@ -82,7 +86,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     public Boolean deleteApartment(Apartment apartment) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
         return (Boolean) TransactionManager.execute(connection,
                 ()-> apartmentDAO.delete(connection, apartment.getId())
         );

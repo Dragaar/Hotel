@@ -1,12 +1,10 @@
-package com.rosivanyshyn.service.implMySQL;
+package com.rosivanyshyn.service.impl;
 
 import com.rosivanyshyn.db.dao.OrderDAO;
 import com.rosivanyshyn.db.dao.ResponseToOrderDAO;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
-import com.rosivanyshyn.db.dao.implMySQL.OrderDAOImpl;
-import com.rosivanyshyn.db.dao.implMySQL.ResponseToOrderDAOImpl;
 import com.rosivanyshyn.db.manager.DBManager;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import com.rosivanyshyn.service.ResponseToOrderService;
@@ -15,10 +13,15 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public class ResponseToOrderServiceImpl implements ResponseToOrderService {
+    ResponseToOrderDAO responseToOrderDAO;
+    OrderDAO orderDAO;
+    DBManager dbManager;
 
-    ResponseToOrderDAO responseToOrderDAO = new ResponseToOrderDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-
+    public ResponseToOrderServiceImpl(ResponseToOrderDAO responseToOrderDAO, OrderDAO orderDAO, DBManager dbManager) {
+        this.responseToOrderDAO = responseToOrderDAO;
+        this.orderDAO = orderDAO;
+        this.dbManager = dbManager;
+    }
     /** Attach response-to-order in order and submit apartment to response-to-order
      * @param order order in which attach response
      * @param responseToOrder response-to-order in which submit apartment
@@ -27,7 +30,7 @@ public class ResponseToOrderServiceImpl implements ResponseToOrderService {
      */
     @Override
     public Boolean createResponseToOrder(Order order, ResponseToOrder responseToOrder, ArrayList<Apartment> apartments) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (Boolean) TransactionManager.execute(connection,
                 ()-> {
@@ -48,7 +51,7 @@ public class ResponseToOrderServiceImpl implements ResponseToOrderService {
 
     @Override
     public ResponseToOrder findResponseToOrderByField(String field, Object value) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         return  (ResponseToOrder) TransactionManager.execute(connection,
                 ()-> responseToOrderDAO.getByField(connection, field, value)
@@ -68,7 +71,7 @@ public class ResponseToOrderServiceImpl implements ResponseToOrderService {
      */
     @Override
     public ArrayList<Apartment> findAllResponseApartments(ResponseToOrder responseToOrder) {
-        Connection connection = DBManager.getConnection();
+        Connection connection = dbManager.getConnection();
 
         @SuppressWarnings("unchecked")
         ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
