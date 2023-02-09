@@ -1,5 +1,6 @@
 package com.rosivanyshyn.controller.other.responseToOrder;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
@@ -8,10 +9,9 @@ import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.OrderService;
 import com.rosivanyshyn.service.ResponseToOrderService;
-import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
-import com.rosivanyshyn.service.implMySQL.ResponseToOrderServiceImpl;
 import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,8 +29,8 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  */
 public class CreateResponseToOrderController implements Controller {
 
-    ResponseToOrderService responseToOrderService = new ResponseToOrderServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    ResponseToOrderService responseToOrderService = AppContext.getInstance().getResponseToOrderService();
+    OrderService orderService = AppContext.getInstance().getOrderService();
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +68,8 @@ public class CreateResponseToOrderController implements Controller {
                 resolver.redirect(request.getContextPath() + "/front?controller=" + GET_ALL_ORDERS_CONTROLLER +
                         "&message=" + "app.message.responseToOrder.create");
             }
+        } catch (ValidationException ex){
+            throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
             throw new AppException("Cannot create response to order", ex);
         }

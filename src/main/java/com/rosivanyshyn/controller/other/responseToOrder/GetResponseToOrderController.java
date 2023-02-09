@@ -1,12 +1,12 @@
 package com.rosivanyshyn.controller.other.responseToOrder;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.ResponseToOrderService;
-import com.rosivanyshyn.service.implMySQL.ResponseToOrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -22,7 +22,7 @@ import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetResponseToOrderController implements Controller {
-    ResponseToOrderService responseToOrderService = new ResponseToOrderServiceImpl();
+    ResponseToOrderService responseToOrderService = AppContext.getInstance().getResponseToOrderService();
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {

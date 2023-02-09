@@ -1,12 +1,13 @@
 package com.rosivanyshyn.controller.other.order;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.OrderService;
-import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
 import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,14 +25,14 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APAR
  * @author Rostyslav Ivanyshyn.
  */
 public class CreateOrderController implements Controller {
-    OrderService orderService = new OrderServiceImpl();
+    OrderService orderService = AppContext.getInstance().getOrderService();
 
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
 
-
+        try {
             HttpSession session = request.getSession(false);
 
             @NonNull final Long accountId = (Long) session.getAttribute("id");
@@ -67,12 +68,14 @@ public class CreateOrderController implements Controller {
                 Validation validation = new Validation();
                 validation.validateOrder(order);
 
-        try {
+
                  orderService.createOrder(order);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
                     "&message=" + "app.message.order.create");
 
+        } catch (ValidationException ex){
+            throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
             throw new AppException("Cannot create order", ex);
         }

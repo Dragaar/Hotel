@@ -1,5 +1,6 @@
 package com.rosivanyshyn.controller.other.booking;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
@@ -7,8 +8,6 @@ import com.rosivanyshyn.db.dao.entity.Booking;
 
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.BookingService;
-
-import com.rosivanyshyn.service.implMySQL.BookingServiceImpl;
 
 import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_BOOK
  */
 public class GetAllBookingController implements Controller {
 
-    BookingService bookingService = new BookingServiceImpl();
+    BookingService bookingService = AppContext.getInstance().getBookingService();
     int pageId, recordsPerPage, currentRecord;
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {

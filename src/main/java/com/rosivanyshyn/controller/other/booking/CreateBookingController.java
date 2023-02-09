@@ -1,15 +1,15 @@
 package com.rosivanyshyn.controller.other.booking;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.BookingService;
-import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
-import com.rosivanyshyn.service.implMySQL.BookingServiceImpl;
 import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,15 +29,15 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class CreateBookingController implements Controller {
-    ApartmentService apartmentService = new ApartmentServiceImpl();
-    BookingService bookingService = new BookingServiceImpl();
+    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
+    BookingService bookingService = AppContext.getInstance().getBookingService();
 
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
 
-
+        try {
             HttpSession session = request.getSession(false);
 
             @NonNull final Long accountId = (Long) session.getAttribute("id");
@@ -72,12 +72,14 @@ public class CreateBookingController implements Controller {
 
                 Validation validation = new Validation();
                 validation.validateBooking(booking, bookingsDates);
-        try {
+
                 bookingService.createBooking(booking);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
                     "&message=" + "app.message.booking.create");
 
+        } catch (ValidationException ex){
+            throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
             throw new AppException("Cannot booking apartment", ex);
         }

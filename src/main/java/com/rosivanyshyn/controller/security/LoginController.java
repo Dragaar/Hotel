@@ -1,5 +1,6 @@
 package com.rosivanyshyn.controller.security;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 
@@ -7,8 +8,8 @@ import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.AccountService;
-import com.rosivanyshyn.service.implMySQL.AccountServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -27,7 +28,7 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class LoginController implements Controller {
-    AccountService accountService = new AccountServiceImpl();
+    AccountService accountService =  AppContext.getInstance().getAccountService();
 
     protected static final Logger LOG = Logger.getLogger(AccountDAOImpl.class);
 
@@ -60,8 +61,11 @@ public class LoginController implements Controller {
                        // "&message=" + "Successful login!");
             } else throw new RuntimeException("Account isn`t exist!");
 
-        } catch (RuntimeException ex){
-            throw new AppException("Wrong login input data", ex);
+        } catch (ValidationException ex){
+            throw new ValidationException(ex.getMessage(), ex);
+        }
+        catch (RuntimeException ex){
+            throw new AppException("Cannot log in account", ex);
         }
         return resolver;
     }

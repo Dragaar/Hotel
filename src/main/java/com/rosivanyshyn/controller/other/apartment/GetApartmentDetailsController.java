@@ -1,11 +1,11 @@
 package com.rosivanyshyn.controller.other.apartment;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.ApartmentService;
-import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -18,7 +18,7 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetApartmentDetailsController implements Controller {
-    ApartmentService apartmentService = new ApartmentServiceImpl();
+    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {

@@ -1,12 +1,12 @@
 package com.rosivanyshyn.controller.other.booking;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.exeption.AppException;
 
 import com.rosivanyshyn.service.BookingService;
-import com.rosivanyshyn.service.implMySQL.BookingServiceImpl;
 import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,13 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
-import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_APARTMENT_ID;
 
 /** Get Create Booking Form Controller class.
@@ -66,7 +64,7 @@ public class GetCreateBookingFormController implements Controller {
     }
 
     private HashMap<Date, Date> getBookingsDatesFromDB(Long apartmentIdOfBookingDatesHashMap) {
-        BookingService bookingService = new BookingServiceImpl();
+        BookingService bookingService = AppContext.getInstance().getBookingService();
 
         MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
         queryBuilder.setLabel("booking");

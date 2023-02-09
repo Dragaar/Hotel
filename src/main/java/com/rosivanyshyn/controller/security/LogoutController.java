@@ -2,6 +2,7 @@ package com.rosivanyshyn.controller.security;
 
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
+import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.exeption.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class LogoutController implements Controller {
                     "?message=" + "app.message.logout");
 
         } catch (RuntimeException ex){
-            throw new ValidationException("Cannot logout", ex);
+            throw new AppException("Cannot log out", ex);
         }
         return resolver;
     }

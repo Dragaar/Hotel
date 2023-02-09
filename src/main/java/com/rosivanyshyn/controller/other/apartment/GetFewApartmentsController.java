@@ -1,5 +1,6 @@
 package com.rosivanyshyn.controller.other.apartment;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.Field;
@@ -7,16 +8,12 @@ import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
-import com.rosivanyshyn.service.implMySQL.ApartmentServiceImpl;
 import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
@@ -26,7 +23,7 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetFewApartmentsController implements Controller {
-    ApartmentService apartmentService = new ApartmentServiceImpl();
+    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
     int pageId, recordsPerPage, currentRecord;
     boolean findBookedApartment = false;
     @Override

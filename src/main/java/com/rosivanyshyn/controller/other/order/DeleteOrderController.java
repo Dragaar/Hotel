@@ -1,12 +1,12 @@
 package com.rosivanyshyn.controller.other.order;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.constant.Field;
 import com.rosivanyshyn.db.dao.entity.Order;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.OrderService;
-import com.rosivanyshyn.service.implMySQL.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -21,7 +21,7 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  */
 public class DeleteOrderController implements Controller {
 
-    OrderService orderService = new OrderServiceImpl();
+    OrderService orderService = AppContext.getInstance().getOrderService();
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
