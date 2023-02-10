@@ -21,6 +21,8 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.RESPONSE_TO_ORDER_SUCCEED_CREATE;
+import static com.rosivanyshyn.exeption.Message.RESPONSE_TO_ORDER_CREATE_ERROR;
 
 /** Create Response To Order Controller class.
  * <br> Add new response-to-order (by moderator) to database and redirect to all orders JSP.
@@ -69,12 +71,12 @@ public class CreateResponseToOrderController implements Controller {
                 responseToOrderService.createResponseToOrder(order, responseToOrder, apartments);
 
                 resolver.redirect(request.getContextPath() + "/front?controller=" + GET_ALL_ORDERS_CONTROLLER +
-                        "&message=" + "app.message.responseToOrder.create");
+                        "&message=" + RESPONSE_TO_ORDER_SUCCEED_CREATE);
             }
         } catch (ValidationException ex){
             throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
-            throw new AppException("Cannot create response to order", ex);
+            throw new AppException(RESPONSE_TO_ORDER_CREATE_ERROR, ex);
         }
         return resolver;
     }

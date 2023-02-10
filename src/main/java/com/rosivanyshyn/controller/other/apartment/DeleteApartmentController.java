@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.APARTMENT_SUCCEED_DELETE;
+import static com.rosivanyshyn.exeption.Message.APARTMENT_DELETE_ERROR;
 
 /** Delete Apartment Controller class.
  * <br> Delete apartment from database and redirect to index JSP.
@@ -33,10 +35,10 @@ public class DeleteApartmentController implements Controller {
         apartmentService.deleteApartment(apartment);
 
         resolver.redirect(request.getContextPath()+ INDEX_JSP +
-                "?message=" + "app.message.apartment.delete");
+                "?message=" + APARTMENT_SUCCEED_DELETE);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot delete Apartment", ex);
+            throw new AppException(APARTMENT_DELETE_ERROR, ex);
         }
         return resolver;
     }

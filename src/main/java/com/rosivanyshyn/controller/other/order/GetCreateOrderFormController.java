@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_ORDER_JSP;
+import static com.rosivanyshyn.exeption.Message.ORDER_GET_CREATE_PAGE_ERROR;
 
 /** Get Create Order Form Controller class.
  * <br> Get JSP form for create new order.
@@ -21,7 +22,7 @@ public class GetCreateOrderFormController implements Controller {
         try {
             resolver.forward(NEW_ORDER_JSP);
         } catch (RuntimeException ex) {
-            throw new AppException("Cannot get create-order page", ex);
+            throw new AppException(ORDER_GET_CREATE_PAGE_ERROR, ex);
         }
         return resolver;
     }

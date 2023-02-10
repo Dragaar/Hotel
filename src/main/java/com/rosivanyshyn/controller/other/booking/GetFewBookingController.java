@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.BOOKINGS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
+import static com.rosivanyshyn.exeption.Message.BOOKINGS_GET_ERROR;
 
 /** Get Few Booking Controller class.
  * <br> Get current user bookings (paginated) and forward to bookings JSP
@@ -63,7 +64,7 @@ public class GetFewBookingController implements Controller {
             resolver.forward(BOOKINGS_JSP);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot get Bookings", ex);
+            throw new AppException(BOOKINGS_GET_ERROR, ex);
         }
         return resolver;
     }

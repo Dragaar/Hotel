@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.exeption.Message.APARTMENTS_GET_ERROR;
+import static com.rosivanyshyn.exeption.Message.INCORRECT_SORTING_ORDER;
 
 /** Get Few Apartments Controller class.
  * <br> Get apartments (paginated) by sorting parameters and forward to apartments JSP
@@ -98,7 +100,7 @@ public class GetFewApartmentsController implements Controller {
             resolver.forward(APARTMENTS_JSP);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot get Apartments", ex);
+            throw new AppException(APARTMENTS_GET_ERROR, ex);
         }
         return resolver;
     }
@@ -174,7 +176,7 @@ public class GetFewApartmentsController implements Controller {
             case "Unavailable" -> queryBuilder.order(
                     SortingFields.STATUS_AVAILABILITY.getField(),
                     false);
-            default ->  throw new ValidationException("Input sorting order doesn`t exist", new RuntimeException());
+            default ->  throw new ValidationException(INCORRECT_SORTING_ORDER, new RuntimeException());
             }
         }
     }
@@ -187,7 +189,7 @@ public class GetFewApartmentsController implements Controller {
         {
             return true;
         } else {
-            throw new ValidationException("Input sorting order doesn`t exist", new RuntimeException());
+            throw new ValidationException(INCORRECT_SORTING_ORDER, new RuntimeException());
         }
     }
 

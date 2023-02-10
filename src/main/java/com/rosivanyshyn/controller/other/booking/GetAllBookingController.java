@@ -18,6 +18,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_BOOKINGS_JSP;
+import static com.rosivanyshyn.exeption.Message.BOOKINGS_GET_ALL_ERROR;
 
 /** Delete Booking Controller class.
  * <br> Get all users bookings (paginated)(for moderator request) and forward to all bookings JSP
@@ -65,7 +66,7 @@ public class GetAllBookingController implements Controller {
                 resolver.forward(ALL_BOOKINGS_JSP);
             }
         } catch (RuntimeException ex){
-            throw new AppException("Cannot get All Bookings", ex);
+            throw new AppException(BOOKINGS_GET_ALL_ERROR, ex);
         }
         return resolver;
     }

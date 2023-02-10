@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_APARTMENT_ID;
+import static com.rosivanyshyn.exeption.Message.BOOKING_GET_CREATE_PAGE_ERROR;
 
 /** Get Create Booking Form Controller class.
  * <br> Get JSP form for create new booking by apartment id and prepare data to working there.
@@ -42,7 +43,7 @@ public class GetCreateBookingFormController implements Controller {
 
             resolver.forward(NEW_BOOKING_JSP);
         } catch (RuntimeException ex) {
-            throw new AppException("Cannot get create-booking page", ex);
+            throw new AppException(BOOKING_GET_CREATE_PAGE_ERROR, ex);
         }
         return resolver;
     }

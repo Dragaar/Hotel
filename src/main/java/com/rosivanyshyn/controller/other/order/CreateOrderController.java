@@ -18,6 +18,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.ORDER_SUCCEED_CREATE;
+import static com.rosivanyshyn.exeption.Message.ORDER_CREATE_ERROR;
 
 /** Create Order Controller class.
  * <br> Add new order to database and redirect to apartments JSP.
@@ -73,12 +75,12 @@ public class CreateOrderController implements Controller {
                  orderService.createOrder(order);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.order.create");
+                    "&message=" + ORDER_SUCCEED_CREATE);
 
         } catch (ValidationException ex){
             throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
-            throw new AppException("Cannot create order", ex);
+            throw new AppException(ORDER_CREATE_ERROR, ex);
         }
         return resolver;
     }

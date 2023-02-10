@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.ACCOUNT_SUCCEED_REGISTRATION;
+import static com.rosivanyshyn.exeption.Message.ACCOUNT_REGISTRATION_ERROR;
 
 /** Registration Controller class.
  * <br> Add new user to database and redirect to log in JSP
@@ -52,13 +54,13 @@ public class RegistrationController implements Controller {
             accountService.createAccount(account);
 
             resolver.redirect(request.getContextPath() + LOGIN_JSP +
-                    "?message=" + "app.message.registration");
+                    "?message=" + ACCOUNT_SUCCEED_REGISTRATION);
 
         } catch (ValidationException ex){
             throw new ValidationException(ex.getMessage(), ex);
         }
         catch (RuntimeException ex){
-            throw new AppException("Cannot registration account", ex);
+            throw new AppException(ACCOUNT_REGISTRATION_ERROR, ex);
         }
         return resolver;
     }

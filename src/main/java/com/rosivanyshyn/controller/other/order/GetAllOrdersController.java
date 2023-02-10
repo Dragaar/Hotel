@@ -17,6 +17,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_ORDERS_JSP;
+import static com.rosivanyshyn.exeption.Message.ORDERS_GET_ALL_ERROR;
 
 /** Get All Orders Controller class.
  * <br> Get all users orders (paginated)(for moderator request) and forward to all orders JSP.
@@ -64,7 +65,7 @@ public class GetAllOrdersController implements Controller {
                 resolver.forward(ALL_ORDERS_JSP);
             }
         } catch (RuntimeException ex){
-            throw new AppException("Cannot get All Orders", ex);
+            throw new AppException(ORDERS_GET_ALL_ERROR, ex);
         }
         return resolver;
     }

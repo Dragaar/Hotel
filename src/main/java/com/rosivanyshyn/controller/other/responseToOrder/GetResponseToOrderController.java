@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.RESPONSE_TO_ORDER_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
+import static com.rosivanyshyn.exeption.Message.RESPONSE_TO_ORDER_GET_ERROR;
 
 /** Get Response To Order Controller class.
  * <br> Get response-to-order by id and forward to response-to-order JSP
@@ -46,7 +47,7 @@ public class GetResponseToOrderController implements Controller {
             resolver.forward(RESPONSE_TO_ORDER_JSP);
 
         } catch (RuntimeException ex) {
-            throw new AppException("Cannot get Response to order", ex);
+            throw new AppException(RESPONSE_TO_ORDER_GET_ERROR, ex);
         }
         return resolver;
     }

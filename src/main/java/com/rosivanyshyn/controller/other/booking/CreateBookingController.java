@@ -21,7 +21,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_CREATE;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+import static com.rosivanyshyn.exeption.Message.BOOKING_CREATE_ERROR;
 
 /** Create Booking Controller class.
  * <br> Add new booking to database and redirect to apartments JSP
@@ -78,12 +80,12 @@ public class CreateBookingController implements Controller {
                 bookingService.createBooking(booking);
 
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.booking.create");
+                    "&message=" + BOOKING_SUCCEED_CREATE);
 
         } catch (ValidationException ex){
             throw new ValidationException(ex.getMessage(), ex);
         } catch (RuntimeException ex){
-            throw new AppException("Cannot booking apartment", ex);
+            throw new AppException(BOOKING_CREATE_ERROR, ex);
         }
         return resolver;
     }

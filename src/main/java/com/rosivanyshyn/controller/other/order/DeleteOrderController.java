@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.ORDER_DONT_HAVE_ACCESS_TO_DELETE;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.ORDER_SUCCEED_DELETE;
+import static com.rosivanyshyn.exeption.Message.ORDER_DELETE_ERROR;
 
 /** Delete Order Controller class.
  * <br> Delete order from database (if order created by current user) and redirect to apartments JSP.
@@ -40,17 +43,15 @@ public class DeleteOrderController implements Controller {
                 orderService.deleteOrder(order);
 
                 resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                        "&message=" + "app.message.order.delete");
+                        "&message=" + ORDER_SUCCEED_DELETE);
             }
             else {
                 resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                        "&message=" + "app.message.order.dontHaveAccessToDelete");
+                        "&message=" + ORDER_DONT_HAVE_ACCESS_TO_DELETE);
             }
 
-
-
         } catch (RuntimeException ex){
-            throw new AppException("Cannot delete order", ex);
+            throw new AppException(ORDER_DELETE_ERROR, ex);
         }
         return resolver;
     }

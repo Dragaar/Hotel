@@ -17,6 +17,7 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_RESPONSE_TO_ORDER_JSP;
+import static com.rosivanyshyn.exeption.Message.RESPONSE_TO_ORDER_GET_CREATE_PAGE_ERROR;
 
 /** Get Create Response To Order Controller class.
  * <br> Get JSP form (for moderator) for create new response-to-order.
@@ -62,7 +63,7 @@ public class GetCreateResponseToOrderController implements Controller {
 
             resolver.forward(NEW_RESPONSE_TO_ORDER_JSP);
         } catch (RuntimeException ex) {
-            throw new AppException("Cannot get create-response to order page", ex);
+            throw new AppException(RESPONSE_TO_ORDER_GET_CREATE_PAGE_ERROR, ex);
         }
         return resolver;
     }

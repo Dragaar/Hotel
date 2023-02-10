@@ -12,6 +12,7 @@ import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+import static com.rosivanyshyn.exeption.Message.APARTMENT_GET_DETAILS_ERROR;
 
 /** Get Apartment Details Controller class.
  * <br> Get apartment by id and forward to apartment details JSP
@@ -37,7 +38,7 @@ public class GetApartmentDetailsController implements Controller {
             resolver.forward(APARTMENT_DETAILS_JSP);
 
         } catch (RuntimeException ex) {
-            throw new AppException("Cannot get Apartment Details", ex);
+            throw new AppException(APARTMENT_GET_DETAILS_ERROR, ex);
         }
         return resolver;
     }

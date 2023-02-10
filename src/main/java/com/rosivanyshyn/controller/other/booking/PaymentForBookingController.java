@@ -14,7 +14,9 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_PAYMENT;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
+import static com.rosivanyshyn.exeption.Message.BOOKING_PAYMENT_ERROR;
 
 /** Payment For Booking Controller class.
  * <br> Make payment for specific booking
@@ -45,10 +47,10 @@ public class PaymentForBookingController implements Controller {
 
 
             resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.booking.makePaymentForBooking");
+                    "&message=" + BOOKING_SUCCEED_PAYMENT);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot make payment for booking", ex);
+            throw new AppException(BOOKING_PAYMENT_ERROR, ex);
         }
         return resolver;
     }

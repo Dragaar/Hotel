@@ -21,6 +21,8 @@ import java.util.Arrays;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+import static com.rosivanyshyn.exeption.Message.ACCOUNT_ISNT_EXIST;
+import static com.rosivanyshyn.exeption.Message.ACCOUNT_LOGIN_ERROR;
 
 /** Login Controller class.
  * <br> Log in to user previously created account, create new session and redirect to apartments JSP.
@@ -61,13 +63,13 @@ public class LoginController implements Controller {
 
                 resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER);
                        // "&message=" + "Successful login!");
-            } else throw new RuntimeException("Account isn`t exist!");
+            } else throw new ValidationException(ACCOUNT_ISNT_EXIST);
 
         } catch (ValidationException ex){
             throw new ValidationException(ex.getMessage(), ex);
         }
         catch (RuntimeException ex){
-            throw new AppException("Cannot log in account", ex);
+            throw new AppException(ACCOUNT_LOGIN_ERROR, ex);
         }
         return resolver;
     }

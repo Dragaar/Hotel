@@ -15,7 +15,9 @@ import lombok.NonNull;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_DELETE;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
+import static com.rosivanyshyn.exeption.Message.BOOKING_DELETE_ERROR;
 
 /** Delete Booking Controller class.
  * <br> Delete booking from database and redirect to apartments JSP
@@ -48,10 +50,10 @@ public class DeleteBookingController implements Controller {
             }
 
             resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
-                    "&message=" + "app.message.booking.delete");
+                    "&message=" + BOOKING_SUCCEED_DELETE);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot delete booking", ex);
+            throw new AppException(BOOKING_DELETE_ERROR, ex);
         }
         return resolver;
     }

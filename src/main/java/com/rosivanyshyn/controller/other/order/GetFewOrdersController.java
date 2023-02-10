@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ORDERS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
+import static com.rosivanyshyn.exeption.Message.ORDERS_GET_ERROR;
 
 /** Get Few Orders Controller class.
  * <br> Get current user orders (paginated) and forward to orders JSP.
@@ -64,7 +65,7 @@ public class GetFewOrdersController implements Controller {
             resolver.forward(ORDERS_JSP);
 
         } catch (RuntimeException ex){
-            throw new AppException("Cannot get Orders", ex);
+            throw new AppException(ORDERS_GET_ERROR, ex);
         }
         return resolver;
     }

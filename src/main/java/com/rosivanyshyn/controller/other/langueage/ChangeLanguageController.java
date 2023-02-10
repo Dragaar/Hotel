@@ -10,6 +10,7 @@ import lombok.NonNull;
 import org.apache.log4j.Logger;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
+import static com.rosivanyshyn.exeption.Message.LANGUAGE_CHANGE_ERROR;
 
 /** Change Language Controller class.
  * <br> Change and save localization in session.
@@ -39,8 +40,8 @@ public class ChangeLanguageController implements Controller {
             resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER);
         }
         } catch (RuntimeException ex) {
-            LOG.error(this.getClass() + " " + "Cannot change language", ex);
-            throw new AppException("Cannot change language", ex);
+            LOG.error(this.getClass() + " " + LANGUAGE_CHANGE_ERROR, ex);
+            throw new AppException(LANGUAGE_CHANGE_ERROR, ex);
         }
         return resolver;
     }
