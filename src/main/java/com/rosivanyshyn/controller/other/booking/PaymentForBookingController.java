@@ -23,7 +23,10 @@ import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
  */
 public class PaymentForBookingController implements Controller {
 
-    BookingService bookingService = AppContext.getInstance().getBookingService();
+    BookingService bookingService;
+    public PaymentForBookingController(AppContext appContext){
+        bookingService = appContext.getBookingService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

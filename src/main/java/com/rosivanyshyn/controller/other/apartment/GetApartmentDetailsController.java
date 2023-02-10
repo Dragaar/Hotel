@@ -18,8 +18,11 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetApartmentDetailsController implements Controller {
-    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
 
+    ApartmentService apartmentService;
+    public GetApartmentDetailsController(AppContext appContext){
+        apartmentService = appContext.getApartmentService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

@@ -29,10 +29,12 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class CreateBookingController implements Controller {
-    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
-    BookingService bookingService = AppContext.getInstance().getBookingService();
-
-
+    ApartmentService apartmentService;
+    BookingService bookingService;
+    public CreateBookingController(AppContext appContext){
+        apartmentService = appContext.getApartmentService();
+        bookingService = appContext.getBookingService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

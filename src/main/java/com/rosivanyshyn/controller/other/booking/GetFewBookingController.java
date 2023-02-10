@@ -24,8 +24,11 @@ import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
  */
 public class GetFewBookingController implements Controller {
 
-    BookingService bookingService = AppContext.getInstance().getBookingService();
+    BookingService bookingService;
     int pageId, recordsPerPage, currentRecord;
+    public GetFewBookingController(AppContext appContext){
+        bookingService = appContext.getBookingService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

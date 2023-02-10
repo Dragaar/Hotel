@@ -17,7 +17,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class DeleteApartmentController implements Controller {
-    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
+    ApartmentService apartmentService;
+    public DeleteApartmentController(AppContext appContext){
+        apartmentService = appContext.getApartmentService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

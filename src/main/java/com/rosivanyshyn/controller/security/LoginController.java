@@ -28,10 +28,12 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class LoginController implements Controller {
-    AccountService accountService =  AppContext.getInstance().getAccountService();
+    AccountService accountService;
 
     protected static final Logger LOG = Logger.getLogger(AccountDAOImpl.class);
-
+    public LoginController(AppContext appContext){
+        accountService = appContext.getAccountService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

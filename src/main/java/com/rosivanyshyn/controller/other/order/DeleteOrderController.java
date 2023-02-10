@@ -21,7 +21,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  */
 public class DeleteOrderController implements Controller {
 
-    OrderService orderService = AppContext.getInstance().getOrderService();
+    OrderService orderService;
+    public DeleteOrderController(AppContext appContext){
+        orderService = appContext.getOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

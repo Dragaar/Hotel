@@ -23,9 +23,12 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetFewApartmentsController implements Controller {
-    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
+    ApartmentService apartmentService;
     int pageId, recordsPerPage, currentRecord;
     boolean findBookedApartment = false;
+    public GetFewApartmentsController(AppContext appContext){
+        apartmentService = appContext.getApartmentService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

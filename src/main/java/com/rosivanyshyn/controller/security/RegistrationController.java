@@ -21,8 +21,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class RegistrationController implements Controller {
-    AccountService accountService = AppContext.getInstance().getAccountService();
-
+    AccountService accountService;
+    public RegistrationController(AppContext appContext){
+        accountService = appContext.getAccountService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

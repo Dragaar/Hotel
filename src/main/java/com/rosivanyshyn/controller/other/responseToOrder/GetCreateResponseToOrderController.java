@@ -7,6 +7,8 @@ import com.rosivanyshyn.db.dao.constant.Field;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.ApartmentService;
+import com.rosivanyshyn.service.OrderService;
+import com.rosivanyshyn.service.ResponseToOrderService;
 import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,8 +24,11 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.NEW_RESP
  * @author Rostyslav Ivanyshyn.
  */
 public class GetCreateResponseToOrderController implements Controller {
-    ApartmentService apartmentService = AppContext.getInstance().getApartmentService();
+    ApartmentService apartmentService;
     int pageId, recordsPerPage, currentRecord;
+    public GetCreateResponseToOrderController(AppContext appContext){
+        apartmentService = appContext.getApartmentService();
+    }
 
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {

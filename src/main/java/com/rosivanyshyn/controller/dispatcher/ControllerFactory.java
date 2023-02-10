@@ -1,5 +1,6 @@
 package com.rosivanyshyn.controller.dispatcher;
 
+import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.security.LoginController;
 import com.rosivanyshyn.controller.security.LogoutController;
 import com.rosivanyshyn.controller.security.RegistrationController;
@@ -21,60 +22,61 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  * @author Rostyslav Ivanyshyn.
  */
 public class ControllerFactory {
+    AppContext appContext;
     public ControllerFactory() {
-
+        appContext = AppContext.getInstance();
     }
 
     public Controller getController(final String controllerName) {
 
         switch (controllerName) {
             case LOGIN_CONTROLLER:
-                return new LoginController();
+                return new LoginController(appContext);
             case LOGOUT_CONTROLLER:
                 return new LogoutController();
             case REGISTRATION_CONTROLLER:
-                return new RegistrationController();
+                return new RegistrationController(appContext);
 
             case GET_APARTMENTS_CONTROLLER:
-                return new GetFewApartmentsController();
+                return new GetFewApartmentsController(appContext);
             case GET_APARTMENT_DETAILS_CONTROLLER:
-                return new GetApartmentDetailsController();
+                return new GetApartmentDetailsController(appContext);
             case DELETE_APARTMENT_CONTROLLER:
-                return new DeleteApartmentController();
+                return new DeleteApartmentController(appContext);
 
             case GET_BOOKINGS_CONTROLLER:
-                return new GetFewBookingController();
+                return new GetFewBookingController(appContext);
             case GET_ALL_BOOKINGS_CONTROLLER:
-                return new GetAllBookingController();
+                return new GetAllBookingController(appContext);
             case NEW_BOOKING_CONTROLLER:
                 return new GetCreateBookingFormController();
             case CREATE_BOOKING_CONTROLLER:
-                return new CreateBookingController();
+                return new CreateBookingController(appContext);
             case MAKE_PAYMENT_FOR_BOOKING:
-                return new PaymentForBookingController();
+                return new PaymentForBookingController(appContext);
             case DELETE_BOOKING_CONTROLLER:
-                return new DeleteBookingController();
+                return new DeleteBookingController(appContext);
 
 
 
             case GET_ORDERS_CONTROLLER:
-                return new GetFewOrdersController();
+                return new GetFewOrdersController(appContext);
             case GET_ALL_ORDERS_CONTROLLER:
-                return new GetAllOrdersController();
+                return new GetAllOrdersController(appContext);
             case NEW_ORDER_CONTROLLER:
                 return new GetCreateOrderFormController();
             case CREATE_ORDER_CONTROLLER:
-                return new CreateOrderController();
+                return new CreateOrderController(appContext);
             case DELETE_ORDER_CONTROLLER:
-                return new DeleteOrderController();
+                return new DeleteOrderController(appContext);
 
 
             case GET_RESPONSE_TO_ORDER_CONTROLLER:
-                return new GetResponseToOrderController();
+                return new GetResponseToOrderController(appContext);
             case NEW_RESPONSE_TO_ORDER_CONTROLLER:
-                return new GetCreateResponseToOrderController();
+                return new GetCreateResponseToOrderController(appContext);
             case CREATE_RESPONSE_TO_ORDER_CONTROLLER:
-                return new CreateResponseToOrderController();
+                return new CreateResponseToOrderController(appContext);
 
 
             case CHANGE_LANGUAGE_CONTROLLER:

@@ -25,8 +25,11 @@ import static com.rosivanyshyn.db.dao.constant.Field.*;
  */
 public class GetFewOrdersController implements Controller {
 
-    OrderService orderService = AppContext.getInstance().getOrderService();
+    OrderService orderService;
     int pageId, recordsPerPage, currentRecord;
+    public GetFewOrdersController(AppContext appContext){
+        orderService = appContext.getOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

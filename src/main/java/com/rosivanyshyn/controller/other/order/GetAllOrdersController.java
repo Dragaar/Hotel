@@ -25,8 +25,11 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_ORDE
  */
 public class GetAllOrdersController implements Controller {
 
-    OrderService orderService = AppContext.getInstance().getOrderService();
+    OrderService orderService;
     int pageId, recordsPerPage, currentRecord;
+    public GetAllOrdersController(AppContext appContext){
+        orderService = appContext.getOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

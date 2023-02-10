@@ -26,8 +26,11 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ALL_BOOK
  */
 public class GetAllBookingController implements Controller {
 
-    BookingService bookingService = AppContext.getInstance().getBookingService();
+    BookingService bookingService;
     int pageId, recordsPerPage, currentRecord;
+    public GetAllBookingController(AppContext appContext){
+        bookingService = appContext.getBookingService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

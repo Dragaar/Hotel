@@ -25,9 +25,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APAR
  * @author Rostyslav Ivanyshyn.
  */
 public class CreateOrderController implements Controller {
-    OrderService orderService = AppContext.getInstance().getOrderService();
-
-
+    OrderService orderService;
+    public CreateOrderController(AppContext appContext){
+        orderService = appContext.getOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

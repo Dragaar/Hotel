@@ -6,6 +6,7 @@ import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.service.OrderService;
 import com.rosivanyshyn.service.ResponseToOrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,8 +23,11 @@ import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
  * @author Rostyslav Ivanyshyn.
  */
 public class GetResponseToOrderController implements Controller {
-    ResponseToOrderService responseToOrderService = AppContext.getInstance().getResponseToOrderService();
 
+    ResponseToOrderService responseToOrderService;
+    public GetResponseToOrderController(AppContext appContext){
+        responseToOrderService = appContext.getResponseToOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();

@@ -29,9 +29,12 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
  */
 public class CreateResponseToOrderController implements Controller {
 
-    ResponseToOrderService responseToOrderService = AppContext.getInstance().getResponseToOrderService();
-    OrderService orderService = AppContext.getInstance().getOrderService();
-
+    ResponseToOrderService responseToOrderService;
+    OrderService orderService;
+    public CreateResponseToOrderController(AppContext appContext){
+        responseToOrderService = appContext.getResponseToOrderService();
+        orderService = appContext.getOrderService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
