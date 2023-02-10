@@ -28,8 +28,16 @@
         <c:if test="${!empty requestScope.requestUri}">
             <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.requestURI" /></strong>:${requestScope.requestUri} </div>
         </c:if>
+
+        <c:if test="${!empty requestScope.translatedMessage}">
+            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.message" /></strong>:
+                <fmt:message key="${requestScope.translatedMessage}" />
+            </div>
+        </c:if>
         <c:if test="${!empty requestScope.message}">
-            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.message" /></strong>:${requestScope.message} </div>
+            <div class="d-flex justify-content-center"> <strong><fmt:message key="app.error.message" /></strong>:
+                    ${requestScope.message}
+            </div>
         </c:if>
       </div>
 
