@@ -12,6 +12,7 @@ import com.rosivanyshyn.utils.MySQLQueryBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class GetFewApartmentsController implements Controller {
         ViewResolver resolver = new ViewResolver();
 
         try {
-            HttpSession session = request.getSession(true);
+            @NonNull HttpSession session = request.getSession(false);
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel(Field.APARTMENT);
