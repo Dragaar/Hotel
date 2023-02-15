@@ -2,10 +2,13 @@ package com.rosivanyshyn.controller.other.booking;
 
 import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
+import com.rosivanyshyn.controller.other.apartment.GetFewApartmentsController;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.Account;
+import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.exeption.AppException;
+import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.BookingService;
 import com.rosivanyshyn.util.RequestWrapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,16 +19,18 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.Constant.*;
-import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_DELETE;
+import static com.rosivanyshyn.Constant.DAO_EXCEPTION;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class GetAllBookingControllerTest {
+class GetFewBookingControllerTest {
+
     private final HttpServletRequest request = mock(HttpServletRequest.class);
     private final HttpServletResponse response = mock(HttpServletResponse.class);
     private final AppContext appContext = mock(AppContext.class);
+
     private final BookingService bookingService = mock(BookingService.class);
 
     //-----------------------
@@ -33,8 +38,7 @@ class GetAllBookingControllerTest {
     private final Booking booking = Booking.builder().id(ID_VALUE_LONG).account(account).build();
     ArrayList<Booking> bookings = new ArrayList<>();
     { bookings.add(booking); }
-    AccountRole accountManagerRole = AccountRole.MANAGER;
-    AccountRole accountUSerRole = AccountRole.USER;
+
 
     /**
      * Test standard behavior
@@ -46,40 +50,37 @@ class GetAllBookingControllerTest {
         RequestWrapper requestWrapper = new RequestWrapper(request);
         HttpSession session = requestWrapper.getSession();
 
-        //access role
-        session.setAttribute(ROLE_FIELD, accountManagerRole);
+        //account id
+        session.setAttribute(ID_FIELD, ID_VALUE_LONG);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
-        when(bookingService.findFewBookingAndSort(any(String.class))).thenReturn(bookings);
-        when(bookingService.getRowsNumber()).thenReturn(1);
+        when(bookingService.findFewBookingAndSort(any(String.class), any(Long.class))).thenReturn(bookings);
+        when(bookingService.getRowsNumber()).thenReturn(ONE);
 
-        ViewResolver view = new GetAllBookingController(appContext).resolve(requestWrapper, response);
+        ViewResolver view = new GetFewBookingController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
         assertEquals(bookings, requestWrapper.getAttribute("bookings"));
+
     }
 
     /**
-     * Test controller to return void when user don`t have access. Exception should throw other application layer
+     *   RequestWrapper return session instance. Without it wrapper standard request will return null.
      */
     @Test
-    void testResolveAccessError() {
+    void testSessionDoesntExist() {
         AppContext.createInstance();
-        RequestWrapper requestWrapper = new RequestWrapper(request);
-        HttpSession session = requestWrapper.getSession();
 
-        //access role
-        session.setAttribute(ROLE_FIELD, accountUSerRole);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
-        when(bookingService.findFewBookingAndSort(any(String.class))).thenReturn(bookings);
-        when(bookingService.getRowsNumber()).thenReturn(1);
+        when(bookingService.findFewBookingAndSort(any(String.class), any(Long.class))).thenReturn(bookings);
+        when(bookingService.getRowsNumber()).thenReturn(ONE);
 
-        ViewResolver view = new GetAllBookingController(appContext).resolve(requestWrapper, response);
-
-        assertNull(view.getView());
-        assertNull(requestWrapper.getAttribute("bookings"));
+        assertThrows(AppException.class,
+                ()-> new GetFewBookingController(appContext).resolve(request, response)
+        );
     }
+
     /**
      * Test controller to return AppException when something goes wrong in Service
      */
@@ -89,15 +90,15 @@ class GetAllBookingControllerTest {
         RequestWrapper requestWrapper = new RequestWrapper(request);
         HttpSession session = requestWrapper.getSession();
 
-        //access role
-        session.setAttribute(ROLE_FIELD, accountManagerRole);
+        //account id
+        session.setAttribute(ID_FIELD, ID_VALUE_LONG);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
-        when(bookingService.findFewBookingAndSort(any(String.class))).thenThrow(DAO_EXCEPTION);
-        when(bookingService.getRowsNumber()).thenReturn(1);
+        when(bookingService.findFewBookingAndSort(any(String.class), any(Long.class))).thenThrow(DAO_EXCEPTION);
+        when(bookingService.getRowsNumber()).thenReturn(ONE);
 
         assertThrows(AppException.class,
-                ()-> new GetAllBookingController(appContext).resolve(requestWrapper, response)
+                ()-> new GetFewBookingController(appContext).resolve(requestWrapper, response)
         );
     }
 }

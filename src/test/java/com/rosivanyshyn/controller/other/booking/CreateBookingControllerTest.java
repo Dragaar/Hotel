@@ -36,6 +36,9 @@ class CreateBookingControllerTest {
     private final Apartment apartment = Apartment.builder().id(ID_VALUE_LONG).build();
     private final HashMap<Date, Date> bookingsDates = new HashMap<>();
 
+    /**
+     * Test standard behavior
+     */
     @Test
     void testResolve() {
 
@@ -98,7 +101,7 @@ class CreateBookingControllerTest {
     }
 
     /**
-     * Test controller to return AppException when something goes wrong in DAO
+     * Test controller to return AppException when something goes wrong in Service
      */
     @Test
     void testResolveError() {
