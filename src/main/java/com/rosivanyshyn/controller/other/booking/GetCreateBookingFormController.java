@@ -30,7 +30,10 @@ import static com.rosivanyshyn.exeption.Message.BOOKING_GET_CREATE_PAGE_ERROR;
  * and if new booking date intersect existing - prevent booking
  */
 public class GetCreateBookingFormController implements Controller {
-
+    BookingService bookingService;
+    public GetCreateBookingFormController(AppContext appContext){
+        bookingService = appContext.getBookingService();
+    }
     @Override
     public ViewResolver resolve(HttpServletRequest request, HttpServletResponse response) {
         ViewResolver resolver = new ViewResolver();
@@ -65,7 +68,6 @@ public class GetCreateBookingFormController implements Controller {
     }
 
     private HashMap<Date, Date> getBookingsDatesFromDB(Long apartmentIdOfBookingDatesHashMap) {
-        BookingService bookingService = AppContext.getInstance().getBookingService();
 
         MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
         queryBuilder.setLabel("booking");

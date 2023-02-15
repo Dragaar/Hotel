@@ -49,7 +49,7 @@ public class ControllerFactory {
             case GET_ALL_BOOKINGS_CONTROLLER:
                 return new GetAllBookingController(appContext);
             case NEW_BOOKING_CONTROLLER:
-                return new GetCreateBookingFormController();
+                return new GetCreateBookingFormController(appContext);
             case CREATE_BOOKING_CONTROLLER:
                 return new CreateBookingController(appContext);
             case MAKE_PAYMENT_FOR_BOOKING:
