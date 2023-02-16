@@ -5,6 +5,11 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import org.apache.log4j.Logger;
 
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
+
 
 /**
  * Context listener class.
@@ -27,9 +32,20 @@ public class ContextListener implements ServletContextListener {
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
     LOG.debug("Servlet context destruction starts");
-    // no op
+    deregisterDrivers();
     LOG.debug("Servlet context destruction finished");
   }
 
+  private static void deregisterDrivers(){
+    DriverManager.drivers()
+            .forEach(driver -> {
+                try {
+                  DriverManager.deregisterDriver(driver);
+                  LOG.debug(String.format("deregistering jdbc driver: %s", driver));
+                } catch (SQLException e) {
+                  LOG.error(String.format("Error deregistering driver %s", driver), e);
+                }
+            });
+  }
 
 }
