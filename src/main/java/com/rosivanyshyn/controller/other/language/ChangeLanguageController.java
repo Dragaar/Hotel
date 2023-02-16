@@ -1,4 +1,4 @@
-package com.rosivanyshyn.controller.other.langueage;
+package com.rosivanyshyn.controller.other.language;
 
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;

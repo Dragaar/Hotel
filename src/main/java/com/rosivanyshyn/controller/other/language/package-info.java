@@ -3,4 +3,4 @@
  *
  * @author Rostyslav Ivanyshyn.
  */
-package com.rosivanyshyn.controller.other.langueage;
+package com.rosivanyshyn.controller.other.language;

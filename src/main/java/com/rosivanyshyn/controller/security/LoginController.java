@@ -4,6 +4,7 @@ import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.dispatcher.Controller;
 import com.rosivanyshyn.controller.dispatcher.viewresolve.ViewResolver;
 
+import com.rosivanyshyn.utils.LanguageUtil;
 import com.rosivanyshyn.db.dao.constant.AccountRole;
 import com.rosivanyshyn.db.dao.entity.Account;
 import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
@@ -15,9 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
@@ -58,8 +56,8 @@ public class LoginController implements Controller {
                 session.setAttribute("userRoleName", AccountRole.USER);
 
                 session.setAttribute("lang", "en");
-                //TODO move list to resources
-                session.setAttribute("languages", new ArrayList<>(Arrays.asList("en", "uk")));
+
+                session.setAttribute("languages", LanguageUtil.getLanguageNamesList());
 
                 resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER);
                        // "&message=" + "Successful login!");
