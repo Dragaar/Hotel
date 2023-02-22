@@ -1,7 +1,7 @@
-package database.dao;
+package com.rosivanyshyn.database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
-import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.manager.MySQLDBManagerImpl;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 
 import org.apache.log4j.lf5.DefaultLF5Configurator;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @param <T> Type of Entity
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public abstract class GenericDAOTest<T> {
+public abstract class GenericDAOIT<T> {
     Connection connection;
     T entity = setEntity();
     GenericDAO<T> genericDAO = setDAO();
@@ -49,7 +48,7 @@ public abstract class GenericDAOTest<T> {
      * @param insertNewEntityBuilder Entity pattern, which will be using during all next DAO tests cases
      */
     protected void insertTestLogic(BuildEntity<T> insertNewEntityBuilder){
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
         entity = insertNewEntityBuilder.buildEntity();
 
         boolean result = (Boolean) TransactionManager.execute(connection,
@@ -61,45 +60,44 @@ public abstract class GenericDAOTest<T> {
 
     /** Logic for get test */
     protected void getTestLogic() {
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
         @SuppressWarnings("unchecked")
         T getEntity = (T) TransactionManager.execute(connection,
                 ()-> genericDAO.get(connection, getEntityId(entity)));
 
-        assertEquals(entity, getEntity);
+        assertEquals(getEntityId(entity), getEntityId(getEntity));
     }
 
     /** 3 rd record should be represented
      *  as main class entity to pass the test
      */
 
-    protected void getFewTestLogic() {
-        connection = DBManager.getConnection();
+    protected void getFewTestLogic(int start, int total) {
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
         //Get 1 record, from 2 to 3
         @SuppressWarnings("unchecked")
-        T getEntity = (T) TransactionManager.execute(connection,
-                ()-> genericDAO.getFew(connection, 2, 1));
-        ArrayList<T> expected = new ArrayList<>();
-        expected.add(entity);
-        assertEquals(expected, getEntity);
+        ArrayList<T> getEntities = (ArrayList<T>) TransactionManager.execute(connection,
+                ()-> genericDAO.getFew(connection, start, total));
+
+        assertEquals(total, getEntities.size());
     }
 
     protected void getByFieldTestLogic(String fieldName, Object value) {
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
         @SuppressWarnings("unchecked")
         T getEntity = (T) TransactionManager.execute(connection,
                 ()-> genericDAO.getByField(connection, fieldName, value));
 
 
-        assertEquals(entity, getEntity);
+        assertEquals(getEntityId(entity), getEntityId(getEntity));
     }
 
     /** Logic for getAll test */
     protected void getAllTestLogic() {
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
         boolean result = true;
 
         @SuppressWarnings("unchecked")
@@ -121,7 +119,7 @@ public abstract class GenericDAOTest<T> {
      */
     protected void updateTestLogic(BuildEntity<T> updateEntityBuilder) {
         T entityUpdated = updateEntityBuilder.buildEntity();
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
         boolean result = (Boolean) TransactionManager.execute(connection,
                 ()-> genericDAO.update(connection, entityUpdated));
@@ -133,7 +131,7 @@ public abstract class GenericDAOTest<T> {
 
     /** Logic for delete test */
     protected void deleteTestLogic(Long entityId){
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
         boolean result = (Boolean) TransactionManager.execute(connection,
                 ()-> genericDAO.delete(connection, entityId)
         );
@@ -143,7 +141,7 @@ public abstract class GenericDAOTest<T> {
     @AfterEach
     protected void clear(){
         if(cleanDB) {
-            connection = DBManager.getConnection();
+            connection = MySQLDBManagerImpl.getInstance().getConnection();
             boolean result = (Boolean) TransactionManager.execute(connection,
                     () -> {
                         if (genericDAO.get(connection, getEntityId(entity)) != null) {

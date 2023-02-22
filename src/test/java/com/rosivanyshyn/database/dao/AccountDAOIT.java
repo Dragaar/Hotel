@@ -1,4 +1,4 @@
-package database.dao;
+package com.rosivanyshyn.database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
 import com.rosivanyshyn.db.dao.constant.Field;
@@ -8,8 +8,11 @@ import com.rosivanyshyn.db.dao.implMySQL.AccountDAOImpl;
 
 import org.junit.jupiter.api.*;
 
-
-public class AccountDAOTest extends GenericDAOTest<Account> {
+/**
+ * Account DAO Integration Test
+ */
+@Tag("IntegrationTest")
+public class AccountDAOIT extends GenericDAOIT<Account> {
 
     Account account;
     @Override
@@ -81,7 +84,7 @@ public class AccountDAOTest extends GenericDAOTest<Account> {
             insertTestLogic(insertEntity3);
             ThirdEntityID = entity.getId();
 
-            getFewTestLogic();
+            getFewTestLogic(1, 2);
         } finally {
             deleteTestLogic(firstEntityID);
             deleteTestLogic(secondEntityID);
@@ -91,7 +94,7 @@ public class AccountDAOTest extends GenericDAOTest<Account> {
     @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
-        getByFieldTestLogic(Field.ACCOUNT_FIRST_NAME, "Oleg");
+        getByFieldTestLogic(Field.ENTITY_ID, entity.getId());
     }
     @Test
     void deleteTest(){

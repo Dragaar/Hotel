@@ -1,4 +1,4 @@
-package database.dao;
+package com.rosivanyshyn.database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
 
@@ -6,10 +6,11 @@ import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.entity.ResponseToOrder;
 
 import com.rosivanyshyn.db.dao.implMySQL.ResponseToOrderDAOImpl;
-import com.rosivanyshyn.db.manager.DBManager;
+import com.rosivanyshyn.db.manager.MySQLDBManagerImpl;
 import com.rosivanyshyn.db.transaction.TransactionManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
+/**
+ *  Response To Order DAO Integration Test
+ */
+@Tag("IntegrationTest")
+public class ResponseToOrderDAOIT extends GenericDAOIT<ResponseToOrder> {
     ResponseToOrder responseToOrder;
     ResponseToOrderDAOImpl rtoDAO = new ResponseToOrderDAOImpl();
     @Override
@@ -32,7 +37,7 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
 
     ArrayList<Apartment> apartments = new ArrayList<>();
     ArrayList<Apartment> dataBaseApartments = new ArrayList<>();
-    ApartmentDAOTest apartmentInitializer = new ApartmentDAOTest();
+    ApartmentDAOIT apartmentInitializer = new ApartmentDAOIT();
 
     @BeforeEach
     void initialiseForeignKeys(){
@@ -76,7 +81,7 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
 
     // -------------- Many to Many extra queries ---------- \\
     protected void insertRTOApartments(){
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
         boolean result = (Boolean) TransactionManager.execute(connection,
                 ()-> rtoDAO.setApartmentToResponse(connection, responseToOrder, apartments.get(0))
@@ -87,7 +92,7 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
 
     /** Logic for get test */
     protected void getRTOApartments() {
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
 
 
         dataBaseApartments = (
@@ -99,7 +104,7 @@ public class ResponseToOrderDAOTest extends GenericDAOTest<ResponseToOrder>{
     }
 
     protected void deleteRTOApartments(){
-        connection = DBManager.getConnection();
+        connection = MySQLDBManagerImpl.getInstance().getConnection();
         boolean result = (Boolean) TransactionManager.execute(connection,
                 ()-> rtoDAO.deleteResponseApartments(connection, responseToOrder.getId())
         );

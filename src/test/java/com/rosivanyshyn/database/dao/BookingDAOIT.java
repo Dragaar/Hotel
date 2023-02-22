@@ -1,73 +1,79 @@
-package database.dao;
+package com.rosivanyshyn.database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
-import com.rosivanyshyn.db.dao.constant.Field;
-import com.rosivanyshyn.db.dao.entity.Account;
-import com.rosivanyshyn.db.dao.entity.Order;
-import com.rosivanyshyn.db.dao.implMySQL.OrderDAOImpl;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.rosivanyshyn.db.dao.entity.Account;
+import com.rosivanyshyn.db.dao.entity.Apartment;
+import com.rosivanyshyn.db.dao.entity.Booking;
+
+import com.rosivanyshyn.db.dao.implMySQL.BookingDAOImpl;
+import org.junit.jupiter.api.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class OrderDAOTest extends GenericDAOTest<Order>{
-    Order order;
-    @Override
-    protected GenericDAO<Order> setDAO() { return new OrderDAOImpl();}
-    @Override
-    protected Order setEntity() { return order; }
-    @Override
-    protected Long getEntityId(Order entity) { return entity.getId();}
+import static com.rosivanyshyn.db.dao.constant.Field.*;
 
+/**
+ * Booking DAO Integration Test
+ */
+@Tag("IntegrationTest")
+public class BookingDAOIT extends GenericDAOIT<Booking> {
+    Booking booking;
+    @Override
+    protected GenericDAO<Booking> setDAO() { return new BookingDAOImpl();}
+    @Override
+    protected Booking setEntity() { return booking; }
+    @Override
+    protected Long getEntityId(Booking entity) { return entity.getId();}
     //--------------Foreign keys temporary data----------------------\\
-    AccountDAOTest accountInitializer = new AccountDAOTest();
+    AccountDAOIT accountInitializer = new AccountDAOIT();
+    ApartmentDAOIT apartmentInitializer= new ApartmentDAOIT();
     Account account;
-
+    Apartment apartment;
     @BeforeEach
     void initialiseForeignKeys(){
         //don`t clean BD after calling each method
         accountInitializer.cleanDB = false;
+        apartmentInitializer.cleanDB = false;
 
         accountInitializer.insertTestLogic(accountInitializer.insertEntity);
+        apartmentInitializer.insertTestLogic(apartmentInitializer.insertEntity);
 
         account = accountInitializer.entity;
+        apartment =  apartmentInitializer.entity;
     }
     @AfterEach
     void destroyForeignKeys(){
         accountInitializer.deleteTestLogic(accountInitializer.entity.getId());
+        apartmentInitializer.deleteTestLogic(apartmentInitializer.entity.getId());
     }
     //--------------------------------------------------------------\\
 
-    protected BuildEntity<Order> insertEntity = ()-> order = Order.builder()
+    BuildEntity<Booking> insertEntity = ()-> booking = Booking.builder()
             .id(0L)
-            .guestsNumber(4)
-            .roomsNumber("2")
-            .apartmentClass("B")
-            .price(250L)
-            .description("best apartment")
+            .guestsNumber("4")
             .checkInDate(
                     Date.valueOf(LocalDate.of(2023, 01, 10))
             )
             .checkOutDate(
                     Date.valueOf(LocalDate.of(2023, 01, 20))
             )
+            .isPaidForReservation(false)
             .account(account)
+            .apartment(apartment)
             .build();
 
-    protected BuildEntity<Order> updateEntity = ()-> Order.builder()
-            .id(order.getId())
-            .guestsNumber(6)
-            .roomsNumber("3")
-            .apartmentClass("C")
-            .price(500L)
-            .description("best apartment 2")
-            .checkInDate(order.getCheckInDate())
+    BuildEntity<Booking> updateEntity = ()-> Booking.builder()
+            .id(booking.getId())
+            .guestsNumber(booking.getGuestsNumber())
             .checkOutDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 27))
+                    Date.valueOf(LocalDate.of(2023, 01, 5))
             )
+            .checkInDate(booking.getCheckOutDate())
+            .isPaidForReservation(true)
+            .account(booking.getAccount())
+            .apartment(booking.getApartment())
             .build();
 
     @Test
@@ -94,6 +100,7 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
     @Test
     void getFewTest(){
         Long firstEntityID = 0L, secondEntityID = 0L, ThirdEntityID = 0L;
+
         try {
             insertTestLogic(insertEntity);
             firstEntityID = entity.getId();
@@ -102,7 +109,7 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
             insertTestLogic(insertEntity);
             ThirdEntityID = entity.getId();
 
-            getFewTestLogic();
+            getFewTestLogic(1, 2);
         } finally {
             deleteTestLogic(firstEntityID);
             deleteTestLogic(secondEntityID);
@@ -112,11 +119,11 @@ public class OrderDAOTest extends GenericDAOTest<Order>{
     @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
-        getByFieldTestLogic(Field.ORDER_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
+        getByFieldTestLogic(BOOKING_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
     }
     @Test
     void deleteTest(){
         insertTestLogic(insertEntity);
-        deleteTestLogic(order.getId());
+        deleteTestLogic(booking.getId());
     }
 }

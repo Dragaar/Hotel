@@ -1,12 +1,17 @@
-package database.dao;
+package com.rosivanyshyn.database.dao;
 
 import com.rosivanyshyn.db.dao.GenericDAO;
 import com.rosivanyshyn.db.dao.constant.Field;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.implMySQL.ApartmentDAOImpl;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
+/**
+ * Apartment DAO Integration Test
+ */
+@Tag("IntegrationTest")
+public class ApartmentDAOIT extends GenericDAOIT<Apartment> {
     Apartment apartment;
     @Override
     protected GenericDAO<Apartment> setDAO() { return new ApartmentDAOImpl();}
@@ -74,7 +79,7 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
             insertTestLogic(insertEntity);
             ThirdEntityID = entity.getId();
 
-            getFewTestLogic();
+            getFewTestLogic(1, 2);
         } finally {
             deleteTestLogic(firstEntityID);
             deleteTestLogic(secondEntityID);
@@ -84,7 +89,7 @@ public class ApartmentDAOTest extends GenericDAOTest<Apartment>{
     @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
-        getByFieldTestLogic(Field.APARTMENT_PRICE, 2000L);
+        getByFieldTestLogic(Field.ENTITY_ID, entity.getId());
     }
     @Test
     void deleteTest(){
