@@ -47,7 +47,7 @@ class GetCreateResponseToOrderControllerTest {
 
         assertNotNull(view.getView());
         assertEquals(ID_VALUE_LONG, requestWrapper.getAttribute(ORDER_ID_FIELD));
-        assertEquals(apartments, requestWrapper.getAttribute("apartments"));
+        assertEquals(apartments, requestWrapper.getAttribute(APARTMENTS_FIELD));
     }
 
     /**

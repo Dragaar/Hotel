@@ -48,9 +48,9 @@ class CreateResponseToOrderControllerTest {
         //access role
         session.setAttribute(ROLE_FIELD, accountManagerRole);
         //param
-        when(request.getParameter("orderId")).thenReturn("1");
-        when(request.getParameter("description")).thenReturn("answer to user application");
-        when(request.getParameterValues("apartmentId")).thenReturn(new String[]{"1", "3","6"});
+        when(request.getParameter(ORDER_ID_FIELD)).thenReturn(ONE_STRING);
+        when(request.getParameter(DESCRIPTION_FIELD)).thenReturn(DESCRIPTION_VALUE);
+        when(request.getParameterValues(APARTMENT_ID_FIELD)).thenReturn(new String[]{"1", "3","6"});
 
         //service
         when(appContext.getOrderService()).thenReturn(orderService);
@@ -76,11 +76,9 @@ class CreateResponseToOrderControllerTest {
         //access role
         session.setAttribute(ROLE_FIELD, accountManagerRole);
         //param
-        when(request.getParameter("orderId")).thenReturn("1");
-        when(request.getParameter("description")).thenReturn("answer to user application");
-        when(request.getParameter("orderId")).thenReturn("1");
-        when(request.getParameter("description")).thenReturn("answer to user application");
-        when(request.getParameterValues("apartmentId")).thenReturn(new String[]{"1", "3","6"});
+        when(request.getParameter(ORDER_ID_FIELD)).thenReturn(ONE_STRING);
+        when(request.getParameter(DESCRIPTION_FIELD)).thenReturn(DESCRIPTION_VALUE);
+        when(request.getParameterValues(APARTMENT_ID_FIELD)).thenReturn(new String[]{"1", "3","6"});
 
         //service
         when(appContext.getOrderService()).thenReturn(orderService);

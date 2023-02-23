@@ -63,8 +63,8 @@ class GetCreateBookingFormControllerTest {
 
         assertNotNull(view.getView());
         //check if dates was correctly inserted in session for apartment which can be booked
-        assertEquals(ID_VALUE_LONG, session.getAttribute("apartmentIdOfBookingDates"));
-        assertEquals(bookingsDates,   session.getAttribute("bookingsDates"));
+        assertEquals(ID_VALUE_LONG, session.getAttribute(APARTMENT_ID_OF_BOOKINGS_DATES_FIELD));
+        assertEquals(bookingsDates,   session.getAttribute(BOOKINGS_DATES_FIELD));
 
     }
 

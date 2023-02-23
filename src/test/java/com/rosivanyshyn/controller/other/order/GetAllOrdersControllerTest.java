@@ -55,7 +55,7 @@ class GetAllOrdersControllerTest {
         ViewResolver view = new GetAllOrdersController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
-        assertEquals(orders, requestWrapper.getAttribute("orders"));
+        assertEquals(orders, requestWrapper.getAttribute(ORDERS_FIELD));
     }
 
     /**
@@ -77,7 +77,7 @@ class GetAllOrdersControllerTest {
         ViewResolver view = new GetAllOrdersController(appContext).resolve(requestWrapper, response);
 
         assertNull(view.getView());
-        assertNull(requestWrapper.getAttribute("orders"));
+        assertNull(requestWrapper.getAttribute(ORDERS_FIELD));
     }
     /**
      * Test controller to return AppException when something goes wrong in Service

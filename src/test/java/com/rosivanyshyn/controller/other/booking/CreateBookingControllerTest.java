@@ -57,9 +57,9 @@ class CreateBookingControllerTest {
         when(apartmentService.findApartmentByField(ENTITY_ID, ID_VALUE)).thenReturn(apartment);
 
         when(request.getParameter(APARTMENT_ID_FIELD)).thenReturn(ID_VALUE);
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("checkInDate")).thenReturn(DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn("2");
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
 
         when(bookingService.createBooking(any(Booking.class))).thenReturn(true);
 
@@ -89,9 +89,9 @@ class CreateBookingControllerTest {
         when(apartmentService.findApartmentByField(ENTITY_ID, ID_VALUE)).thenReturn(apartment);
 
         when(request.getParameter(APARTMENT_ID_FIELD)).thenReturn(ID_VALUE);
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("checkInDate")).thenReturn(INCORRECT_DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn(TWO_STRING);
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(INCORRECT_DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
 
         when(bookingService.createBooking(any(Booking.class))).thenReturn(true);
 
@@ -120,9 +120,9 @@ class CreateBookingControllerTest {
         when(apartmentService.findApartmentByField(ENTITY_ID, ID_VALUE)).thenReturn(apartment);
 
         when(request.getParameter(APARTMENT_ID_FIELD)).thenReturn(ID_VALUE);
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("checkInDate")).thenReturn(DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn(TWO_STRING);
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
 
         when(bookingService.createBooking(any(Booking.class))).thenThrow(DAO_EXCEPTION);
 

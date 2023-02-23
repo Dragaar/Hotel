@@ -38,13 +38,13 @@ class CreateOrderControllerTest {
         //account user id
         session.setAttribute(ID_FIELD, ID_VALUE_LONG);
         //param
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("roomsNumber")).thenReturn("4");
-        when(request.getParameter("apartmentClass")).thenReturn("Хостел");
-        when(request.getParameter("price")).thenReturn("550");
-        when(request.getParameter("description")).thenReturn("опис заявки");
-        when(request.getParameter("checkInDate")).thenReturn(DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn(TWO_STRING);
+        when(request.getParameter(ROOMS_NUMBER_FIELD)).thenReturn(ROOMS_NUMBER_VALUE);
+        when(request.getParameter(APARTMENT_CLASS_FIELD)).thenReturn(APARTMENT_CLASS_VALUE);
+        when(request.getParameter(PRICE_FIELD)).thenReturn(PRICE_VALUE);
+        when(request.getParameter(DESCRIPTION_FIELD)).thenReturn(DESCRIPTION_VALUE);
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
         //service
         when(appContext.getOrderService()).thenReturn(orderService);
         when(orderService.createOrder(any(Order.class))).thenReturn(true);
@@ -67,13 +67,13 @@ class CreateOrderControllerTest {
         //account user id
         session.setAttribute(ID_FIELD, ID_VALUE_LONG);
         //param
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("roomsNumber")).thenReturn("4.732");
-        when(request.getParameter("apartmentClass")).thenReturn("Хостел");
-        when(request.getParameter("price")).thenReturn("550");
-        when(request.getParameter("description")).thenReturn("опис заявки");
-        when(request.getParameter("checkInDate")).thenReturn(DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn(TWO_STRING);
+        when(request.getParameter(ROOMS_NUMBER_FIELD)).thenReturn("4.732");
+        when(request.getParameter(APARTMENT_CLASS_FIELD)).thenReturn(APARTMENT_CLASS_VALUE);
+        when(request.getParameter(PRICE_FIELD)).thenReturn(PRICE_VALUE);
+        when(request.getParameter(DESCRIPTION_FIELD)).thenReturn(DESCRIPTION_VALUE);
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
         //service
         when(appContext.getOrderService()).thenReturn(orderService);
         when(orderService.createOrder(any(Order.class))).thenReturn(true);
@@ -95,13 +95,13 @@ class CreateOrderControllerTest {
         //account user id
         session.setAttribute(ID_FIELD, ID_VALUE_LONG);
         //param
-        when(request.getParameter("guestsNumber")).thenReturn("2");
-        when(request.getParameter("roomsNumber")).thenReturn("4");
-        when(request.getParameter("apartmentClass")).thenReturn("Хостел");
-        when(request.getParameter("price")).thenReturn("550");
-        when(request.getParameter("description")).thenReturn("опис заявки");
-        when(request.getParameter("checkInDate")).thenReturn(DATE_VALUE.toString());
-        when(request.getParameter("checkOutDate")).thenReturn(DATE_VALUE2.toString());
+        when(request.getParameter(GUESTS_NUMBER_FIELD)).thenReturn(TWO_STRING);
+        when(request.getParameter(ROOMS_NUMBER_FIELD)).thenReturn(ROOMS_NUMBER_VALUE);
+        when(request.getParameter(APARTMENT_CLASS_FIELD)).thenReturn(APARTMENT_CLASS_VALUE);
+        when(request.getParameter(PRICE_FIELD)).thenReturn(PRICE_VALUE);
+        when(request.getParameter(DESCRIPTION_FIELD)).thenReturn(DESCRIPTION_VALUE);
+        when(request.getParameter(CHECK_IN_DATE_FIELD)).thenReturn(DATE_VALUE.toString());
+        when(request.getParameter(CHECK_OUT_DATE_FIELD)).thenReturn(DATE_VALUE2.toString());
         //service
         when(appContext.getOrderService()).thenReturn(orderService);
         when(orderService.createOrder(any(Order.class))).thenThrow(DAO_EXCEPTION);

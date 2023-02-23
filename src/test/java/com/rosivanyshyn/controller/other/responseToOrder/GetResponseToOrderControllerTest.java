@@ -30,7 +30,7 @@ class GetResponseToOrderControllerTest {
     //-----------------------
     private final ResponseToOrder responseToOrder = ResponseToOrder.builder()
             .id(ID_VALUE_LONG)
-            .description("some description")
+            .description(DESCRIPTION_VALUE)
             .build();
     private final Apartment apartment = Apartment.builder().id(ID_VALUE_LONG).build();
     ArrayList<Apartment> apartments = new ArrayList<>();
@@ -55,7 +55,7 @@ class GetResponseToOrderControllerTest {
         ViewResolver view = new GetResponseToOrderController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
-        assertEquals(apartments, requestWrapper.getAttribute("apartments"));
+        assertEquals(apartments, requestWrapper.getAttribute(APARTMENTS_FIELD));
     }
 
     /**

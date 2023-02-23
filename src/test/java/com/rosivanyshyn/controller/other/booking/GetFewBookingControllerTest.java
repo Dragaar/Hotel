@@ -60,7 +60,7 @@ class GetFewBookingControllerTest {
         ViewResolver view = new GetFewBookingController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
-        assertEquals(bookings, requestWrapper.getAttribute("bookings"));
+        assertEquals(bookings, requestWrapper.getAttribute(BOOKINGS_FIELD));
 
     }
 

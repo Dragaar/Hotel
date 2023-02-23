@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static com.rosivanyshyn.Constant.*;
-import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_DELETE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -34,7 +33,7 @@ class GetAllBookingControllerTest {
     ArrayList<Booking> bookings = new ArrayList<>();
     { bookings.add(booking); }
     AccountRole accountManagerRole = AccountRole.MANAGER;
-    AccountRole accountUSerRole = AccountRole.USER;
+    AccountRole accountUserRole = AccountRole.USER;
 
     /**
      * Test standard behavior
@@ -56,7 +55,7 @@ class GetAllBookingControllerTest {
         ViewResolver view = new GetAllBookingController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
-        assertEquals(bookings, requestWrapper.getAttribute("bookings"));
+        assertEquals(bookings, requestWrapper.getAttribute(BOOKINGS_FIELD));
     }
 
     /**
@@ -69,7 +68,7 @@ class GetAllBookingControllerTest {
         HttpSession session = requestWrapper.getSession();
 
         //access role
-        session.setAttribute(ROLE_FIELD, accountUSerRole);
+        session.setAttribute(ROLE_FIELD, accountUserRole);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
         when(bookingService.findFewBookingAndSort(any(String.class))).thenReturn(bookings);
@@ -78,7 +77,7 @@ class GetAllBookingControllerTest {
         ViewResolver view = new GetAllBookingController(appContext).resolve(requestWrapper, response);
 
         assertNull(view.getView());
-        assertNull(requestWrapper.getAttribute("bookings"));
+        assertNull(requestWrapper.getAttribute(BOOKINGS_FIELD));
     }
     /**
      * Test controller to return AppException when something goes wrong in Service

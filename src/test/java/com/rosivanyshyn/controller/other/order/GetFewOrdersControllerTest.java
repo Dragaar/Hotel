@@ -54,7 +54,7 @@ class GetFewOrdersControllerTest {
         ViewResolver view = new GetFewOrdersController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
-        assertEquals(orders, requestWrapper.getAttribute("orders"));
+        assertEquals(orders, requestWrapper.getAttribute(ORDERS_FIELD));
 
     }
 
