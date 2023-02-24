@@ -190,7 +190,7 @@ public class Validation {
         if (string == null || string.isEmpty() || length <= 0) {
             return false;
         }
-        return string.length() > length;
+        return string.length() >= length;
     }
 
     /**

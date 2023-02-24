@@ -26,7 +26,6 @@ import static com.rosivanyshyn.exeption.Message.RESPONSE_TO_ORDER_GET_CREATE_PAG
  */
 public class GetCreateResponseToOrderController implements Controller {
     ApartmentService apartmentService;
-    int pageId, recordsPerPage, currentRecord;
     public GetCreateResponseToOrderController(AppContext appContext){
         apartmentService = appContext.getApartmentService();
     }
@@ -37,29 +36,15 @@ public class GetCreateResponseToOrderController implements Controller {
 
         ArrayList<Apartment> apartments;
 
-        //getPageConfig(request);
-
         try {
             @NonNull final Long orderId = Long.valueOf(request.getParameter("orderId"));
             request.setAttribute("orderId", orderId);
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel(Field.APARTMENT);
-            //queryBuilder.limit(currentRecord, recordsPerPage);
 
             apartments = apartmentService.findFewApartmentsAndSort(queryBuilder.getQuery());
             request.setAttribute("apartments", apartments);
-
-            //request.setAttribute("page", pageId);
-            //for pagination links
-            //request.setAttribute("currentController", "newResponseToOrder");
-
-            //Pagination totalPagesCount
-            //int totalRecordCount = apartmentService.getRowsNumber();
-            //int totalPagesCount = (int) Math.ceil(totalRecordCount * 1.0 / recordsPerPage);
-
-            //request.setAttribute("totalPagesCount", totalPagesCount);
-
 
             resolver.forward(NEW_RESPONSE_TO_ORDER_JSP);
         } catch (RuntimeException ex) {
@@ -68,28 +53,4 @@ public class GetCreateResponseToOrderController implements Controller {
         return resolver;
     }
 
-    /*private void getPageConfig(HttpServletRequest request) {
-        String reqPageId = request.getParameter("page");
-        String reqRecordsPerPage = request.getParameter("recordsPerPage");
-
-        if(reqPageId==null ){
-            pageId = 1;
-            currentRecord=1;
-        } else {
-            pageId = Integer.parseInt(reqPageId);
-            currentRecord = pageId;
-        }
-
-        if(reqRecordsPerPage==null){
-            recordsPerPage = 8;
-        } else {
-            recordsPerPage = Integer.parseInt(reqRecordsPerPage);
-        }
-
-        if(pageId>1)
-        {
-            int temp = pageId-1;
-            currentRecord = temp*recordsPerPage+1;
-        }
-    }*/
 }
