@@ -48,7 +48,7 @@
             </li>
             </c:if>
             <li class="nav-item ">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAccount"><fmt:message key="navbar.account" /></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAccountDetails"><fmt:message key="navbar.account" /></a>
             </li>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="<fmt:message key="navbar.search" />" aria-label="Search">

@@ -12,9 +12,9 @@ public class ControllerConstant {
     public static final String ERROR_JSP = "/pages/error.jsp";
 
     public static final String LOGIN_JSP = "/pages/login.jsp";
+    public static final String ACCOUNT_DETAILS_JSP = "/pages/account/account.jsp";
 
     public static final String APARTMENTS_JSP = "/pages/apartments.jsp";
-    //public static final String APARTMENTS_JSP = "/pages/test11.jsp";
     public static final String APARTMENT_DETAILS_JSP = "/pages/apartment.jsp";
 
 
@@ -44,6 +44,9 @@ public class ControllerConstant {
     public static final String LOGIN_CONTROLLER = "login";
     public static final String LOGOUT_CONTROLLER ="logout";
     public static final String REGISTRATION_CONTROLLER = "registration";
+    public static final String GET_ACCOUNT_DETAILS_CONTROLLER = "getAccountDetails";
+    public static final String UPDATE_ACCOUNT_CONTROLLER = "updateAccount";
+
 
     public static final String GET_APARTMENTS_CONTROLLER = "getApartments";
     public static final String GET_APARTMENT_DETAILS_CONTROLLER = "getApartmentDetails";

@@ -1,10 +1,12 @@
 package com.rosivanyshyn.controller.dispatcher;
 
 import com.rosivanyshyn.controller.context.AppContext;
+import com.rosivanyshyn.controller.other.account.GetAccountDetailsController;
+import com.rosivanyshyn.controller.other.account.UpdateAccountController;
 import com.rosivanyshyn.controller.security.LoginController;
 import com.rosivanyshyn.controller.security.LogoutController;
 import com.rosivanyshyn.controller.security.RegistrationController;
-import com.rosivanyshyn.controller.other.langueage.ChangeLanguageController;
+import com.rosivanyshyn.controller.other.language.ChangeLanguageController;
 import com.rosivanyshyn.controller.other.apartment.DeleteApartmentController;
 import com.rosivanyshyn.controller.other.apartment.GetApartmentDetailsController;
 import com.rosivanyshyn.controller.other.apartment.GetFewApartmentsController;
@@ -36,6 +38,12 @@ public class ControllerFactory {
                 return new LogoutController();
             case REGISTRATION_CONTROLLER:
                 return new RegistrationController(appContext);
+            case GET_ACCOUNT_DETAILS_CONTROLLER:
+                return new GetAccountDetailsController(appContext);
+            case UPDATE_ACCOUNT_CONTROLLER:
+                return new UpdateAccountController(appContext);
+
+
 
             case GET_APARTMENTS_CONTROLLER:
                 return new GetFewApartmentsController(appContext);

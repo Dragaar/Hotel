@@ -26,6 +26,9 @@ public class Message {
     public static final String ACCOUNT_LOGIN_ERROR = "Cannot log in account";
     public static final String ACCOUNT_LOGOUT_ERROR = "Cannot log out";
     public static final String ACCOUNT_REGISTRATION_ERROR = "Cannot registration account";
+    public static final String ACCOUNT_DETAILS_ERROR = "Cannot get Account Details";
+    public static final String ACCOUNT_UPDATE_ERROR = "Cannot update account";
+
 
     public static final String APARTMENT_DELETE_ERROR = "Cannot delete Apartment";
     public static final String APARTMENT_GET_DETAILS_ERROR ="Cannot get Apartment Details";

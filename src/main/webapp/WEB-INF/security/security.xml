@@ -16,6 +16,16 @@
 		<role>user</role>
 		<role>manager</role>
 	</constraint>
+	<constraint>
+		<url-pattern>getAccountDetails</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+	<constraint>
+		<url-pattern>updateAccount</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
 
 
 	<constraint>

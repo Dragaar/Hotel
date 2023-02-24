@@ -4,6 +4,9 @@ public class ControllerMessageConstant {
 
     public static final String ACCOUNT_SUCCEED_LOGOUT = "app.message.logout";
     public static final String ACCOUNT_SUCCEED_REGISTRATION = "app.message.registration";
+    public static final String ACCOUNT_SUCCEED_UPDATE = "app.message.account.update";
+    public static final String ACCOUNT_NOTHING_UPDATE = "app.message.account.nothingUpdate";
+
 
     public static final String APARTMENT_SUCCEED_DELETE = "app.message.apartment.delete";
 
