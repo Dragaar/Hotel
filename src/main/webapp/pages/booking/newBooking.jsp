@@ -44,17 +44,36 @@
           <h4 class="fw-normal mt-2 mb-3 pb-3" style="letter-spacing: 1px;"> <fmt:message key="booking.details" /></h4>
 
           <div class="form-outline mb-4">
-            <input name="guestsNumber" type="number" id="form2Example18" class="form-control form-control-lg" />
-            <label class="form-label" for="form2Example18"> <fmt:message key="booking.guestsNumber" /></label>
+            <input name="guestsNumber" type="number" id="form1" class="form-control form-control-lg" />
+            <label class="form-label" for="form1"> <fmt:message key="booking.guestsNumber" /></label>
           </div>
 
+
+          <script type="text/javascript">
+            $(document).ready(function(){
+              $('.input-daterange').datepicker({
+                "format": "yyyy-mm-dd",
+                "language": "${sessionScope.lang}",
+                "startDate": "${requestScope.currentDate}",
+                <c:if test="${!empty requestScope.datesDisabled}">
+                "datesDisabled": "${requestScope.datesDisabled}",
+                </c:if>
+              });
+            });
+          </script>
+
           <div class="form-outline mb-4">
-            <input name="checkInDate" type="date" id="form2Example28" class="form-control form-control-lg" />
-            <label class="form-label" for="form2Example28"> <fmt:message key="booking.checkInDate" /></label>
-          </div>
-          <div class="form-outline mb-4">
-            <input name="checkOutDate" type="date" id="form2Example29" class="form-control form-control-lg" />
-            <label class="form-label" for="form2Example29"> <fmt:message key="booking.checkOutDate" /></label>
+
+            <div class="input-group input-daterange">
+              <input name="checkInDate" type='text' class="input-sm form-control" id='form2'>
+               <span class="input-group-text">to</span>
+              <input name="checkOutDate" type='text' class="input-sm form-control" id='form3'>
+            </div>
+            <div class="row">
+              <label class="col-md-6 form-label" for="form2"> <fmt:message key="booking.checkInDate" /></label>
+              <label class="col-md-6 form-label" for="form3"> <fmt:message key="booking.checkOutDate" /></label>
+            </div>
+
           </div>
 
           <div class="pt-1 mb-4">

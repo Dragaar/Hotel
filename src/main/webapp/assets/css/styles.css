@@ -7,7 +7,17 @@
     overflow: hidden;
 }
 
-/* Стиді для сторінки реєстрації */
+/* Bootstrap datepicker СSS */
+.datepicker td,th{
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+.datepicker td.disabled{
+    background-color: #EAF2F8 !important;
+}
+
+/* Стилі для сторінки реєстрації */
 
 
 

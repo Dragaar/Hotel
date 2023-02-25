@@ -14,9 +14,15 @@ import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_APARTMENT_ID;
@@ -42,7 +48,13 @@ public class GetCreateBookingFormController implements Controller {
         try {
             @NonNull final Long requestedApartmentId = Long.valueOf(request.getParameter("apartmentId"));
 
-            setBookingsDatesOfRelatedApartmentInSession(session, requestedApartmentId);
+            request.setAttribute("currentDate", LocalDate.now());
+
+            HashMap<Date, Date> bookingsDates = setBookingsDatesOfRelatedApartmentInSession(session, requestedApartmentId);
+            ArrayList<LocalDate> bookingsDatesAsList = convertDatesRangeToList(bookingsDates);
+
+
+            request.setAttribute("datesDisabled",  bookingsDatesAsList);
 
             resolver.forward(NEW_BOOKING_JSP);
         } catch (RuntimeException ex) {
@@ -51,7 +63,7 @@ public class GetCreateBookingFormController implements Controller {
         return resolver;
     }
 
-    private void setBookingsDatesOfRelatedApartmentInSession(HttpSession session, Long requestedApartmentId) {
+    private HashMap<Date, Date> setBookingsDatesOfRelatedApartmentInSession(HttpSession session, Long requestedApartmentId) {
         final Long apartmentIdOfBookingDates = (Long) session.getAttribute("apartmentIdOfBookingDates");
 
         @SuppressWarnings("unchecked")
@@ -65,6 +77,7 @@ public class GetCreateBookingFormController implements Controller {
             session.setAttribute("apartmentIdOfBookingDates", requestedApartmentId);
             session.setAttribute("bookingsDates", bookingsDates);
         }
+        return bookingsDates;
     }
 
     private HashMap<Date, Date> getBookingsDatesFromDB(Long apartmentIdOfBookingDatesHashMap) {
@@ -80,4 +93,31 @@ public class GetCreateBookingFormController implements Controller {
         }
         return bookingsDates;
     }
+
+    private ArrayList<LocalDate> convertDatesRangeToList(HashMap<Date, Date> bookingsDates) {
+        ArrayList<LocalDate> bookingsDatesAsList = new ArrayList<>();
+        bookingsDates.forEach(
+                (checkInDate, checkOutDate)-> {
+                    bookingsDatesAsList.addAll(
+                            getDatesFromRange(convertToLocalDate(checkInDate),
+                                    convertToLocalDate(checkOutDate)) );
+                }
+        );
+        return bookingsDatesAsList;
+    }
+
+    public List<LocalDate> getDatesFromRange(LocalDate dateFrom, LocalDate dateTill) {
+        long numOfDaysBetween = ChronoUnit.DAYS.between(dateFrom, dateTill) + 1;
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(dateFrom::plusDays)
+                .collect(Collectors.toList());
+    }
+
+    public LocalDate convertToLocalDate(Date dateToConvert) {
+        return Optional.ofNullable(dateToConvert)
+                .map(Date::toLocalDate)
+                .orElse(null);
+    }
+
 }
