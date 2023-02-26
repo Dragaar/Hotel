@@ -14,6 +14,7 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
+import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_DELETE;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
@@ -41,7 +42,7 @@ public class DeleteBookingController implements Controller {
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("booking");
-            queryBuilder.where(ENTITY_ID, true);
+            queryBuilder.where(ENTITY_ID, EQUAL, true);
             @NonNull ArrayList<Booking> booking = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), bookingId);
 
             if(booking.get(0).getAccount().getId().equals(accountId))

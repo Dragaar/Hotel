@@ -14,6 +14,7 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
+import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.BOOKINGS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_ACCOUNT_ID;
 import static com.rosivanyshyn.exeption.Message.BOOKINGS_GET_ERROR;
@@ -44,7 +45,7 @@ public class GetFewBookingController implements Controller {
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("booking");
-            queryBuilder.where(BOOKING_ACCOUNT_ID, true);
+            queryBuilder.where(BOOKING_ACCOUNT_ID, EQUAL, true);
             queryBuilder.limit(currentRecord, recordsPerPage);
             bookings = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), accountId);
 

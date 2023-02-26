@@ -13,6 +13,7 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
+import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_PAYMENT;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
@@ -38,7 +39,7 @@ public class PaymentForBookingController implements Controller {
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("booking");
-            queryBuilder.where(ENTITY_ID, true);
+            queryBuilder.where(ENTITY_ID, EQUAL, true);
 
             @NonNull ArrayList<Booking> booking = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), bookingId);
 

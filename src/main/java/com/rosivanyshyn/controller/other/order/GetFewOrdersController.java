@@ -15,6 +15,7 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
+import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ORDERS_JSP;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.exeption.Message.ORDERS_GET_ERROR;
@@ -45,7 +46,7 @@ public class GetFewOrdersController implements Controller {
 
             MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
             queryBuilder.setLabel("order");
-            queryBuilder.where(ORDER_ACCOUNT_ID, true);
+            queryBuilder.where(ORDER_ACCOUNT_ID, EQUAL, true);
             queryBuilder.limit(currentRecord, recordsPerPage);
             orders = orderService.findFewOrdersAndSort(queryBuilder.getQuery(), accountId);
 

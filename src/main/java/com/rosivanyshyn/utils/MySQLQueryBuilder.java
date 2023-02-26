@@ -14,6 +14,7 @@ public class MySQLQueryBuilder {
     protected StringBuilder where;
     private StringBuilder order;
     private String limit;
+    private Boolean openSubcondition = false;
 
     /** Setter
      * @param label name of DB table
@@ -68,9 +69,16 @@ public class MySQLQueryBuilder {
      * @param field field by which to filter
      * @param and combining with previous condition. True -> the preconditions, including the new one, must be true to return records. False -> return a records if any of the conditions is true.
      */
-    public void where(String field, boolean and) {
-        String clause = label + ".`" + field + "` = ? ";
-        addWhere(clause, and);
+    public void where(String field, LogicalOperation logicalOperation, boolean and) {
+        StringBuilder clause = new StringBuilder();
+
+        if(openSubcondition){
+            clause.append(" ( ");
+            openSubcondition=false;
+        }
+        clause.append( label + ".`" + field + "` " + logicalOperation.getOperation() + " ? " );
+
+        addWhere(clause.toString(), and);
     }
 
     /** Combine several filters
@@ -91,6 +99,19 @@ public class MySQLQueryBuilder {
         }
     }
 
+    /**
+     * Open or close new sub-condition in WHERE clause
+     * @param state - State of condition. True - open new sub-condition. False - close previous sub-condition
+     */
+    public void subcondition(Boolean state){
+        if(where != null){
+            if(state){
+                openSubcondition = true;
+            }else {
+                where.append(" ) ");
+            }
+        }
+    }
 
     //-------------------------------------------------------------\\
 
@@ -161,5 +182,21 @@ public class MySQLQueryBuilder {
         order = null;
         limit = null;
 
+    }
+
+    public enum LogicalOperation{
+        EQUAL("="),
+        NOT_EQUAL("!="),
+        GREATER(">"),
+        LESS("<"),
+        GREATER_OR_EQUAL(">="),
+        LESS_OR_EQUAL("<=");
+        private final String operation;
+        LogicalOperation(String operation) {
+            this.operation=operation;
+        }
+        public String getOperation(){
+            return operation;
+        }
     }
 }

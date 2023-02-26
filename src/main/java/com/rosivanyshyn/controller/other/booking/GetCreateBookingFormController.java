@@ -24,8 +24,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.rosivanyshyn.db.dao.constant.Field.*;
+import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
-import static com.rosivanyshyn.db.dao.constant.Field.BOOKING_APARTMENT_ID;
 import static com.rosivanyshyn.exeption.Message.BOOKING_GET_CREATE_PAGE_ERROR;
 
 /** Get Create Booking Form Controller class.
@@ -52,7 +53,6 @@ public class GetCreateBookingFormController implements Controller {
 
             HashMap<Date, Date> bookingsDates = setBookingsDatesOfRelatedApartmentInSession(session, requestedApartmentId);
             ArrayList<LocalDate> bookingsDatesAsList = convertDatesRangeToList(bookingsDates);
-
 
             request.setAttribute("datesDisabled",  bookingsDatesAsList);
 
@@ -81,11 +81,23 @@ public class GetCreateBookingFormController implements Controller {
     }
 
     private HashMap<Date, Date> getBookingsDatesFromDB(Long apartmentIdOfBookingDatesHashMap) {
-
+        Date currentDate = Date.valueOf(LocalDate.now());
         MySQLQueryBuilder queryBuilder = new MySQLQueryBuilder();
         queryBuilder.setLabel("booking");
-        queryBuilder.where(BOOKING_APARTMENT_ID, true);
-        ArrayList<Booking> bookings = bookingService.findFewBookingAndSort(queryBuilder.getQuery(), apartmentIdOfBookingDatesHashMap);
+        queryBuilder.where(BOOKING_APARTMENT_ID, EQUAL, true);
+
+        //get only actual dates
+        queryBuilder.subcondition(true);
+        queryBuilder.where(BOOKING_CHECK_IN_DATE, GREATER_OR_EQUAL, true);
+        queryBuilder.where(BOOKING_CHECK_OUT_DATE, GREATER_OR_EQUAL, false);
+        queryBuilder.subcondition(false);
+
+        ArrayList<Booking> bookings = bookingService.findFewBookingAndSort(
+                queryBuilder.getQuery(),
+                apartmentIdOfBookingDatesHashMap,
+                currentDate,
+                currentDate
+        );
 
         HashMap<Date, Date> bookingsDates = new HashMap<>();
         for(Booking booking : bookings){
