@@ -18,15 +18,22 @@ public final class TransactionManager {
 
     public static Object execute(Connection con, ExecuteOperation operation) {
         Object value = null;
+        String message = "Cannot execute operation in transaction";
         try {
             con.setAutoCommit(false);
+            con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             value = operation.execute();
             con.commit();
         } catch (SQLException ex) {
             rollback(con);
-            LOG.error("Cannot execute operation in transaction", ex);
-            throw new DAOException("Cannot execute operation in transaction", ex);
-        } finally {
+            LOG.error(message, ex);
+            throw new DAOException(message, ex);
+        } catch (Exception ex){
+            rollback(con);
+            LOG.error(message, ex);
+            throw ex;
+        }
+        finally {
             if (con != null) {
                 close(con);
             }
