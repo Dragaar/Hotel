@@ -55,8 +55,8 @@
                 "format": "yyyy-mm-dd",
                 "language": "${sessionScope.lang}",
                 "startDate": "${requestScope.currentDate}",
-                <c:if test="${!empty requestScope.datesDisabled}">
-                "datesDisabled": "${requestScope.datesDisabled}",
+                <c:if test="${!empty requestScope.disabledDatesList}">
+                "datesDisabled": "${requestScope.disabledDatesList}",
                 </c:if>
               });
             });

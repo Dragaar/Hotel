@@ -10,7 +10,6 @@ import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.exeption.ValidationException;
 import com.rosivanyshyn.service.ApartmentService;
 import com.rosivanyshyn.service.BookingService;
-import com.rosivanyshyn.utils.Validation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import lombok.NonNull;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_CREATE;
@@ -48,10 +46,6 @@ public class CreateBookingController implements Controller {
             Account account = new Account();
             account.setId(accountId);
 
-            @SuppressWarnings("unchecked")
-            @NonNull final HashMap<Date, Date> bookingsDates
-                    = (HashMap<Date, Date>) session.getAttribute("bookingsDates");
-
             @NonNull final Long apartmentId = Long.valueOf(request.getParameter("apartmentId"));
             Apartment apartment = apartmentService.findApartmentByField(ENTITY_ID, apartmentId);
 
@@ -74,8 +68,7 @@ public class CreateBookingController implements Controller {
                         .apartment(apartment)
                         .build();
 
-                Validation validation = new Validation();
-                validation.validateBooking(booking, bookingsDates);
+               //Validation inside service
 
                 bookingService.createBooking(booking);
 

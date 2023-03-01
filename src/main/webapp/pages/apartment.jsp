@@ -36,18 +36,37 @@
                             <c:out value="${apartment.getPrice()}" /> &#8372
                         </h6>
                 </div>
-            </div>
-            <div class="row">
-                <h6 class="col-md-3 text-left"><fmt:message key="apartment.roomsCount" /></h6>
-                <h6 class="col-md-2 text-muted">
-                    <c:out value="${apartment.getRoomsNumber()}" />
-                </h6>
-            </div>
-            <div class="row">
-                <h6 class="col-md-3 text-left"><fmt:message key="apartment.maxGuestsNumber" /></h6>
-                <h6 class="col-md-2 text-muted">
-                    <c:out value="${apartment.getMaxGuestsNumber()}" />
-                </h6>
+
+                <div class="row">
+                    <h6 class="col-md-3 text-left"><fmt:message key="apartment.roomsCount" /></h6>
+                    <h6 class="col-md-2 text-muted">
+                        <c:out value="${apartment.getRoomsNumber()}" />
+                    </h6>
+                </div>
+                <div class="row">
+                    <h6 class="col-md-3 text-left"><fmt:message key="apartment.maxGuestsNumber" /></h6>
+                    <h6 class="col-md-2 text-muted">
+                        <c:out value="${apartment.getMaxGuestsNumber()}" />
+                    </h6>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('.datepicker').datepicker({
+                            "format": "yyyy-mm-dd",
+                            "language": "${sessionScope.lang}",
+                            "startDate": "${requestScope.currentDate}",
+                            <c:if test="${!empty requestScope.disabledDatesList}">
+                            "datesDisabled": "${requestScope.disabledDatesList}",
+                            </c:if>
+                        });
+                    });
+                </script>
+
+                <h6 class="text-left"><fmt:message key="apartment.availableDates"/></h6>
+                <div class="row">
+                    <div class="datepicker"> </div>
+                </div>
             </div>
 
             <form action="${pageContext.request.contextPath}/front?controller=newBooking" method="POST">
