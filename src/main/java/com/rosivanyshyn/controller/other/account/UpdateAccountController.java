@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
-import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ACCOUNT_DETAILS_JSP;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
@@ -42,19 +41,20 @@ public class UpdateAccountController implements Controller {
 
             boolean areChangesExist = false;
 
-            if(!firstName.isEmpty()){
+            if(isNotBlank(firstName)){
                 account.setFirstName(firstName);
                 areChangesExist=true;
             }
-            if(!lastName.isEmpty()){
+            if(isNotBlank(lastName)){
                 account.setLastName(lastName);
                 areChangesExist=true;
             }
-            if(!oldPassword.isEmpty() && !newPassword.isEmpty() &&
-                    oldPassword.equals(account.getPassword())
-            ){
-                account.setPassword(newPassword);
-                areChangesExist=true;
+            if(isNotBlank(oldPassword) && isNotBlank(newPassword))
+            {
+                if(oldPassword.equals(account.getPassword())) {
+                    account.setPassword(newPassword);
+                    areChangesExist = true;
+                } else { throw new ValidationException(INCORRECT_ACCOUNT_PASSWORD); }
             }
 
             if(areChangesExist){
@@ -73,8 +73,15 @@ public class UpdateAccountController implements Controller {
             throw new ValidationException(ex.getMessage(), ex);
         }
         catch (RuntimeException ex){
-            throw new AppException(ACCOUNT_LOGIN_ERROR, ex);
+            throw new AppException(ACCOUNT_UPDATE_ERROR, ex);
         }
         return resolver;
+    }
+
+    private boolean isBlank(String field) {
+        return field == null || field.isEmpty();
+    }
+    private boolean isNotBlank(String field) {
+        return !isBlank(field);
     }
 }
