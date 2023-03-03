@@ -7,6 +7,7 @@ import com.rosivanyshyn.db.dao.entity.Booking;
 import com.rosivanyshyn.exeption.AppException;
 import com.rosivanyshyn.service.BookingService;
 import com.rosivanyshyn.util.RequestWrapper;
+import com.rosivanyshyn.utils.DateUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ class GetCreateBookingFormControllerTest {
     ArrayList<Booking> bookings = new ArrayList<>();
     { bookings.add(booking); }
 
-    HashMap<java.util.Date, java.util.Date> bookingsDates = new HashMap<>();
+    HashMap<Date, Date> bookingsDates = new HashMap<>();
 
     { for (Booking booking : bookings) {
             bookingsDates.put(booking.getCheckInDate(), booking.getCheckOutDate());
@@ -50,6 +51,7 @@ class GetCreateBookingFormControllerTest {
      */
     @Test
     void testResolve() {
+        DateUtil dateUtil = new DateUtil();
         AppContext.createInstance();
         RequestWrapper requestWrapper = new RequestWrapper(request);
         HttpSession session = requestWrapper.getSession();
@@ -57,14 +59,14 @@ class GetCreateBookingFormControllerTest {
         when(request.getParameter(APARTMENT_ID_FIELD)).thenReturn(ID_VALUE);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
-        when(bookingService.findFewBookingAndSort(any(String.class), any(Long.class))).thenReturn(bookings);
+        when(bookingService.getBookingsDatesFromDB(any(Long.class))).thenReturn(bookingsDates);
 
         ViewResolver view = new GetCreateBookingFormController(appContext).resolve(requestWrapper, response);
 
         assertNotNull(view.getView());
         //check if dates was correctly inserted in session for apartment which can be booked
-        assertEquals(ID_VALUE_LONG, session.getAttribute(APARTMENT_ID_OF_BOOKINGS_DATES_FIELD));
-        assertEquals(bookingsDates,   session.getAttribute(BOOKINGS_DATES_FIELD));
+        assertEquals(dateUtil.convertDatesRangeToList(bookingsDates),
+                    requestWrapper.getAttribute(BOOKINGS_DISABLED_DATES_LIST_FIELD));
 
     }
 
@@ -75,12 +77,11 @@ class GetCreateBookingFormControllerTest {
     void resolveError() {
         AppContext.createInstance();
         RequestWrapper requestWrapper = new RequestWrapper(request);
-        HttpSession session = requestWrapper.getSession();
         //apartment id
         when(request.getParameter(APARTMENT_ID_FIELD)).thenReturn(ID_VALUE);
         //service
         when(appContext.getBookingService()).thenReturn(bookingService);
-        when(bookingService.findFewBookingAndSort(any(String.class), any(Long.class))).thenThrow(DAO_EXCEPTION);
+        when(bookingService.getBookingsDatesFromDB(any(Long.class))).thenThrow(DAO_EXCEPTION);
 
         assertThrows(AppException.class,
                 ()-> new GetCreateBookingFormController(appContext).resolve(requestWrapper, response)

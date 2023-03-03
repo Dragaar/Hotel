@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import static com.rosivanyshyn.Constant.DATE_VALUE;
+import static com.rosivanyshyn.Constant.DATE_VALUE2;
+import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
+
 /**
  * Order DAO Integration Test
  */
@@ -54,10 +58,10 @@ public class OrderDAOIT extends GenericDAOIT<Order> {
             .price(250L)
             .description("best apartment")
             .checkInDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 10))
+                    Date.valueOf(DATE_VALUE)
             )
             .checkOutDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 20))
+                    Date.valueOf(DATE_VALUE2)
             )
             .account(account)
             .build();
@@ -70,9 +74,7 @@ public class OrderDAOIT extends GenericDAOIT<Order> {
             .price(500L)
             .description("best apartment 2")
             .checkInDate(order.getCheckInDate())
-            .checkOutDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 27))
-            )
+            .checkOutDate(order.getCheckOutDate())
             .build();
 
     @Test
@@ -117,7 +119,7 @@ public class OrderDAOIT extends GenericDAOIT<Order> {
     @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
-        getByFieldTestLogic(Field.ORDER_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
+        getByFieldTestLogic(ENTITY_ID, entity.getId());
     }
     @Test
     void deleteTest(){

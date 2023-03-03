@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import static com.rosivanyshyn.Constant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 
 /**
@@ -54,10 +55,10 @@ public class BookingDAOIT extends GenericDAOIT<Booking> {
             .id(0L)
             .guestsNumber("4")
             .checkInDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 10))
+                    Date.valueOf(DATE_VALUE)
             )
             .checkOutDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 20))
+                    Date.valueOf(DATE_VALUE2)
             )
             .isPaidForReservation(false)
             .account(account)
@@ -68,9 +69,9 @@ public class BookingDAOIT extends GenericDAOIT<Booking> {
             .id(booking.getId())
             .guestsNumber(booking.getGuestsNumber())
             .checkOutDate(
-                    Date.valueOf(LocalDate.of(2023, 01, 5))
+                    booking.getCheckOutDate()
             )
-            .checkInDate(booking.getCheckOutDate())
+            .checkInDate(booking.getCheckInDate())
             .isPaidForReservation(true)
             .account(booking.getAccount())
             .apartment(booking.getApartment())
@@ -119,7 +120,7 @@ public class BookingDAOIT extends GenericDAOIT<Booking> {
     @Test
     void getByFieldTest(){
         insertTestLogic(insertEntity);
-        getByFieldTestLogic(BOOKING_CHECK_IN_DATE, Date.valueOf(LocalDate.of(2023, 01, 10)));
+        getByFieldTestLogic(ENTITY_ID, entity.getId());
     }
     @Test
     void deleteTest(){

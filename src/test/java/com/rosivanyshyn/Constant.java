@@ -15,8 +15,7 @@ public final class Constant {
 
     public static final String BOOKINGS_FIELD = "bookings";
     public static final String BOOKING_ID_FIELD = "bookingId";
-    public static final String APARTMENT_ID_OF_BOOKINGS_DATES_FIELD = "apartmentIdOfBookingDates";
-    public static final String BOOKINGS_DATES_FIELD = "bookingsDates";
+    public static final String BOOKINGS_DISABLED_DATES_LIST_FIELD = "disabledDatesList";
     public static final String GUESTS_NUMBER_FIELD = "guestsNumber";
     public static final String CHECK_IN_DATE_FIELD = "checkInDate";
     public static final String CHECK_OUT_DATE_FIELD = "checkOutDate";
