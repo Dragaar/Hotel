@@ -48,6 +48,21 @@ public class ApartmentServiceImpl implements ApartmentService {
         );
         return result;
     }
+
+    @Override
+    public ArrayList<Apartment> searchApartment(String value, int start, int total) {
+        Connection connection = dbManager.getConnection();
+        @SuppressWarnings("unchecked")
+        ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
+                ()-> {
+                    ArrayList<Apartment> r = apartmentDAO.searchApartments(connection, value, start-1, total);
+                    rowsNumber = apartmentDAO.countRowsInLastQuery(connection);
+                    return r;
+                }
+        );
+        return result;
+    }
+
     @Override
     public ArrayList<Apartment> findFewApartmentsAndSort(String secondQueryPart, String... fields) {
         Connection connection = dbManager.getConnection();

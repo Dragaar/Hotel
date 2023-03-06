@@ -19,4 +19,12 @@ public interface ApartmentDAO extends GenericDAO<Apartment>{
      * @return ArrayList  result array
      */
     ArrayList<Apartment>        getUniqueApartmentsWhichAreBookedWithDynamicQuery(Connection con, String secondQueryPart, Object... fields);
-    }
+
+    /** Get objects using direct search algorithms from respective table by relevance.
+     * <br> Include tag functionality to regulate relevancy and result set
+     * @param con connection to database
+     * @param value user value
+     * @return ArrayList<T> result array
+     */
+    ArrayList<Apartment> searchApartments(Connection con, String value, int start, int total);
+}

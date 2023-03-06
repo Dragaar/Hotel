@@ -89,7 +89,9 @@ CREATE TABLE IF NOT EXISTS `hotel`.`apartment` (
     `apartment_class` VARCHAR(255) NOT NULL,
     `price` BIGINT(10) NOT NULL,
     `state` TINYINT(1) NOT NULL,
-    PRIMARY KEY (`id`));
+    PRIMARY KEY (`id`),
+    FULLTEXT INDEX `search_inx` (`title`, `description`, `address`, `apartment_class`) VISIBLE
+    );
 
 
 -- -----------------------------------------------------

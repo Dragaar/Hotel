@@ -36,6 +36,15 @@ public interface ApartmentService {
     ArrayList<Apartment>     findFewApartment(int start, int total);
 
     /**
+     * Find few apartments using direct search algorithm by total count and from set start id
+     * @param value user value
+     * @param start countdown start id
+     * @param total total rows count
+     * @return found apartments
+     */
+    ArrayList<Apartment> searchApartment(String value, int start, int total);
+
+    /**
      * Find few apartments using second query part conditions and by fields for them
      * @param secondQueryPart QueryBuilder result string
      * @param fields fields to insert in second query part statement

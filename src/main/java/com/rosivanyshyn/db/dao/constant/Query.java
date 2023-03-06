@@ -49,6 +49,13 @@ public class Query {
 
     public static final String DELETE_APARTMENT = "DELETE FROM apartment WHERE id = ?" ;
 
+    public static final String SEARCH_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS *, " +
+            "MATCH(`title`, `description`, `address`, `apartment_class`) AGAINST(? IN BOOLEAN MODE) AS REL " +
+            "FROM hotel.apartment " +
+            "WHERE MATCH(`title`, `description`, `address`, `apartment_class`) AGAINST(? IN BOOLEAN MODE) " +
+            "ORDER BY REL " +
+            "LIMIT ?, ? " ;
+
     //-----------------------Booking Queries -------------------------------------------------\\
     public static final String INSERT_BOOKING = "INSERT INTO booking VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)" ;
 

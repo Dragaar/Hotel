@@ -3,14 +3,18 @@ package com.rosivanyshyn.db.dao.implMySQL;
 
 import com.rosivanyshyn.db.dao.ApartmentDAO;
 import com.rosivanyshyn.db.dao.entity.Apartment;
-import com.rosivanyshyn.db.dao.entity.Order;
+import com.rosivanyshyn.exeption.DAOException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Formatter;
 
 import static com.rosivanyshyn.db.dao.constant.Field.*;
 import static com.rosivanyshyn.db.dao.constant.Query.*;
+import static com.rosivanyshyn.exeption.Message.SEARCH_ERROR;
 
 /**
  * Apartment DAO interface implementation.
@@ -99,6 +103,30 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
         return getWithDynamicQuery(con, formatter.toString(), fields);
     }
 
+    @Override
+    public ArrayList<Apartment> searchApartments(Connection con, String value, int start, int total){
+        LOG.info("Query: " + SEARCH_APARTMENTS);
+        ArrayList<Apartment> apartments = new ArrayList<>();
+
+        ResultSet rs;
+
+        try (PreparedStatement stmt = con.prepareStatement(SEARCH_APARTMENTS)) {
+            stmt.setString(1, value);
+            stmt.setString(2, value);
+            stmt.setLong(3, start);
+            stmt.setLong(4, total);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                apartments.add(entityFromGet().extractEntity(rs));
+            }
+            return apartments;
+
+        } catch (SQLException ex){
+            LOG.error(className + " " + SEARCH_ERROR, ex);
+            throw new DAOException(className + " " + SEARCH_ERROR, ex);
+        }
+    }
 
 
     }
