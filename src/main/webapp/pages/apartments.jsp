@@ -41,6 +41,8 @@
         <h2 class="col-md-6"><fmt:message key="apartment.list" /></h2>
 
 
+        <c:if test="${!requestScope.dontShowFilters}">
+
         <form class="col-md-6 input-group" action="${pageContext.request.contextPath}/front?controller=getApartments" method="POST">
             <select class="selectpicker" multiple  name="price" data-selected-text-format="static" title="<fmt:message key="apartment.sort.price" />">
                 <optgroup label="<fmt:message key="apartment.sort.price" />" data-max-options="1">
@@ -72,7 +74,7 @@
             <input type="hidden" name="newSortingOrder" value="exist">
             <button class="col-md-2 btn btn-outline-secondary" type="submit"><fmt:message key="apartment.sort" /></button>
             </form>
-
+        </c:if>
     </div>
 
 

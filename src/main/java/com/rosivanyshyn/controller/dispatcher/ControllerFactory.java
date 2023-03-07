@@ -3,6 +3,7 @@ package com.rosivanyshyn.controller.dispatcher;
 import com.rosivanyshyn.controller.context.AppContext;
 import com.rosivanyshyn.controller.other.account.GetAccountDetailsController;
 import com.rosivanyshyn.controller.other.account.UpdateAccountController;
+import com.rosivanyshyn.controller.other.apartment.SearchApartmentController;
 import com.rosivanyshyn.controller.security.LoginController;
 import com.rosivanyshyn.controller.security.LogoutController;
 import com.rosivanyshyn.controller.security.RegistrationController;
@@ -51,6 +52,8 @@ public class ControllerFactory {
                 return new GetApartmentDetailsController(appContext);
             case DELETE_APARTMENT_CONTROLLER:
                 return new DeleteApartmentController(appContext);
+            case SEARCH_APARTMENT_CONTROLLER:
+                return new SearchApartmentController(appContext);
 
             case GET_BOOKINGS_CONTROLLER:
                 return new GetFewBookingController(appContext);

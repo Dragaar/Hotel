@@ -42,6 +42,13 @@
 		<url-pattern>deleteApartment</url-pattern>
 		<role>manager</role>
 	</constraint>
+	<constraint>
+		<url-pattern>searchApartment</url-pattern>
+		<role>user</role>
+		<role>manager</role>
+	</constraint>
+
+
 
 
 	<constraint>

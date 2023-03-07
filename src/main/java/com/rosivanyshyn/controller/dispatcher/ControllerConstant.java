@@ -51,6 +51,7 @@ public class ControllerConstant {
     public static final String GET_APARTMENTS_CONTROLLER = "getApartments";
     public static final String GET_APARTMENT_DETAILS_CONTROLLER = "getApartmentDetails";
     public static final String DELETE_APARTMENT_CONTROLLER = "deleteApartment";
+    public static final String SEARCH_APARTMENT_CONTROLLER = "searchApartment";
 
     public static final String GET_BOOKINGS_CONTROLLER = "getBookings";
     public static final String GET_ALL_BOOKINGS_CONTROLLER = "getAllBookings";
