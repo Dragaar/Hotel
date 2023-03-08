@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
+
 public class AvailableAccessChain extends AccessChain {
 
 	public AvailableAccessChain(AccessChain successor, AccessMapHolder holder, ArrayList<String> urls) {
@@ -21,13 +23,24 @@ public class AvailableAccessChain extends AccessChain {
 	@Override
 	public void processRequest(HttpServletRequest req, HttpServletResponse res, FilterChain chain, String action,
 							   AccountRole role) throws IOException, ServletException {
-		if (!this.holder.get(role).contains(action)) {
-			String errorMessage = "You do not have permission " + "to access the requested resource";
-			throw new SecurityException(errorMessage, new RuntimeException());
+		if (this.holder.get(role).contains(action)) {
+			if(isLoginOrRegistrationController(action))
+			{
+				res.sendRedirect(req.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER);
+			} else {
+				chain.doFilter(req, res);
+			}
 		} else {
-			chain.doFilter(req, res);
+			accessError();
 		}
 
 	}
 
+	private void accessError() {
+		String errorMessage = "You do not have permission " + "to access the requested resource";
+		throw new SecurityException(errorMessage, new RuntimeException());
+	}
+	private boolean isLoginOrRegistrationController(String controller){
+		return controller.equals(LOGIN_CONTROLLER) || controller.equals(REGISTRATION_CONTROLLER);
+	}
 }

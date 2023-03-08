@@ -26,14 +26,16 @@ public class RoleAccessChain extends AccessChain {
 			if (successor != null) {
 				successor.processRequest(req, res, chain, action, role);
 			}
-		} else if(action.equals(LOGIN_CONTROLLER)
-				|| action.equals(REGISTRATION_CONTROLLER)
-		){
+		} else if(isLoginOrRegistrationController(action)){
 			chain.doFilter(req, res);
 		} else {
 			res.sendRedirect(req.getContextPath() + LOGIN_JSP);
 		}
 
+	}
+
+	private boolean isLoginOrRegistrationController(String controller){
+		return controller.equals(LOGIN_CONTROLLER) || controller.equals(REGISTRATION_CONTROLLER);
 	}
 
 }

@@ -33,6 +33,8 @@ public class ControllerConstant {
     //------------- Dispatcher Servlet -----------\\
     public static final String CONTROLLER_NAME = "controller";
 
+    public static final String INITIALIZE_CONTROLLER = "/front?controller=";
+
     //------------- Security -----------\\
     public static final String SECURITY = "security";
 
