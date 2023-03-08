@@ -96,6 +96,18 @@ class ApartmentServiceImplTest {
     }
 
     @Test
+    void searchApartment(){
+        when(apartmentDAO.searchApartments(isA(Connection.class), isA(String.class), isA(int.class), isA(int.class))).thenReturn(apartments);
+        when(apartmentDAO.countRowsInLastQuery(isA(Connection.class))).thenReturn(1);
+
+        assertEquals(apartments,
+                apartmentService.searchApartment("query", 1, 1)
+        );
+
+        assertEquals(1, apartmentService.getRowsNumber());
+    }
+
+    @Test
     void updateApartment() {
         apartmentService.updateApartment(getTestApartment());
     }

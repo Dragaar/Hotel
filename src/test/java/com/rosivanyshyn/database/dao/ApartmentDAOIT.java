@@ -1,11 +1,19 @@
 package com.rosivanyshyn.database.dao;
 
+import com.rosivanyshyn.db.dao.ApartmentDAO;
 import com.rosivanyshyn.db.dao.GenericDAO;
 import com.rosivanyshyn.db.dao.constant.Field;
 import com.rosivanyshyn.db.dao.entity.Apartment;
 import com.rosivanyshyn.db.dao.implMySQL.ApartmentDAOImpl;
+import com.rosivanyshyn.db.manager.MySQLDBManagerImpl;
+import com.rosivanyshyn.db.transaction.TransactionManager;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Apartment DAO Integration Test
@@ -22,7 +30,7 @@ public class ApartmentDAOIT extends GenericDAOIT<Apartment> {
 
     protected BuildEntity<Apartment> insertEntity = ()-> apartment = Apartment.builder()
             .id(0L)
-            .title("Затишний хостл")
+            .title("Тестовий хостел")
             .description("some description")
             .imageURL("new image")
             .address("вулиця Прорізна, 14, Київ, 01034")
@@ -95,5 +103,25 @@ public class ApartmentDAOIT extends GenericDAOIT<Apartment> {
     void deleteTest(){
         insertTestLogic(insertEntity);
         deleteTestLogic(apartment.getId());
+    }
+
+    // -------------- Unique queries ---------- \\
+
+    @Test
+    void searchApartmentsTest(){
+        ApartmentDAO apartmentDAO = new ApartmentDAOImpl();
+
+            insertTestLogic(insertEntity);
+
+            String searchValue = "Тестовий";
+            connection = MySQLDBManagerImpl.getInstance().getConnection();
+            @SuppressWarnings("unchecked")
+            ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
+                    ()-> apartmentDAO.searchApartments(connection, searchValue, 0,1)
+            );
+
+            deleteTestLogic(apartment.getId());
+
+        assertEquals(getEntityId(entity), getEntityId(result.get(0)));
     }
 }
