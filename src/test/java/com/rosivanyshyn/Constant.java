@@ -13,6 +13,9 @@ public final class Constant {
     public static final String APARTMENTS_FIELD = "apartments";
     public static final String APARTMENT_ID_FIELD = "apartmentId";
 
+    public static final String APARTMENT_SEARCH_FIELD = "searchValue";
+
+
     public static final String BOOKINGS_FIELD = "bookings";
     public static final String BOOKING_ID_FIELD = "bookingId";
     public static final String BOOKINGS_DISABLED_DATES_LIST_FIELD = "disabledDatesList";
@@ -62,6 +65,9 @@ public final class Constant {
     public static final String APARTMENT_CLASS_VALUE = "class";
     public static final String PRICE_VALUE = "200";
     public static final Long PRICE_VALUE_LONG = 200L;
+
+    public static final String APARTMENT_SEARCH_VALUE = "search test value";
+
 
 
     //Sorting markers
