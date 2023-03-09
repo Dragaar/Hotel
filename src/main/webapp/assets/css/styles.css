@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Jost:wght@300;400;500;600;700;800&display=swap");
 /* Обрізка занадто довгого тексту */
 .line-clamp {
     display: -webkit-box;
@@ -18,6 +18,102 @@
 }
 
 /* Стилі для сторінки реєстрації */
+
+/* Index styles */
+.masthead {
+    padding-top: 10.5rem;
+    padding-bottom: 8rem;
+    text-align: center;
+    color: #fff;
+    background-image: url("../../images/header-back.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
+
+.section-tittle h1 {
+    font-family:"Baskervville", serif;
+    font-size:57px;
+    font-weight:400;
+    color:#fff;
+    line-height:1.3;
+    margin-bottom:7px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .section-tittle h1 {
+        font-size:52px;
+        line-height:1.2
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .section-tittle h1 {
+        font-size:50px;
+        line-height:1.2
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .section-tittle h1 {
+        font-size:43px;
+        line-height:1.2;
+        margin-bottom:20px
+    }
+}
+@media (max-width: 575px) {
+    .section-tittle h1 {
+        font-size:35px;
+        line-height:1.2;
+        margin-bottom:20px
+    }
+}
+
+.section-tittle h2 {
+    font-family:"Baskervville",serif;
+    font-size:36px;
+    display:block;
+    font-weight:400;
+    line-height:1.3;
+    margin-bottom:12px
+}
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .section-tittle h2 {
+        font-size:30px
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .section-tittle h2 {
+        font-size:25px
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .section-tittle h2 {
+        font-size:30px
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .section-tittle h2 {
+        font-size:28px
+    }
+}
+@media (max-width: 575px) {
+    .section-tittle h2 {
+        font-size:24px
+    }
+}
+
+.index-btn {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem !important;
+    min-width: 260px;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 80% !important;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    border: 0 !important;
+}
+
+
 
 
 
