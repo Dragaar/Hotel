@@ -70,7 +70,7 @@ public class CreateResponseToOrderController implements Controller {
 
                 responseToOrderService.createResponseToOrder(order, responseToOrder, apartments);
 
-                resolver.redirect(request.getContextPath() + "/front?controller=" + GET_ALL_ORDERS_CONTROLLER +
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_ALL_ORDERS_CONTROLLER +
                         "&message=" + RESPONSE_TO_ORDER_SUCCEED_CREATE);
             }
         } catch (ValidationException ex){

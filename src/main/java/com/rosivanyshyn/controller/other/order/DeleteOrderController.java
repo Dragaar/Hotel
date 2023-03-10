@@ -42,11 +42,11 @@ public class DeleteOrderController implements Controller {
             {
                 orderService.deleteOrder(order);
 
-                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                         "&message=" + ORDER_SUCCEED_DELETE);
             }
             else {
-                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                         "&message=" + ORDER_DONT_HAVE_ACCESS_TO_DELETE);
             }
 

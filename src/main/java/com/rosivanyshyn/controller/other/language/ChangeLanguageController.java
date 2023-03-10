@@ -10,6 +10,7 @@ import lombok.NonNull;
 import org.apache.log4j.Logger;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.INITIALIZE_CONTROLLER;
 import static com.rosivanyshyn.exeption.Message.LANGUAGE_CHANGE_ERROR;
 
 /** Change Language Controller class.
@@ -37,7 +38,7 @@ public class ChangeLanguageController implements Controller {
         if(lastPage != null){
             resolver.redirect(lastPage);
         } else {
-            resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER);
+            resolver.redirect(request.getContextPath()+ INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER);
         }
         } catch (RuntimeException ex) {
             LOG.error(this.getClass() + " " + LANGUAGE_CHANGE_ERROR, ex);

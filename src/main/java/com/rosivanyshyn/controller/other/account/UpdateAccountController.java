@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.NonNull;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.INITIALIZE_CONTROLLER;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.*;
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
 import static com.rosivanyshyn.exeption.Message.*;
@@ -62,10 +63,10 @@ public class UpdateAccountController implements Controller {
                 validation.validateAccount(account);
 
                 accountService.updateAccount(account);
-                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                         "&message=" + ACCOUNT_SUCCEED_UPDATE);
             } else {
-                resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                         "&message=" + ACCOUNT_NOTHING_UPDATE);
             }
 

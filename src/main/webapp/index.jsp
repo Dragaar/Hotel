@@ -22,7 +22,7 @@
             <div class="row justify-content-center ">
                 <div class="col-xl-7 col-lg-11">
                     <div class="section-tittle pt-10">
-                        <h1>Rest Journey in Single step, in the breathtaking</h1>
+                        <h1><fmt:message key="index.mainTitle" /></h1>
                     </div>
                 </div>
             </div>
@@ -33,10 +33,10 @@
             <div class="col-xl-8 col-lg-8 col-md-8">
                 <div class="right-caption">
                     <div class="section-tittle">
-                        <h2>Luxury &amp; Comfort Our services and wonders of Prague</h2>
+                        <h2><fmt:message key="index.companyTitle" /></h2>
                     </div>
                     <div class="support-caption">
-                        <p class="mb-10">The concept and service of the best luxury hotels in Asturias in our sophisticated Urban Double and Unique Junior Suite rooms, with the possibility of enjoying a furnished terrace in our Double Urban Loft and Unique Junior Loft Suite.</p>
+                        <p class="mb-10"><fmt:message key="index.companyDescription" /></p>
                     </div>
                 </div>
             </div>

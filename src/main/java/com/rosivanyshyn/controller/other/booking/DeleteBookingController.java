@@ -50,7 +50,7 @@ public class DeleteBookingController implements Controller {
                 bookingService.deleteBooking(booking.get(0));
             }
 
-            resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+            resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                     "&message=" + BOOKING_SUCCEED_DELETE);
 
         } catch (RuntimeException ex){

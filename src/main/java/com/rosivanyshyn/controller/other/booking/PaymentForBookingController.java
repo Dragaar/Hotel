@@ -13,6 +13,7 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
+import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.INITIALIZE_CONTROLLER;
 import static com.rosivanyshyn.utils.MySQLQueryBuilder.LogicalOperation.*;
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.GET_APARTMENTS_CONTROLLER;
 import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.BOOKING_SUCCEED_PAYMENT;
@@ -47,7 +48,7 @@ public class PaymentForBookingController implements Controller {
             bookingService.updateBooking(booking.get(0));
 
 
-            resolver.redirect(request.getContextPath() + "/front?controller="+ GET_APARTMENTS_CONTROLLER +
+            resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                     "&message=" + BOOKING_SUCCEED_PAYMENT);
 
         } catch (RuntimeException ex){

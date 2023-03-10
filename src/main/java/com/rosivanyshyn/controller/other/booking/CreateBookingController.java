@@ -72,7 +72,7 @@ public class CreateBookingController implements Controller {
 
                 bookingService.createBooking(booking);
 
-            resolver.redirect(request.getContextPath()+"/front?controller="+ GET_APARTMENTS_CONTROLLER +
+            resolver.redirect(request.getContextPath()+ INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER +
                     "&message=" + BOOKING_SUCCEED_CREATE);
 
         } catch (ValidationException ex){

@@ -59,7 +59,7 @@ public class LoginController implements Controller {
 
                 session.setAttribute("languages", LanguageUtil.getLanguageNamesList());
 
-                resolver.redirect("/hotel/front?controller="+ GET_APARTMENTS_CONTROLLER);
+                resolver.redirect(request.getContextPath() + INITIALIZE_CONTROLLER + GET_APARTMENTS_CONTROLLER);
                        // "&message=" + "Successful login!");
             } else throw new ValidationException(ACCOUNT_ISNT_EXIST);
 
