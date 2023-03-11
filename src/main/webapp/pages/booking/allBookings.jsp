@@ -22,10 +22,9 @@
         </div>
     </c:if>
 
-
     <c:if test="${!empty requestScope.bookings}">
 
-        <h2 class="col-md-4"><fmt:message key="booking.list.all" /></h2>
+        <h2 class="col-lg-8"><fmt:message key="booking.list.all" /></h2>
 
         <div class="container">
             <div class="row ">
@@ -40,6 +39,7 @@
                         <th scope="col"><fmt:message key="booking.checkInDate" /></th>
                         <th scope="col"><fmt:message key="booking.checkOutDate" /></th>
                         <th scope="col"><fmt:message key="booking.dateOfCreation" /></th>
+                        <th scope="col"><fmt:message key="booking.userAccount" /></th>
                         <th scope="col"><fmt:message key="booking.actions" /></th>
                     </tr>
                     </thead>
@@ -61,10 +61,17 @@
                             </c:choose>
 
                             <td>
-                                <a class="btn btn-danger" href="${pageContext.request.contextPath}/front?controller=getApartmentDetails&apartmentId=${booking.getApartment().getId()}" >
-                                    <i class="bi bi-info-circle"></i>
-                                </a>
+                                <c:if test="${booking.getIsPaidForReservation() == false}">
+                                    <form id="paymentForm" action="${pageContext.request.contextPath}/front?controller=makePaymentForBooking&bookingId=${booking.getId()}" method="POST">
+                                        <button type="submit" class="btn btn-info"><i class="bi bi-currency-dollar"></i></button>
+                                    </form>
+                                </c:if>
+                            </td>
 
+                            <td>
+                                <form id="apartmentForm" action="${pageContext.request.contextPath}/front?controller=getApartmentDetails&apartmentId=${booking.getApartment().getId()}" method="POST">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-info-circle"></i></button>
+                                </form>
                             </td>
                             <td><c:out value="${booking.getGuestsNumber()}" /></td>
                             <td><c:out value="${booking.getCheckInDate()}" /></td>

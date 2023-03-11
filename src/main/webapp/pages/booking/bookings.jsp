@@ -25,7 +25,7 @@
 
     <c:if test="${!empty requestScope.bookings}">
 
-        <h2 class="col-md-4"><fmt:message key="booking.list" /></h2>
+        <h2 class="col-lg-8"><fmt:message key="booking.list" /></h2>
 
         <div class="container">
             <div class="row ">
@@ -60,9 +60,11 @@
                                 </c:otherwise>
                             </c:choose>
                             <td>
-                                <form id="paymentForm" action="${pageContext.request.contextPath}/front?controller=makePaymentForBooking&bookingId=${booking.getId()}" method="POST">
-                                    <button type="submit" class="btn btn-info"><i class="bi bi-currency-dollar"></i></button>
-                                </form>
+                                <c:if test="${booking.getIsPaidForReservation() == false}">
+                                    <form id="paymentForm" action="${pageContext.request.contextPath}/front?controller=makePaymentForBooking&bookingId=${booking.getId()}" method="POST">
+                                        <button type="submit" class="btn btn-info"><i class="bi bi-currency-dollar"></i></button>
+                                    </form>
+                                </c:if>
                             </td>
                             <td>
                                 <form id="apartmentForm" action="${pageContext.request.contextPath}/front?controller=getApartmentDetails&apartmentId=${booking.getApartment().getId()}" method="POST">

@@ -34,19 +34,31 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getApartments"><fmt:message key="navbar.catalog" /><span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getBookings"><fmt:message key="navbar.bookings" /></a>
-            </li>
+
+
             <c:if test="${sessionScope.role == sessionScope.userRoleName}">
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getOrders"><fmt:message key="navbar.myApplications" /></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getBookings"><fmt:message key="navbar.bookings" /></a>
+                </li>
             </c:if>
             <c:if test="${sessionScope.role == sessionScope.managerRoleName}">
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAllOrders"><fmt:message key="navbar.userApplications" /></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAllBookings"><fmt:message key="navbar.usersBookings" /></a>
+                </li>
             </c:if>
+
+            <c:if test="${sessionScope.role == sessionScope.userRoleName}">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getOrders"><fmt:message key="navbar.myApplications" /></a>
+                </li>
+            </c:if>
+            <c:if test="${sessionScope.role == sessionScope.managerRoleName}">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAllOrders"><fmt:message key="navbar.usersApplications" /></a>
+                </li>
+            </c:if>
+
+
             <li class="nav-item ">
                 <a class="nav-link" href="${pageContext.request.contextPath}/front?controller=getAccountDetails"><fmt:message key="navbar.account" /></a>
             </li>
