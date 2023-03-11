@@ -22,13 +22,25 @@
         </div>
     </c:if>
 
+    <c:if test="${page == 1}">
+        <div class="row">
+            <h4 class="col-lg-8 pt-1"> <fmt:message key="apartment.createApplicationMessage" /></h4>
+            <div class="col-lg-2 text-center">
+                <a class="order-btn btn btn-primary" href="${pageContext.request.contextPath}/front?controller=newOrder" >
+                    <fmt:message key="apartment.createApplication" />
+                </a>
+            </div>
+        </div>
+    </c:if>
 
     <c:if test="${!empty requestScope.orders}">
 
-        <h2 class="col-md-4"><fmt:message key="order.list" /></h2>
+        <div class="row" style="margin-top: 15px;">
+            <h2 class="col-lg-4"><fmt:message key="order.list" /></h2>
+        </div>
 
         <div class="container">
-            <div class="row ">
+            <div class="row">
                 <table class="table table-bordered table-responsive">
                     <thead>
                     <tr>

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Jost:wght@300;400;500;600;700;800&display=swap");
+
 /* Обрізка занадто довгого тексту */
 .line-clamp {
     display: -webkit-box;
@@ -17,7 +18,15 @@
     background-color: #EAF2F8 !important;
 }
 
-/* Стилі для сторінки реєстрації */
+/* Order styles */
+.order-btn {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.5rem 2rem !important;
+    max-height: 160px !important;
+    min-width: 160px !important;
+    max-width: 160px !important;
+    border: 0 !important;
+}
 
 /* Index styles */
 .masthead {
