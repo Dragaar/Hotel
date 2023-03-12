@@ -29,6 +29,9 @@
 
         <div class="container">
             <div class="row ">
+
+                <script src="${pageContext.request.contextPath}/assets/js/rowNumeration.js"></script>
+
                 <table class="table table-bordered table-responsive">
                     <thead>
                     <tr>
@@ -46,8 +49,8 @@
                     <tbody>
                     <c:forEach items="${requestScope.bookings}" var="booking" >
 
-                        <tr>
-                            <th scope="row">1</th>
+                        <tr class="numeric">
+                            <td></td>
 
                             <c:choose>
                                 <c:when test="${booking.getIsPaidForReservation() == true}">

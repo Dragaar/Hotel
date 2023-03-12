@@ -41,6 +41,9 @@
 
         <div class="container">
             <div class="row">
+
+                <script src="${pageContext.request.contextPath}/assets/js/rowNumeration.js"></script>
+
                 <table class="table table-bordered table-responsive">
                     <thead>
                     <tr>
@@ -59,8 +62,8 @@
                     <tbody>
                     <c:forEach items="${requestScope.orders}" var="order" >
 
-                        <tr>
-                            <th scope="row">1</th>
+                        <tr class="numeric">
+                            <td></td>
 
                             <c:choose>
                                 <c:when test="${!empty order.getResponseToOrder()}">
