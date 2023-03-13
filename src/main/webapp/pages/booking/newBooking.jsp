@@ -48,18 +48,10 @@
             <label class="form-label" for="form1"> <fmt:message key="booking.guestsNumber" /></label>
           </div>
 
-
-          <script type="text/javascript">
-            $(document).ready(function(){
-              $('.input-daterange').datepicker({
-                "format": "yyyy-mm-dd",
-                "language": "${sessionScope.lang}",
-                "startDate": "${requestScope.currentDate}",
-                <c:if test="${!empty requestScope.disabledDatesList}">
-                "datesDisabled": "${requestScope.disabledDatesList}",
-                </c:if>
-              });
-            });
+          <script id="datepickerScript" src="${pageContext.request.contextPath}/assets/js/bookingDatepickerDaterangeConfig.js"
+                  data-pickerLang = "${sessionScope.lang}" data-currentDate = "${requestScope.currentDate}"
+                  data-disabledDatesListExist = "${!empty requestScope.disabledDatesList}"
+                  data-disabledDatesList = "${requestScope.disabledDatesList}">
           </script>
 
           <div class="form-outline mb-4">

@@ -50,19 +50,6 @@
                     </h6>
                 </div>
 
-<%--                <script type="text/javascript">--%>
-<%--                    $(document).ready(function(){--%>
-<%--                        $('.datepicker').datepicker({--%>
-<%--                            "format": "yyyy-mm-dd",--%>
-<%--                            "language": "${sessionScope.lang}",--%>
-<%--                            "startDate": "${requestScope.currentDate}",--%>
-<%--                            <c:if test="${!empty requestScope.disabledDatesList}">--%>
-<%--                            "datesDisabled": "${requestScope.disabledDatesList}",--%>
-<%--                            </c:if>--%>
-<%--                        });--%>
-<%--                    });--%>
-<%--                </script>--%>
-
                 <script id="datepickerScript" src="${pageContext.request.contextPath}/assets/js/bookingDatepickerConfig.js"
                         data-pickerLang = "${sessionScope.lang}" data-currentDate = "${requestScope.currentDate}"
                         data-disabledDatesListExist = "${!empty requestScope.disabledDatesList}"
