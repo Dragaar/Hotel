@@ -68,9 +68,18 @@
                     <input type="hidden" name="apartmentClass" value="${apartment.getApartmentClass()}">
                     <input type="hidden" name="apartmentPrice" value="${apartment.getPrice()}">
                     <input type="hidden" name="apartmentId" value="${apartment.getId()}">
-                <div class="row d-flex flex-row-reverse">
-                <button class="col-2 btn btn-primary my-1" type="submit" ><fmt:message key="apartment.makeBooking" /></button>
-            </div>
+
+                <div class="row d-flex flex-row-reverse align-items-center">
+                    <c:choose>
+                        <c:when test="${apartment.getState() == true}">
+                            <button class="col-md-2 btn btn-primary my-1" type="submit" ><fmt:message key="apartment.makeBooking" /></button>
+                        </c:when>
+                        <c:otherwise>
+                            <button disabled class="col-md-2 btn btn-secondary my-1"><fmt:message key="apartment.makeBooking" /></button>
+                            <h5 class="col-md-6"><fmt:message key="apartment.bookingUnavailable" /></h5>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </form>
 
         </div>

@@ -49,6 +49,9 @@ public class CreateBookingController implements Controller {
             @NonNull final Long apartmentId = Long.valueOf(request.getParameter("apartmentId"));
             Apartment apartment = apartmentService.findApartmentByField(ENTITY_ID, apartmentId);
 
+            if(!apartment.getState()) {
+                throw new ValidationException("apartment.bookingUnavailable");
+            }
 
                 @NonNull final String guestsNumber = request.getParameter("guestsNumber");
                 @NonNull final LocalDate  checkInDate = LocalDate.parse(
