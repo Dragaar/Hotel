@@ -95,6 +95,22 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
+    public ArrayList<Apartment> findFewApartmentsWhichAreFree(String secondQueryPart, String... fields) {
+        Connection connection = dbManager.getConnection();
+
+        //sql start indexing from 0
+        @SuppressWarnings("unchecked")
+        ArrayList<Apartment> result = (ArrayList<Apartment>) TransactionManager.execute(connection,
+                ()-> {
+                    ArrayList<Apartment> r = apartmentDAO.getUniqueApartmentsWhichAreFree(connection, secondQueryPart, fields);
+                    rowsNumber = apartmentDAO.countRowsInLastQuery(connection);
+                    return r;
+                }
+        );
+        return result;
+    }
+
+    @Override
     public Boolean updateApartment(Apartment apartment) {
         return null;
     }

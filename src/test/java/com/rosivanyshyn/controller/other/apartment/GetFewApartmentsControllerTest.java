@@ -69,7 +69,7 @@ class GetFewApartmentsControllerTest {
 
         //service
         when(appContext.getApartmentService()).thenReturn(apartmentService);
-        when(apartmentService.findFewApartmentsAndSort(any(String.class))).thenReturn(apartments);
+        when(apartmentService.findFewApartmentsWhichAreFree(any(String.class))).thenReturn(apartments);
         when(apartmentService.getRowsNumber()).thenReturn(1);
 
         //Sorting order param.

@@ -98,7 +98,15 @@ public class ApartmentDAOImpl extends GenericDAOImpl<Apartment> implements Apart
     public ArrayList<Apartment> getUniqueApartmentsWhichAreBookedWithDynamicQuery(Connection con, String secondQueryPart, Object... fields){
 
         Formatter formatter = new Formatter();
-        formatter.format(UNIQUE_APARTMENTS_WHICH_ARE_BOOKED, secondQueryPart);
+        formatter.format(UNIQUE_APARTMENTS_WHICH_ARE_BOOKED_AND_ACTUAL, secondQueryPart);
+
+        return getWithDynamicQuery(con, formatter.toString(), fields);
+    }
+    @Override
+    public ArrayList<Apartment> getUniqueApartmentsWhichAreFree(Connection con, String secondQueryPart, Object... fields){
+
+        Formatter formatter = new Formatter();
+        formatter.format(UNIQUE_APARTMENTS_WHICH_ARE_FREE_AND_ACTUAL, secondQueryPart);
 
         return getWithDynamicQuery(con, formatter.toString(), fields);
     }

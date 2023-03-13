@@ -96,6 +96,17 @@ class ApartmentServiceImplTest {
     }
 
     @Test
+    void findFewApartmentsWhichAreFree() {
+        when(apartmentDAO.getUniqueApartmentsWhichAreFree(isA(Connection.class), isA(String.class))).thenReturn(apartments);
+        when(apartmentDAO.countRowsInLastQuery(isA(Connection.class))).thenReturn(1);
+
+        assertEquals(apartments,
+                apartmentService.findFewApartmentsWhichAreFree("query")
+        );
+        assertEquals(1, apartmentService.getRowsNumber());
+    }
+
+    @Test
     void searchApartment(){
         when(apartmentDAO.searchApartments(isA(Connection.class), isA(String.class), isA(int.class), isA(int.class))).thenReturn(apartments);
         when(apartmentDAO.countRowsInLastQuery(isA(Connection.class))).thenReturn(1);

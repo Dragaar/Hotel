@@ -61,6 +61,14 @@ public interface ApartmentService {
     ArrayList<Apartment>     findFewApartmentsWhichAreBooked(String secondQueryPart, String... fields);
 
     /**
+     * Find few apartments which are free (not booked in the future) and available
+     * @param secondQueryPart QueryBuilder result string
+     * @param fields fields to insert in second query part statement
+     * @return found apartments
+     */
+    ArrayList<Apartment>     findFewApartmentsWhichAreFree(String secondQueryPart, String... fields);
+
+    /**
      * Update apartment
      * @param apartment apartment to update
      * @return operation result

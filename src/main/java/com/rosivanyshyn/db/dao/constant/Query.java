@@ -35,6 +35,19 @@ public class Query {
             "ON `apartment`.`id` = a2.`id` " +
             "%s" ;
 
+    public static final String UNIQUE_APARTMENTS_WHICH_ARE_BOOKED_AND_ACTUAL =
+            "INNER JOIN (SELECT DISTINCT `apartment`.`id` FROM apartment INNER JOIN `booking` booking ON booking.`apartment_id` = `apartment`.`id` " +
+                        "WHERE `booking`.`check_in_date` >= CURRENT_DATE() OR `booking`.`check_out_date` >= CURRENT_DATE() " +
+                        ") AS a2 " +
+                    "ON `apartment`.`id` = a2.`id` " +
+                    "%s" ;
+
+    public static final String UNIQUE_APARTMENTS_WHICH_ARE_FREE_AND_ACTUAL =
+            "WHERE `id` NOT IN (SELECT DISTINCT `apartment`.`id` FROM apartment " +
+                                "INNER JOIN `booking` booking ON booking.`apartment_id` = `apartment`.`id` " +
+                                "WHERE `booking`.`check_in_date` >= CURRENT_DATE() OR `booking`.`check_out_date` >= CURRENT_DATE() " +
+            ") AND State = 1 " +
+            "%s";
     public static final String SELECT_FEW_APARTMENTS = "SELECT SQL_CALC_FOUND_ROWS * FROM apartment LIMIT ?, ?" ;
 
     //use formatter to insert field name
