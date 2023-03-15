@@ -9,13 +9,8 @@
     <uri>commonTags</uri>
 
     <tag>
-        <name>messageTag</name>
-        <tag-class>com.rosivanyshyn.controller.tag.MessageTag</tag-class>
+        <name>currentYear</name>
+        <tag-class>com.rosivanyshyn.controller.tag.CurrentYearTag</tag-class>
         <body-content>empty</body-content>
-        <attribute>
-            <name>messageKey</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
     </tag>
 </taglib>

@@ -1,3 +1,5 @@
+<%@ taglib prefix="commonTags" uri="/WEB-INF/tlds/commonTags.tld" %>
+
 <style>
   /* Footer divider */
     .b-example-divider {
@@ -64,7 +66,7 @@
   </div>
 --%>
   <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-    <p>Ros 2023 Company, Inc. All rights reserved.</p>
+    <p>Ros <commonTags:currentYear /> Company, Inc. All rights reserved.</p>
     <ul class="list-unstyled d-flex">
       <li class="ms-3"><a class="link-dark" href="#"><i class="bi bi-twitter"><use xlink:href="#twitter"></use></i></a></li>
       <li class="ms-3"><a class="link-dark" href="#"><i class="bi bi-instagram"><use xlink:href="#instagram"></use></i></a></li>
