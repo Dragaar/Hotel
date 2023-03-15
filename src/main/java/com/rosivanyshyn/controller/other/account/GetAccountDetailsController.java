@@ -15,6 +15,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.ACCOUNT_
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
 import static com.rosivanyshyn.exeption.Message.ACCOUNT_DETAILS_ERROR;
 
+/** Get Account Details Controller class.
+ * <br> Get account from database and redirect to account details JSP
+ * @author Rostyslav Ivanyshyn.
+ */
 public class GetAccountDetailsController implements Controller {
     AccountService accountService;
 

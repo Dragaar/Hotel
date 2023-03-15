@@ -19,6 +19,10 @@ import static com.rosivanyshyn.controller.dispatcher.ControllerMessageConstant.*
 import static com.rosivanyshyn.db.dao.constant.Field.ENTITY_ID;
 import static com.rosivanyshyn.exeption.Message.*;
 
+/** Update Account Controller class.
+ * <br> Update account by id and redirect to apartments JSP
+ * @author Rostyslav Ivanyshyn.
+ */
 public class UpdateAccountController implements Controller {
     AccountService accountService;
 
