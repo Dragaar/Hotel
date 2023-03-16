@@ -12,6 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/** Url Access Chain class. Implements {@link AccessChain Access chain} interface
+ * <br> Check whether application contains requested page
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class UrlAccessChain extends AccessChain {
 
 	public UrlAccessChain(AccessChain successor, AccessMapHolder holder, ArrayList<String> urls) {

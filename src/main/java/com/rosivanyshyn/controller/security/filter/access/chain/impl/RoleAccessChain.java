@@ -13,6 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Role Access Chain class. Implements {@link AccessChain Access chain} interface
+ * <br> Check whether user is login into the session.
+ * <br> Otherwise redirect to login or registration page.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class RoleAccessChain extends AccessChain {
 
 	public RoleAccessChain(AccessChain successor, AccessMapHolder holder, ArrayList<String> urls) {

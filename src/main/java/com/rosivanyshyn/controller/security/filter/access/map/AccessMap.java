@@ -2,6 +2,11 @@ package com.rosivanyshyn.controller.security.filter.access.map;
 
 import java.util.ArrayList;
 
+/** Access Map
+ * Contains list of action to which provide access
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class AccessMap {
 	protected ArrayList<String> urlList;
 

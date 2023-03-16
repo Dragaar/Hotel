@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 
+/** Http Request Parser Implementation
+ *
+ */
 public class HttpRequestParserImpl implements RequestParser {
 	private static final Logger LOG = Logger.getLogger(HttpRequestParserImpl.class);
 	private String action;

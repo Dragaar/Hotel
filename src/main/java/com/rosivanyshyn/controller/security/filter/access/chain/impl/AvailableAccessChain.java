@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import static com.rosivanyshyn.controller.dispatcher.ControllerConstant.*;
 
+/** Available Access Chain class. Implements {@link AccessChain Access chain} interface
+ * <br> Check availability of requested action for current user.
+ *
+ * @author Rostyslav Ivanyshyn.
+ */
 public class AvailableAccessChain extends AccessChain {
 
 	public AvailableAccessChain(AccessChain successor, AccessMapHolder holder, ArrayList<String> urls) {
