@@ -15,9 +15,13 @@ public class LanguageUtil {
         if(!resourceBundles.isEmpty()) {
             if (languageNames == null) {
                 languageNames = new ArrayList<>();
+
                 for (ResourceBundle rs : resourceBundles) {
-                    //System.out.println("Locale -> " + rs.getLocale().getLanguage());
-                    languageNames.add(rs.getLocale().getLanguage());
+                    String languageName = rs.getLocale().getLanguage();
+                    if(isNotBlank(languageName)) {
+                        //System.out.println("Locale -> " + languageName);
+                        languageNames.add(languageName);
+                    }
                 }
             }
             return languageNames;
@@ -37,7 +41,12 @@ public class LanguageUtil {
             }
         }
         return Collections.unmodifiableSet(resourceBundles);
+    }
 
-
+    private static boolean isBlank(String value) {
+        return value == null || value.isEmpty();
+    }
+    private static boolean isNotBlank(String value) {
+        return !isBlank(value);
     }
 }
