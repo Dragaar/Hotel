@@ -71,13 +71,13 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
-                            <input name="oldPassword" type="text" id="form4" class="form-control" />
+                            <input name="oldPassword" type="password" id="form4" class="form-control" />
                             <label class="form-label" for="form4"><fmt:message key="account.oldPassword" /></label>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="form-outline">
-                            <input name="newPassword" type="text" id="form5" class="form-control" />
+                            <input name="newPassword" type="password" id="form5" class="form-control" />
                             <label class="form-label" for="form5"><fmt:message key="account.newPassword" /></label>
                         </div>
                     </div>

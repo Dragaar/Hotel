@@ -66,7 +66,7 @@ public class Query {
             "MATCH(`title`, `description`, `address`, `apartment_class`) AGAINST(? IN BOOLEAN MODE) AS REL " +
             "FROM hotel.apartment " +
             "WHERE MATCH(`title`, `description`, `address`, `apartment_class`) AGAINST(? IN BOOLEAN MODE) " +
-            "ORDER BY REL " +
+            "ORDER BY REL DESC " +
             "LIMIT ?, ? " ;
 
     //-----------------------Booking Queries -------------------------------------------------\\
